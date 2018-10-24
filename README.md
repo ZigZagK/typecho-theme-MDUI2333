@@ -28,3 +28,5 @@
 3. 移动端。~~（估计永远都不会做）~~
 
 ## 预览
+
+![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/screenshot.png)
