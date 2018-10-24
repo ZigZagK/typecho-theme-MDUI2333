@@ -7,7 +7,11 @@
 ## 主题特性
 
 1. 基于MDUI，结合PJAX。有丰富（拥挤）的侧边栏栏目比如用[tagcanvas](http://www.goat1000.com/tagcanvas.php)实现的标签云。
+<<<<<<< HEAD
 2. 支持文章头图设置（随机头图来源[typecho-theme-material](https://github.com/viosey/typecho-theme-material/tree/master/img/random)，侵删），评论字数限制，文章访问量统计，热门文章，音乐播放器（By [Aplayer](https://github.com/MoePlayer/APlayer)&[Meting](https://github.com/metowolf/MetingJS)）等功能。
+=======
+2. 支持文章头图设置（头图来源[typecho-theme-material](https://github.com/viosey/typecho-theme-material/tree/master/img/random)，侵删），评论字数限制，文章访问量统计，热门文章，音乐播放器（By [Aplayer](https://github.com/MoePlayer/APlayer)&[Meting](https://github.com/metowolf/MetingJS)）等功能。
+>>>>>>> 2c4e0e80a4e4a81a55d28115ca6e92155bdb8e58
 3. 一点都不丰富的自定义设置。~~（这哪里是特性了）~~
 4. 中文最棒啦，所以不支持多语言。~~（这完全是敷衍吧）~~
 
