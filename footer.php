@@ -20,7 +20,7 @@
 				<div class="mdui-col-xs-2">
 					<div class="mdui-float-right">
 						<div>Powered by <a href="http://typecho.org" target="_blank">Typecho</a></div>
-						<div>Theme by <a href="https://zigzagk.top" target="_blank">MDUI2333</a></div>
+						<div>Theme by <a href="https://github.com/ZigZagK/typecho-theme-MDUI2333" target="_blank">MDUI2333</a></div>
 					</div>
 				</div>
 			</div>
