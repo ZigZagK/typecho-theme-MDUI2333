@@ -20,7 +20,7 @@
 					</div>
 					<div class="mdui-chip">
 						<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">date_range</i></span>
-						<span class="mdui-chip-title"><?php $this->date(); ?></span>
+						<span class="mdui-chip-title"><a href="<?php $this->permalink() ?>"><?php $this->date(); ?></a></span>
 					</div>
 						<ul class="mdui-menu" id="posttag<?php echo $this->cid(); ?>">
 							<li class="mdui-menu-item mdui-ripple"><?php $this->tags('<li class="mdui-menu-item mdui-ripple">',true,''); ?></li>
