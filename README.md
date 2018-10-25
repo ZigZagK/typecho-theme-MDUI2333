@@ -30,3 +30,5 @@
 ## 预览
 
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/screenshot.png)
+
+![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
