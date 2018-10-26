@@ -117,12 +117,14 @@
 			<div class="mdui-list-item-content">文章总数</div>
 			<div class="mdui-text-color-brown-900"><?php $stat->publishedPostsNum() ?></div>
 		</div>
+		<?php if ($this->options->birthday){ ?>
 		<div class="mdui-list-item mdui-ripple">
 			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">access_time</i>
 			<?php Typecho_Widget::widget('Widget_Stat')->to($stat); ?>
 			<div class="mdui-list-item-content">运行天数</div>
-			<div class="mdui-text-color-brown-900"><script>var BirthDay=new Date("july 29,2018");var today=new Date();var timeold=(today.getTime()-BirthDay.getTime());var sectimeold=timeold/1000;var secondsold=Math.floor(sectimeold);var msPerDay=24*60*60*1000;var e_daysold=timeold/msPerDay;var daysold=Math.floor(e_daysold);document.write(""+daysold);</script></div>
+			<div class="mdui-text-color-brown-900"><script>var BirthDay=new Date("<?php echo $this->options->birthday; ?>");var today=new Date();var timeold=(today.getTime()-BirthDay.getTime());var sectimeold=timeold/1000;var secondsold=Math.floor(sectimeold);var msPerDay=24*60*60*1000;var e_daysold=timeold/msPerDay;var daysold=Math.floor(e_daysold);document.write(""+daysold);</script></div>
 		</div>
+		<?php } ?>
 		<div class="mdui-list-item mdui-ripple">
 			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">remove_red_eye</i>
 			<?php Typecho_Widget::widget('Widget_Stat')->to($stat); ?>

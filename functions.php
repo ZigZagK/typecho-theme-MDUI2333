@@ -18,6 +18,8 @@ function themeConfig($form) {
 	$form->addInput($backgroundPic);
 	$favicon = new Typecho_Widget_Helper_Form_Element_Text('favicon', NULL, NULL, _t('网站小图标地址'), _t('浏览器左上角小图标的图片地址'));
 	$form->addInput($favicon);
+	$birthday = new Typecho_Widget_Helper_Form_Element_Text('birthday', NULL, NULL, _t('建站时间'), _t('用于显示侧边栏的运行天数，格式为 <code>年.月.日</code> ，例如 <code>2018.7.29</code> ，不填则不显示运行天数'));
+	$form->addInput($birthday);
 	$AplayerCode = new Typecho_Widget_Helper_Form_Element_Text('AplayerCode', NULL, NULL, _t('音乐播放器Aplayer代码'), _t('参考<a target="_blank" href="https://i-meto.com/ghost-aplayer/">Meting</a>文档填写，若不加<code>data-fixed="true"</code>参数则显示在最下方。如果不填则不启用Aplayer。'));
 	$form->addInput($AplayerCode);
 	$commenttextlimit = new Typecho_Widget_Helper_Form_Element_Text('commenttextlimit', NULL, NULL, _t('评论字数限制'), _t('这里可以限制评论的最大字数，不填则没有限制'));
