@@ -10,7 +10,7 @@
 2. 支持文章头图设置（随机头图来源[typecho-theme-material](https://github.com/viosey/typecho-theme-material/tree/master/img/random)，侵删），评论字数限制，文章访问量统计，热门文章，音乐播放器（By [Aplayer](https://github.com/MoePlayer/APlayer)&[Meting](https://github.com/metowolf/MetingJS)）等功能。
 3. 使用[Highlight](https://highlightjs.org/)渲染代码片并资瓷行号显示，[MathJax](https://www.mathjax.org/)渲染`LaTeX`数学公式（毕竟我是个OIer嘛QAQ）。
 4. 一点都不丰富的自定义设置。~~（这哪里是特性了）~~
-5. 中文最棒啦，所以不支持多语言。~~（这完全是敷衍吧）~~
+5. 中文最棒啦，所以不支持多语言。高版浏览器最棒啦，所以不兼容低版浏览器。~~（这完全是敷衍吧）~~
 
 ## 演示
 
