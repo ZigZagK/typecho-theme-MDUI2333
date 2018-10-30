@@ -32,7 +32,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
-<script src="<?php Helper::options()->themeUrl(); ?>js/ajax_comments.min.js"></script>
 
 
 <script type="text/javascript">
