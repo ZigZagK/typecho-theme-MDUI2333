@@ -7,9 +7,9 @@
 <a href="#top" class="mdui-fab mdui-fab-fixed mdui-fab-mini mdui-color-theme-accent mdui-ripple mdui-fab-hide" id="gototop" style="z-index:1"><i class="mdui-icon material-icons">keyboard_arrow_up</i></a>
 <footer id="footer" role="contentinfo">
 	<div class="mdui-color-white">
-		<div class="mdui-container-fluid">
+		<div class="mdui-container">
 			<div class="mdui-row mdui-p-y-4">
-				<div class="mdui-col-xs-2 mdui-col-offset-xs-2">
+				<div class="mdui-col-xs-3 mdui-col-offset-xs-1">
 					<div class="mdui-float-left">
 						<?php if ($this->options->githublink) { ?><a href="<?php echo $this->options->githublink; ?>" target="_blank" class="mdui-p-x-1"><i class="mdui-icon mdui-text-color-theme-accent iconfont icon-github"></i></a><?php } ?>
 						<?php if ($this->options->bilibililink) { ?><a href="<?php echo $this->options->bilibililink; ?>" target="_blank" class="mdui-p-x-1"><i class="mdui-icon mdui-text-color-theme-accent iconfont icon-bilibili"></i></a><?php } ?>
@@ -21,7 +21,7 @@
 						Copyright © <?php echo date("Y"); ?> <a href="/"><?php $this->options->title(); ?></a>
 					</div>
 				</div>
-				<div class="mdui-typo mdui-col-xs-2">
+				<div class="mdui-typo mdui-col-xs-3">
 					<div class="mdui-float-right">
 						<div>Powered by <a href="http://typecho.org" target="_blank">Typecho</a></div>
 						<div>Theme by <a href="https://github.com/ZigZagK/typecho-theme-MDUI2333" target="_blank">MDUI2333</a></div>
