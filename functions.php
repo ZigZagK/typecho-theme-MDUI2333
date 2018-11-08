@@ -20,6 +20,12 @@ function themeConfig($form) {
 	$form->addInput($favicon);
 	$birthday = new Typecho_Widget_Helper_Form_Element_Text('birthday', NULL, NULL, _t('建站时间'), _t('用于显示侧边栏的运行天数，格式为 <code>年.月.日</code> ，例如 <code>2018.7.29</code> ，不填则不显示运行天数'));
 	$form->addInput($birthday);
+	$githublink = new Typecho_Widget_Helper_Form_Element_Text('githublink', NULL, NULL, _t('github链接'), _t('用于网站左下角的链接，不填则不显示github链接'));
+	$form->addInput($githublink);
+	$bilibililink = new Typecho_Widget_Helper_Form_Element_Text('bilibililink', NULL, NULL, _t('bilibili链接'), _t('用于网站左下角的链接，不填则不显示bilibili链接'));
+	$form->addInput($bilibililink);
+	$zhihulink = new Typecho_Widget_Helper_Form_Element_Text('zhihulink', NULL, NULL, _t('知乎链接'), _t('用于网站左下角的链接，不填则不显示知乎链接'));
+	$form->addInput($zhihulink);
 	$AplayerCode = new Typecho_Widget_Helper_Form_Element_Text('AplayerCode', NULL, NULL, _t('音乐播放器Aplayer代码'), _t('参考 <a target="_blank" href="https://i-meto.com/ghost-aplayer/">Meting</a> 文档填写，若不加<code>data-fixed="true"</code>参数则显示在最下方。如果不填则不启用Aplayer。'));
 	$form->addInput($AplayerCode);
 	$highlightstyle = new Typecho_Widget_Helper_Form_Element_Text('highlightstyle', NULL, NULL, _t('代码片渲染样式'), _t('参考 <a target="_blank" href="https://highlightjs.org/static/demo/">highlightjs</a> 样式，如果不填则使用<code>default</code>'));
@@ -29,7 +35,7 @@ function themeConfig($form) {
 }
 
 function themeInit($archive) {
-	Helper::options()->commentsAntiSpam = false; 
+	Helper::options()->commentsAntiSpam = false; //反垃圾和PJAX撞了，我又搞不来，我也很绝望啊
 }
 
 function getPostViews($widget, $format = "{views}") {
