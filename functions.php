@@ -20,6 +20,8 @@ function themeConfig($form) {
 	$form->addInput($favicon);
 	$birthday = new Typecho_Widget_Helper_Form_Element_Text('birthday', NULL, NULL, _t('建站时间'), _t('用于显示侧边栏的运行天数，格式为 <code>年.月.日</code> ，例如 <code>2018.7.29</code> ，不填则不显示运行天数'));
 	$form->addInput($birthday);
+	$copyright = new Typecho_Widget_Helper_Form_Element_Text('copyright', NULL, NULL, _t('版权声明'), _t('每篇文章下方的版权声明，不填则不显示版权声明'));
+	$form->addInput($copyright);
 	$githublink = new Typecho_Widget_Helper_Form_Element_Text('githublink', NULL, NULL, _t('github链接'), _t('用于网站左下角的链接，不填则不显示github链接'));
 	$form->addInput($githublink);
 	$bilibililink = new Typecho_Widget_Helper_Form_Element_Text('bilibililink', NULL, NULL, _t('bilibili链接'), _t('用于网站左下角的链接，不填则不显示bilibili链接'));

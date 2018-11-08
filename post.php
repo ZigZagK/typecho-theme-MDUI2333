@@ -47,6 +47,14 @@
 					<div class="mdui-divider mdui-m-t-1"></div>
 					<div class="mdui-typo mdui-p-x-5 mdui-p-y-2" id="post-container">
 		  				<?php $this->content(); ?>
+		  				<?php if ($this->options->copyright){ ?>
+		  				<div class="mdui-card">
+		  					<div class="mdui-card-content mdui-color-grey-50">
+		  						<div><strong>本文链接：</strong><a href="<?php $this->permalink() ?>"><?php $this->permalink() ?></a></div>
+		  						<div><strong>版权声明：</strong><?php echo $this->options->copyright; ?></div>
+		  					</div>
+		  				</div>
+		  				<?php } ?>
 					</div>
 					<div class="mdui-divider"></div>
 					<?php include('comments.php'); ?>
