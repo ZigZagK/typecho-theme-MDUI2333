@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/styles/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "default"?>.min.css">
 	<link rel="stylesheet" href="https://at.alicdn.com/t/font_909068_po540uas8v.css">
 	<style>
-		a {color:unset;text-decoration-line:unset;}
+		a {color:unset;text-decoration:unset;}
 		body {background:<?php if ($this->options->backgroundPic) echo 'url(' . $this->options->backgroundPic . ')'; else echo '#b3d4fc'; ?>;background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;}
 		div#MathJax_Message{display:none!important;}
 		::selection {background:#b3d4fc;text-shadow:none;}

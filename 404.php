@@ -4,7 +4,7 @@
 <div class="mdui-container">
 	<div class="mdui-row">
 		<div class="mdui-col-xs-10 mdui-col-offset-xs-1">
-			<div class="mdui-typo mdui-card mdui-hoverable mdui-m-y-3">
+			<div class="mdui-typo mdui-card mdui-m-y-3">
 				<div class="mdui-card-primary">
 					<div class="mdui-card-primary-title">404 Not Found!</div>
 					<div class="mdui-card-primary-subtitle">并没有此页面呢……</div>

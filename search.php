@@ -6,7 +6,7 @@
 		<div class="mdui-col-xs-10 mdui-col-offset-xs-1">
 			<?php $total=0; ?>
 			<?php while($this->next()): ?>
-				<div class="mdui-card mdui-hoverable mdui-m-y-3">
+				<div class="mdui-card mdui-m-y-3">
 					<a href="<?php $this->permalink() ?>">
 						<div class="mdui-card-media">
 							<div style="background:url(<?php ShowThumbnail($this); ?>);height:300px;background-position:center center;background-size:cover"></div>
@@ -71,7 +71,7 @@
 					</div>
 				</div>
 			<?php } else { ?>
-			<div class="mdui-typo mdui-card mdui-hoverable mdui-m-y-3">
+			<div class="mdui-typo mdui-card mdui-m-y-3">
 				<div class="mdui-card-primary">
 					<div class="mdui-card-primary-title">你啥也没搜索到</div>
 					<div class="mdui-card-primary-subtitle">看来我做的题还是太少了Orz</div>
