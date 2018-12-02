@@ -109,7 +109,7 @@ function SidebarPopPosts(){
 		foreach($result as $val){
 			$val = Typecho_Widget::widget('Widget_Abstract_Contents')->push($val);
 			$post_title = htmlspecialchars($val['title']);$permalink = $val['permalink'];
-			echo '<a href="'.$permalink.'" title="'.$post_title.'" class="mdui-list-item mdui-ripple">';
+			echo '<a href="'.$permalink.'" class="mdui-list-item mdui-ripple" mdui-tooltip=\'{content: "'.$post_title.'", position: "right"}\'>';
 			echo '	<div class="mdui-list-item-content mdui-text-truncate">'.$post_title.'</div>';
 			echo '	<div class="mdui-text-color-blue-900">'.$ans[$x]['int_value'].'</div>';
 			echo '</a>';

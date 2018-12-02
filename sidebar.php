@@ -4,11 +4,11 @@
 
 <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-color-white" id="sidebar">
 	<div class="mdui-card">
-		<a href="/admin" target="_blank"><div class="mdui-card-header">
-			<img class="mdui-card-header-avatar" src="https://www.gravatar.com/avatar/<?php echo HashTheMail($this->options->logoMail) ?>?s=100&r=&d=mystery"/>
+		<div class="mdui-card-header">
+			<a href="/admin" target="_blank"><img class="mdui-card-header-avatar" src="https://www.gravatar.com/avatar/<?php echo HashTheMail($this->options->logoMail) ?>?s=100&r=&d=mystery" mdui-tooltip="{content: '<?php if ($this->user->hasLogin()){ ?><?php echo "访问控制台" ?><?php } else { ?><?php echo "戳这里登录" ?><?php } ?>', position: 'right'}"/></a>
 			<div class="mdui-card-header-title"><?php $this->options->title(); ?></div>
 			<div class="mdui-card-header-subtitle"><?php $this->options->description(); ?></div>
-		</div></a>
+		</div>
 	</div>
 	<div class="mdui-list" mdui-collapse="{accordion: true}">
 		<a href="/" class="mdui-list-item mdui-ripple">
@@ -46,7 +46,7 @@
 			</div>
 			<div class="mdui-collapse-item-body mdui-list">
 				<?php $this->widget('Widget_Comments_Recent','pageSize=5')->parse('
-				<a href="{permalink}" title="{text}" class="mdui-list-item mdui-ripple">
+				<a href="{permalink}" class="mdui-list-item mdui-ripple" mdui-tooltip=\'{content: "{text}", position: "right"}\'>
 					<div class="mdui-list-item-content mdui-text-truncate">{text}</div>
 					<div class="mdui-text-color-blue-900">{author}</div>
 				</a>

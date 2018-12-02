@@ -5,6 +5,7 @@
 	<meta charset="<?php $this->options->charset(); ?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
 	<link rel="icon shortcut" type="image/ico" href="<?php echo $this->options->favicon ?>">
 	<link rel="icon" sizes="192x192" href="<?php echo $this->options->favicon ?>">
 	<link rel="apple-touch-icon" href="<?php echo $this->options->favicon ?>">
@@ -40,7 +41,7 @@
 			<a class="mdui-btn mdui-btn-icon" id="togglesidebar"><i class="mdui-icon material-icons">menu</i></a>
 			<a href="/" class="mdui-typo-title"><?php $this->options->title(); ?></a>
 			<div class="mdui-toolbar-spacer"></div>
-			<div style="width:25%;">
+			<div>
 				<div class="mdui-textfield mdui-textfield-expandable mdui-float-right">
 					<form id="search" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
 						<div class="mdui-textfield-icon mdui-btn mdui-btn-icon mdui-color-white-accent" mdui-tooltip="{content: '文章搜索'}"><i class="mdui-icon material-icons">search</i></div>

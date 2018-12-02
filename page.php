@@ -3,7 +3,7 @@
 
 <div class="mdui-container">
 	<div class="mdui-row">
-		<div class="mdui-col-xs-10 mdui-col-offset-xs-1">
+		<div class="mdui-col-md-10 mdui-col-offset-md-1">
 			<div class="mdui-card mdui-m-y-3">
 				<div class="mdui-card-media">
 					<div style="background:url(<?php ShowThumbnail($this); ?>);height:300px;background-position:center center;background-size:cover"></div>

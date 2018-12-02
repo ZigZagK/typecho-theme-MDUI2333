@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.0
+作者：ZigZagK | 版本：1.1
 
 ## 主题特性
 
@@ -24,11 +24,22 @@
 
 ## 待填坑
 
-1. 评论无刷新。（对这个一脸懵逼，希望有大佬指点Orz）
-2. 移动端。~~（估计永远都不会做）~~
+评论无刷新。（对这个一脸懵逼，希望有大佬指点Orz）
 
 ## 预览
 
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/screenshot.png)
 
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
+
+## 版本更新
+
+### 1.1
+
+什么？MDUI只要加一句话就支持移动端了？于是轻松解决了移动端问题（雾）。
+
+优化了一下侧边栏热门文章和最新评论的显示，把`<a>`的`title`属性换掉改成了MDUI的提示框。
+
+优化了一下文章搜索的样式（其实就是去掉了`width:25%`……），增加了下方链接的提示框。
+
+好像不算很大的更新……不过填掉了第一个神坑，还是很开心的QAQ。
