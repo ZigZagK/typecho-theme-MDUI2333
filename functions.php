@@ -33,6 +33,7 @@ function themeConfig($form) {
 	$highlightstyle = new Typecho_Widget_Helper_Form_Element_Text('highlightstyle', NULL, NULL, _t('代码片渲染样式'), _t('参考 <a target="_blank" href="https://highlightjs.org/static/demo/">highlightjs</a> 样式，如果不填则使用<code>default</code>'));
 	$form->addInput($highlightstyle);
 	$commenttextlimit = new Typecho_Widget_Helper_Form_Element_Text('commenttextlimit', NULL, NULL, _t('评论字数限制'), _t('这里可以限制评论的最大字数，不填则没有限制'));
+	$form->addInput($commenttextlimit);
 	$commentpicture = new Typecho_Widget_Helper_Form_Element_Select('commentpicture',array(
 		'true' => '启用',
 		'false' => '不启用'
