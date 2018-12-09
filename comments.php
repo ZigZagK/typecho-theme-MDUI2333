@@ -99,7 +99,7 @@ echo $commentClass;
 						<div class="mdui-textfield-helper">资瓷Markdown和LaTex数学公式</div>
 					</div>
 					<?php if ($this->options->commentpicture == 'true'){ ?>
-					<div class="mdui-btn mdui-btn-icon mdui-float-left" mdui-tooltip="{content: '使用表情',position: 'top'}" mdui-dialog="{target: '#QAQ'}"><i class="mdui-icon material-icons">sentiment_very_satisfied</i></div>
+					<div class="mdui-text-color-theme-accent mdui-btn mdui-btn-icon mdui-float-left" mdui-tooltip="{content: '使用表情',position: 'top'}" mdui-dialog="{target: '#QAQ'}"><i class="mdui-icon material-icons">sentiment_very_satisfied</i></div>
 					<div class="mdui-dialog" id="QAQ">
 						<div class="mdui-tab mdui-tab-full-width" id="QAQTab">
 							<a href="#ywz" class="mdui-ripple">QwQ</a>
