@@ -33,11 +33,21 @@ function themeConfig($form) {
 	$highlightstyle = new Typecho_Widget_Helper_Form_Element_Text('highlightstyle', NULL, NULL, _t('代码片渲染样式'), _t('参考 <a target="_blank" href="https://highlightjs.org/static/demo/">highlightjs</a> 样式，如果不填则使用<code>default</code>'));
 	$form->addInput($highlightstyle);
 	$commenttextlimit = new Typecho_Widget_Helper_Form_Element_Text('commenttextlimit', NULL, NULL, _t('评论字数限制'), _t('这里可以限制评论的最大字数，不填则没有限制'));
-	$form->addInput($commenttextlimit);
+	$commentpicture = new Typecho_Widget_Helper_Form_Element_Select('commentpicture',array(
+		'true' => '启用',
+		'false' => '不启用'
+	),'true',_t('评论表情'),_t(''));
+	$form->addInput($commentpicture->multiMode());
 }
 
 function themeInit($archive) {
 	Helper::options()->commentsAntiSpam = false; //反垃圾和PJAX撞了，我又搞不来，我也很绝望啊
+	if(isset($_GET['action']) == 'ajax_avatar_get' && 'GET' == $_SERVER['REQUEST_METHOD'] ) {
+		$host = 'https://www.gravatar.com/avatar/';
+		$email = strtolower( $_GET['email']);$hash = md5($email);
+		$sjtx = 'mystery';$avatar = $host . $hash . '?d='.$sjtx;
+		echo $avatar;die();
+	} else { return; }
 }
 
 function getPostViews($widget, $format = "{views}") {
@@ -115,4 +125,67 @@ function SidebarPopPosts(){
 			echo '</a>';
 		}
 	}
+}
+
+function convertSmilies($widget){
+	$smiliesTrans = array(
+		':tieba1:'=>'tieba/1.png',
+		':tieba2:'=>'tieba/2.png',
+		':tieba3:'=>'tieba/3.png',
+		':tieba4:'=>'tieba/4.png',
+		':tieba5:'=>'tieba/5.png',
+		':tieba6:'=>'tieba/6.png',
+		':tieba7:'=>'tieba/7.png',
+		':tieba8:'=>'tieba/8.png',
+		':tieba9:'=>'tieba/9.png',
+		':tieba10:'=>'tieba/10.png',
+		':tieba11:'=>'tieba/11.png',
+		':tieba12:'=>'tieba/12.png',
+		':tieba13:'=>'tieba/13.png',
+		':tieba14:'=>'tieba/14.png',
+		':tieba15:'=>'tieba/15.png',
+		':tieba16:'=>'tieba/16.png',
+		':tieba17:'=>'tieba/17.png',
+		':tieba18:'=>'tieba/18.png',
+		':tieba19:'=>'tieba/19.png',
+		':tieba20:'=>'tieba/20.png',
+		':tieba21:'=>'tieba/21.png',
+		':tieba22:'=>'tieba/22.png',
+		':tieba23:'=>'tieba/23.png',
+		':tieba24:'=>'tieba/24.png',
+		':tieba25:'=>'tieba/25.png',
+		':tieba26:'=>'tieba/26.png',
+		':orz1:'=>'Orz/1.png',
+		':orz2:'=>'Orz/2.png',
+		':orz3:'=>'Orz/3.png',
+		':orz4:'=>'Orz/4.png',
+		':orz5:'=>'Orz/5.png',
+		':orz6:'=>'Orz/6.gif',
+		':orz7:'=>'Orz/7.png',
+		':orz8:'=>'Orz/8.png',
+		':orz9:'=>'Orz/9.png',
+		':orz10:'=>'Orz/10.png',
+		':orz11:'=>'Orz/11.png',
+		':orz12:'=>'Orz/12.png',
+		':orz13:'=>'Orz/13.gif',
+		':orz14:'=>'Orz/14.png',
+		':orz15:'=>'Orz/15.png',
+		':orz16:'=>'Orz/16.png',
+	);
+	$imgUrl = Typecho_Widget::widget('Widget_Options')->themeUrl . '/img/QAQ/';
+	foreach($smiliesTrans as $smiley => $img) {
+		$smiliesTag[] = $smiley;
+		$smiliesReplace[] = "<img src=\"$imgUrl$img\" alt=\"\" class=\"smiley\" />";
+	}   
+	$output = '';
+	$textArr = preg_split("/(<.*>)/U", $widget, -1, PREG_SPLIT_DELIM_CAPTURE);
+	$stop = count($textArr);
+	for ($i = 0; $i < $stop; $i++) {
+		$content = $textArr[$i];
+		if ((strlen($content) > 0) && ('<' != $content{0})) {
+			$content = str_replace($smiliesTag, $smiliesReplace, $content);
+		}
+		$output .= $content;
+	}
+	echo $output;
 }

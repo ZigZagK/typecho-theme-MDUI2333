@@ -42,10 +42,10 @@
 							<span class="mdui-chip-title"><a href="<?php $this->permalink() ?>"><?php echo getPostViews($this); ?> 次访问</a></span>
 						</div>
 					<?php if ($this->user->hasLogin()):?>
-						<a href="<?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?>" target="_blank" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" mdui-tooltip="{content: '编辑该文章', position: 'right'}"><i class="mdui-icon material-icons">edit</i></a>
+						<a href="<?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?>" target="_blank" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right mdui-hidden-sm-down" mdui-tooltip="{content: '编辑该文章', position: 'right'}"><i class="mdui-icon material-icons">edit</i></a>
 					<?php endif;?>
 					<div class="mdui-divider mdui-m-t-1"></div>
-					<div class="mdui-typo mdui-p-x-5 mdui-p-y-2" id="post-container">
+					<div class="mdui-typo mdui-p-y-2" id="post-container" style="padding-left:4%;padding-right:4%;">
 		  				<?php $this->content(); ?>
 		  				<?php if ($this->options->copyright){ ?>
 		  				<div class="mdui-card">

@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/styles/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "default"?>.min.css">
 	<link rel="stylesheet" href="https://at.alicdn.com/t/font_909068_po540uas8v.css">
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 	<style>
 		a {color:unset;text-decoration:unset;}
 		body {background:<?php if ($this->options->backgroundPic) echo 'url(' . $this->options->backgroundPic . ')'; else echo '#b3d4fc'; ?>;background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;}
@@ -41,15 +42,20 @@
 			<a class="mdui-btn mdui-btn-icon" id="togglesidebar"><i class="mdui-icon material-icons">menu</i></a>
 			<a href="/" class="mdui-typo-title"><?php $this->options->title(); ?></a>
 			<div class="mdui-toolbar-spacer"></div>
-			<div>
+			<div class="mdui-hidden-xs-down">
 				<div class="mdui-textfield mdui-textfield-expandable mdui-float-right">
 					<form id="search" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
-						<div class="mdui-textfield-icon mdui-btn mdui-btn-icon mdui-color-white-accent" mdui-tooltip="{content: '文章搜索'}"><i class="mdui-icon material-icons">search</i></div>
+						<div class="mdui-textfield-icon mdui-btn mdui-btn-icon mdui-color-white-accent" style="top:unset;left:unset;" mdui-tooltip="{content: '文章搜索'}"><i class="mdui-icon material-icons">search</i></div>
 						<input type="text" id="s" name="s" class="mdui-textfield-input mdui-text-color-white" type="text" placeholder="输入关键字搜索"/>
 						<div class="mdui-textfield-close mdui-btn mdui-btn-icon mdui-color-white-accent"><i class="mdui-icon material-icons">close</i></div>
 					</form>
 				</div>
 			</div>
+			<?php if ($this->user->hasLogin()){ ?>
+				<a href="/admin" target="_blank" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '控制台'}"><i class="mdui-icon material-icons">tune</i></a>
+			<?php } else { ?>
+				<a href="/admin" target="_blank" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '登录'}"><i class="mdui-icon material-icons">account_circle</i></a>
+			<?php } ?>
 		</div>
 	</div>
 	<div class="pjax-overlay pjax-overlay-show" id="pjax-overlay"></div>

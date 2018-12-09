@@ -2,12 +2,12 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.1
+作者：ZigZagK | 版本：1.1.5
 
 ## 主题特性
 
 1. 基于[MDUI](https://www.mdui.org/)，结合PJAX。有丰富（拥挤）的侧边栏栏目比如用[tagcanvas](http://www.goat1000.com/tagcanvas.php)实现的标签云。
-2. 支持文章头图设置（随机头图来源[typecho-theme-material](https://github.com/viosey/typecho-theme-material/tree/master/img/random)，侵删），评论字数限制，文章访问量统计，热门文章，音乐播放器（By [Aplayer](https://github.com/MoePlayer/APlayer)&[Meting](https://github.com/metowolf/MetingJS)）等功能。
+2. 支持文章头图设置（随机头图来源[typecho-theme-material](https://github.com/viosey/typecho-theme-material/tree/master/img/random)，侵删），评论字数限制以及评论表情，文章访问量统计，热门文章，音乐播放器（By [Aplayer](https://github.com/MoePlayer/APlayer)&[Meting](https://github.com/metowolf/MetingJS)）等功能。
 3. 使用[Highlight](https://highlightjs.org/)渲染代码片并资瓷行号显示，[MathJax](https://www.mathjax.org/)渲染`LaTeX`数学公式（毕竟我是个OIer嘛QAQ）。
 4. 一点都不丰富的自定义设置。~~（这哪里是特性了）~~
 5. 中文最棒啦，所以不支持多语言。高版浏览器最棒啦，所以不兼容低版浏览器。~~（这完全是敷衍吧）~~
@@ -33,6 +33,16 @@
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
 
 ## 版本更新
+
+### 1.1.5
+
+针对移动端优化了好多样式……最大的改动在评论区。
+
+加入了评论表情，因为设置是纯手打的所以如果要自定义的话请加油QAQ，也可以用我的两套图片……
+
+> 自定义评论表情：要更改`function.php`中`function convertSmilies($widget)`的内容以及`comments.php`中`<div class="mdui-dialog-content">`的内容，看我已有的配置应该可以看得懂QAQ。
+
+评论表情是参考[ohmyga](https://ohmyga.net/)的主题的，希望Dalao不要捶我Orz。
 
 ### 1.1
 

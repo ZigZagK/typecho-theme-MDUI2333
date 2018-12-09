@@ -33,9 +33,7 @@
 </footer>
 
 <script src="https://cdnjs.loli.net/ajax/libs/mdui/0.4.1/js/mdui.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
 
 
 <script type="text/javascript">
@@ -51,7 +49,6 @@
 				freezeDecel: true
 			});
 		} catch(e) {
-			// something went wrong, hide the canvas container
 			document.getElementById('MyTagCloud').style.display = 'none';
 		}
 	};
@@ -70,11 +67,15 @@
 		"HTML-CSS": { availableFonts: ["TeX"] }
 	});
 </script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<script src='https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 <script>
+	var sidebar = new mdui.Drawer('#sidebar',{overlay:true});
+	mdui.JQ('#togglesidebar').on('click', function () { sidebar.toggle(); });
+	var QAQTab = new mdui.Tab('#QAQTab');
+	mdui.JQ('#QAQ').on('open.mdui.dialog', function () { QAQTab.handleUpdate(); });
 	$(function(){
 		$('pre code').each(function(){
 			var lines = $(this).text().split('\n').length;
@@ -86,8 +87,6 @@
 		document.getElementById('pjax-overlay').classList.remove("pjax-overlay-show");
 		document.getElementsByTagName('body')[0].classList.remove("mdui-locked");
 	});
-	var sidebar = new mdui.Drawer('#sidebar',{overlay:true});
-	document.getElementById('togglesidebar').addEventListener('click', function () {sidebar.toggle();});
 	window.onscroll=function(){
 		var top = document.getElementById('gototop');
 		if ($(window).scrollTop()>200) top.classList.remove('mdui-fab-hide');

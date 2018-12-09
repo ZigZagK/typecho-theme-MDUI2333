@@ -5,11 +5,14 @@
 <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-color-white" id="sidebar">
 	<div class="mdui-card">
 		<div class="mdui-card-header">
-			<a href="/admin" target="_blank"><img class="mdui-card-header-avatar" src="https://www.gravatar.com/avatar/<?php echo HashTheMail($this->options->logoMail) ?>?s=100&r=&d=mystery" mdui-tooltip="{content: '<?php if ($this->user->hasLogin()){ ?><?php echo "访问控制台" ?><?php } else { ?><?php echo "戳这里登录" ?><?php } ?>', position: 'right'}"/></a>
+			<img class="mdui-card-header-avatar" src="https://www.gravatar.com/avatar/<?php echo HashTheMail($this->options->logoMail) ?>?s=100&r=&d=mystery" />
 			<div class="mdui-card-header-title"><?php $this->options->title(); ?></div>
 			<div class="mdui-card-header-subtitle"><?php $this->options->description(); ?></div>
 		</div>
 	</div>
+	<form id="search" class="mdui-textfield mdui-hidden-sm-up" style="width:90%;margin-left:auto;margin-right:auto;" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
+		<input type="text" id="s" name="s" class="mdui-textfield-input" type="text" placeholder="输入关键字搜索"/>
+	</form>
 	<div class="mdui-list" mdui-collapse="{accordion: true}">
 		<a href="/" class="mdui-list-item mdui-ripple">
 			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>

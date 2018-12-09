@@ -4,7 +4,7 @@
  * 
  * @package MDUI2333
  * @author ZigZagK
- * @version 1.1
+ * @version 1.1.5
  * @link https://zigzagk.top
  */
 	if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -21,7 +21,8 @@
 							<div style="background:url(<?php ShowThumbnail($this); ?>);height:300px;background-position:center center;background-size:cover"></div>
 							<div class="mdui-card-media-covered">
 								<div class="mdui-card-primary">
-									<div class="mdui-card-primary-title"><?php $this->title() ?></div>
+									<div class="mdui-card-primary-title"><?php $this->sticky(); ?><?php $this->title() ?></div>
+									<!-- 标题前面的是文章置顶插件，如果没有可以无视 -->
 								</div>
 							</div>
 						</div>
@@ -29,7 +30,7 @@
 					<div class="mdui-card-content"><?php $this->excerpt(100, '...'); ?></div>
 					<div class="mdui-divider"></div>
 					<div class="mdui-card-actions">
-						<div class="mdui-chip">
+						<div class="mdui-chip mdui-hidden-xs-down">
 							<?php post_gravatar($this->author,100,'identicon'); ?>
 							<span class="mdui-chip-title"><a itemprop="name" href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></span>
 						</div>
