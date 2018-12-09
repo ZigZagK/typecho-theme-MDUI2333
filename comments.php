@@ -38,7 +38,16 @@ echo $commentClass;
 		<div class="comment-meta mdui-panel-item-body">
 			<span class="mdui-typo-caption mdui-text-color-theme-accent mdui-hidden-sm-up"><?php $comments->date(); ?></span>
 			<?php convertSmilies($comments->content); ?>
-			<span class="comment-reply"><?php $comments->reply('<button class="mdui-btn mdui-color-theme-accent mdui-ripple">回复</button>'); ?></span>
+			<div class="mdui-chip">
+				<?php if ($comments->authorId == $comments->ownerId){ ?>
+				<span class="mdui-chip-icon mdui-color-theme-accent" ><i class="mdui-icon material-icons">account_circle</i></span>
+				<div class="mdui-chip-title">博主</div>
+				<?php } else { ?>
+				<span class="mdui-chip-icon" ><i class="mdui-icon material-icons">remove_red_eye</i></span>
+				<div class="mdui-chip-title">访客</div>
+				<?php } ?>
+			</div>
+			<span class="comment-reply mdui-float-right"><?php $comments->reply('<button class="mdui-btn mdui-color-theme-accent mdui-ripple">回复</button>'); ?></span>
 			<?php if ($comments->children) { ?>
 			<div class="comment-children">
 				<?php $comments->threadedComments($options); ?>
