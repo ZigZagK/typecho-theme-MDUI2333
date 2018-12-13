@@ -27,10 +27,10 @@ echo $commentClass;
 		<div class="mdui-panel-item-header">
 			<div class="mdui-panel-item-title">
 				<div class="comment-author mdui-chip mdui-hidden-xs-down">
-					<?php comment_gravatar($comments,100,'identicon'); ?>
+					<?php comment_gravatar($comments,100,'mystery'); ?>
 					<span class="fn mdui-chip-title"><?php comment_author($comments); ?></span>
 				</div>
-				<div class="mdui-hidden-sm-up"><?php comment_gravatar($comments,100,'identicon'); ?></div>
+				<div class="mdui-hidden-sm-up"><?php comment_gravatar($comments,100,'mystery'); ?></div>
 			</div>
 			<div class="mdui-panel-item-summary"><span class="mdui-hidden-xs-down"><?php $comments->date(); ?></span><span class="fn mdui-chip-title mdui-hidden-sm-up"><?php comment_author($comments); ?></span></div>
 			<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
@@ -67,7 +67,7 @@ echo $commentClass;
 			<div class="mdui-card">
 				<div class="mdui-card-content mdui-row">
 					<div class="mdui-chip">
-						<img class="mdui-chip-icon" src="https://www.gravatar.com/avatar/<?php echo HashTheMail($this->user->mail) ?>?s=100&r=&d=mystery" />
+						<img class="mdui-chip-icon" src="https://cn.gravatar.com/avatar/<?php echo HashTheMail($this->user->mail) ?>?s=100&r=&d=mystery" />
 						<span class="mdui-chip-title"><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a></span>
 					</div>
 					<a href="<?php $this->options->logoutUrl(); ?>" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple" mdui-tooltip="{content: '退出登录', position: 'top'}"><i class="mdui-icon material-icons">exit_to_app</i></a>
@@ -75,7 +75,7 @@ echo $commentClass;
 			<div class="mdui-card">
 				<div class="mdui-card-content mdui-row">
 					<div class="mdui-textfield mdui-col-xs-12 mdui-col-sm-4">
-						<i class="mdui-icon" style="width:32px;height:32px;"><img src="https://www.gravatar.com/avatar/?s=100&r=&d=mystery" class="ajax-avatar" style="border-radius:100%;" /></i>
+						<i class="mdui-icon" style="width:32px;height:32px;"><img src="https://cn.gravatar.com/avatar/?s=100&r=&d=mystery" class="ajax-avatar" style="border-radius:100%;" /></i>
 						<input type="text" name="author" id="author" class="text mdui-textfield-input" placeholder="名称" value="<?php $this->remember('author'); ?>" required />
 						<div class="mdui-textfield-error">名称不能为空</div>
 					</div>

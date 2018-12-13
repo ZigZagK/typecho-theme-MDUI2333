@@ -15,7 +15,7 @@
 				</div>
 				<div class="mdui-card-actions">
 					<div class="mdui-chip">
-						<?php post_gravatar($this->author,100,'identicon'); ?>
+						<?php post_gravatar($this->author,100,'mystery'); ?>
 						<span class="mdui-chip-title"><a itemprop="name" href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></span>
 					</div>
 					<div class="mdui-chip">

@@ -44,7 +44,7 @@ function themeConfig($form) {
 function themeInit($archive) {
 	Helper::options()->commentsAntiSpam = false; //反垃圾和PJAX撞了，我又搞不来，我也很绝望啊
 	if(isset($_GET['action']) == 'ajax_avatar_get' && 'GET' == $_SERVER['REQUEST_METHOD'] ) {
-		$host = 'https://www.gravatar.com/avatar/';
+		$host = 'https://cn.gravatar.com/avatar/';
 		$email = strtolower( $_GET['email']);$hash = md5($email);
 		$sjtx = 'mystery';$avatar = $host . $hash . '?d='.$sjtx;
 		echo $avatar;die();
@@ -79,7 +79,7 @@ function HashtheMail($mail) {$mailHash = NULL;if (!empty($mail)) $mailHash = md5
 
 function comment_gravatar($comment, $size = 32, $default = NULL) {
 	$mailHash = HashtheMail($comment->mail);
-	$url = 'https://www.gravatar.com/avatar/';if (!empty($comment->mail)) $url .= $mailHash;
+	$url = 'https://cn.gravatar.com/avatar/';if (!empty($comment->mail)) $url .= $mailHash;
 	$url .= '?s=' . $size;$url .= '&r=' . $rating;$url .= '&d=' . $default;
 	echo '<img class="avatar mdui-chip-icon" src="' . $url . '" alt="' . $comment->author . '" width="' . $size . '" height="' . $size . '" />';
 }
@@ -90,7 +90,7 @@ function comment_author($comment) {
 
 function post_gravatar($user, $size = 40, $default = NULL, $class = NULL) {
 	$mailHash = HashtheMail($user->mail);
-	$url = 'https://www.gravatar.com/avatar/';if (!empty($user->mail)) $url .= $mailHash;
+	$url = 'https://cn.gravatar.com/avatar/';if (!empty($user->mail)) $url .= $mailHash;
 	$url .= '?s=' . $size;$url .= '&r=' . $rating;$url .= '&d=' . $default;
 	echo '<img class="avatar mdui-chip-icon" src="' . $url . '" alt="' . $user->screenName . '" width="' . $size . '" height="' . $size . '" />';
 }
