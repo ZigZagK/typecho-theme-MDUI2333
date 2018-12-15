@@ -15,8 +15,8 @@
 			'tag'	   =>   _t('标签 %s 下的文章'),
 			'author'	=>  _t('%s 发布的文章')
 		), '', ' - '); ?><?php $this->options->title(); ?></title>
-	<link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/mdui/0.4.1/css/mdui.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.2/dist/css/mdui.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/styles/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "default"?>.min.css">
 	<link rel="stylesheet" href="https://at.alicdn.com/t/font_909068_po540uas8v.css">
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>

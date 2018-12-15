@@ -5,7 +5,7 @@
 <div class="mdui-drawer mdui-drawer-close mdui-drawer-full-height mdui-color-white" id="sidebar">
 	<div class="mdui-card">
 		<div class="mdui-card-header">
-			<img class="mdui-card-header-avatar" src="https://www.gravatar.com/avatar/<?php echo HashTheMail($this->options->logoMail) ?>?s=100&r=&d=mystery" />
+			<img class="mdui-card-header-avatar" src="https://cdn.v2ex.com/gravatar/<?php echo HashTheMail($this->options->logoMail) ?>?s=100&r=&d=mystery" />
 			<div class="mdui-card-header-title"><?php $this->options->title(); ?></div>
 			<div class="mdui-card-header-subtitle"><?php $this->options->description(); ?></div>
 		</div>
