@@ -1,10 +1,8 @@
 <?php
-
 function themeFields($layout) {
 	$picUrl = new Typecho_Widget_Helper_Form_Element_Text('picUrl', NULL, NULL, _t('图片地址'), _t('在这里填入一个图片 URL 地址, 作为文章的头图，如果不填则显示随机图片'));
 	$layout->addItem($picUrl);
 }
-
 function themeConfig($form) {
 	echo '<center><h2>这里是MDUI2333主题的一些设置QwQ</h2></center>';
 	echo '<center><h3>网站标题等基本信息需要在控制台中填写</h3></center>';
@@ -40,7 +38,6 @@ function themeConfig($form) {
 	),'true',_t('评论表情'),_t(''));
 	$form->addInput($commentpicture->multiMode());
 }
-
 function themeInit($archive) {
 	Helper::options()->commentsAntiSpam = false; //反垃圾和PJAX撞了，我又搞不来，我也很绝望啊
 	if(isset($_GET['action']) == 'ajax_avatar_get' && 'GET' == $_SERVER['REQUEST_METHOD'] ) {
@@ -50,37 +47,52 @@ function themeInit($archive) {
 		echo $avatar;die();
 	} else { return; }
 }
-
+function getPostViews($widget, $format = "{views}") {
+	$fields = unserialize($widget->fields);
+	if (array_key_exists('views', $fields))
+		$views = (!empty($fields['views'])) ? intval($fields['views']) : 0;
+	else
+		$views = 0;
+	if ($widget->is('single')) {
+		$vieweds = Typecho_Cookie::get('contents_viewed');
+		if (empty($vieweds))
+			$vieweds = array();
+		else
+			$vieweds = explode(',', $vieweds);
+		if (!in_array($widget->cid, $vieweds)) {
+			$views = $views + 1;
+			$widget->setField('views', 'int', $views, $widget->cid);
+			$vieweds[] = $widget->cid;
+			$vieweds = implode(',', $vieweds);
+			Typecho_Cookie::set("contents_viewed",$vieweds);
+		}
+	}
+	return str_replace("{views}", $views, $format);
+}
 function HashtheMail($mail) {$mailHash = NULL;if (!empty($mail)) $mailHash = md5(strtolower($mail));return $mailHash;}
-
 function comment_gravatar($comment, $size = 32, $default = NULL) {
 	$mailHash = HashtheMail($comment->mail);
 	$url = 'https://cdn.v2ex.com/gravatar/';if (!empty($comment->mail)) $url .= $mailHash;
 	$url .= '?s=' . $size;$url .= '&r=' . $rating;$url .= '&d=' . $default;
 	echo '<img class="avatar mdui-chip-icon" src="' . $url . '" alt="' . $comment->author . '" width="' . $size . '" height="' . $size . '" />';
 }
-
 function comment_author($comment) {
 	if ($comment->url) echo '<a target="_blank" href="' , $comment->url , '"' , ($noFollow ? ' rel="external nofollow"' : NULL) , '>' , $comment->author , '</a>'; else echo $comment->author;
 }
-
 function post_gravatar($user, $size = 40, $default = NULL, $class = NULL) {
 	$mailHash = HashtheMail($user->mail);
 	$url = 'https://cdn.v2ex.com/gravatar/';if (!empty($user->mail)) $url .= $mailHash;
 	$url .= '?s=' . $size;$url .= '&r=' . $rating;$url .= '&d=' . $default;
 	echo '<img class="avatar mdui-chip-icon" src="' . $url . '" alt="' . $user->screenName . '" width="' . $size . '" height="' . $size . '" />';
 }
-
 function ShowThumbnail($widget) {
 	$fields = unserialize($widget->fields);if ($fields['picUrl']) {echo $fields['picUrl'];return;}
 	$rand = rand(1,19);$random = Helper::options()->themeUrl . '/img/random/material-' . $rand . '.png';echo $random;
 }
-
 function CountCateOrTag($id){
 	$db = Typecho_Db::get();$po=$db->select('table.metas.count')->from ('table.metas')->where ('parent = ?', $id)->orWhere('mid = ? ', $id);
 	$pom = $db->fetchAll($po);$num = count($pom);$shu = 0;for ($x=0; $x<$num; $x++) $shu=$pom[$x]['count']+$shu;return $shu;
 }
-
 function convertSmilies($widget){
 	$smiliesTrans = array(
 		':tieba1:'=>'tieba/1.png',
