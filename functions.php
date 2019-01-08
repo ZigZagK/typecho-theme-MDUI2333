@@ -51,30 +51,6 @@ function themeInit($archive) {
 	} else { return; }
 }
 
-function getPostViews($widget, $format = "{views}") {
-	$fields = unserialize($widget->fields);
-	if (array_key_exists('views', $fields))
-		$views = (!empty($fields['views'])) ? intval($fields['views']) : 0;
-	else
-		$views = 0;
-
-	if ($widget->is('single')) {
-		$vieweds = Typecho_Cookie::get('contents_viewed');
-		if (empty($vieweds))
-			$vieweds = array();
-		else
-			$vieweds = explode(',', $vieweds);
-		if (!in_array($widget->cid, $vieweds)) {
-			$views = $views + 1;
-			$widget->setField('views', 'int', $views, $widget->cid);
-			$vieweds[] = $widget->cid;
-			$vieweds = implode(',', $vieweds);
-			Typecho_Cookie::set("contents_viewed",$vieweds);
-		}
-	}
-	return str_replace("{views}", $views, $format);
-}
-
 function HashtheMail($mail) {$mailHash = NULL;if (!empty($mail)) $mailHash = md5(strtolower($mail));return $mailHash;}
 
 function comment_gravatar($comment, $size = 32, $default = NULL) {
@@ -103,29 +79,6 @@ function ShowThumbnail($widget) {
 function CountCateOrTag($id){
 	$db = Typecho_Db::get();$po=$db->select('table.metas.count')->from ('table.metas')->where ('parent = ?', $id)->orWhere('mid = ? ', $id);
 	$pom = $db->fetchAll($po);$num = count($pom);$shu = 0;for ($x=0; $x<$num; $x++) $shu=$pom[$x]['count']+$shu;return $shu;
-}
-
-function TotalViews(){
-	$db = Typecho_Db::get();$post=$db->select()->from('table.fields')->where('name = ?','views');
-	$result=$db->fetchAll($post);$num=count($result);$ans=0;
-	for ($x=0;$x<$num;$x++) $ans+=$result[$x]['int_value'];return $ans;
-}
-
-function SidebarPopPosts(){
-	$db = Typecho_Db::get();
-	$post=$db->select()->from('table.fields')->where('name = ?','views')->order('int_value',Typecho_Db::SORT_DESC)->limit(10);
-	$ans=$db->fetchAll($post);$num=count($ans);
-	for ($x=0;$x<$num;$x++){
-		$result=$db->fetchAll($db->select()->from('table.contents')->where('cid = ?',$ans[$x]['cid']));
-		foreach($result as $val){
-			$val = Typecho_Widget::widget('Widget_Abstract_Contents')->push($val);
-			$post_title = htmlspecialchars($val['title']);$permalink = $val['permalink'];
-			echo '<a href="'.$permalink.'" class="mdui-list-item mdui-ripple" mdui-tooltip=\'{content: "'.$post_title.'", position: "right"}\'>';
-			echo '	<div class="mdui-list-item-content mdui-text-truncate">'.$post_title.'</div>';
-			echo '	<div class="mdui-text-color-blue-900">'.$ans[$x]['int_value'].'</div>';
-			echo '</a>';
-		}
-	}
 }
 
 function convertSmilies($widget){

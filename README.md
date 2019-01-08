@@ -7,7 +7,7 @@
 ## 主题特性
 
 1. 基于[MDUI](https://www.mdui.org/)，结合PJAX。有丰富（拥挤）的侧边栏栏目比如用[tagcanvas](http://www.goat1000.com/tagcanvas.php)实现的标签云。
-2. 支持文章头图设置（随机头图来源[typecho-theme-material](https://github.com/viosey/typecho-theme-material/tree/master/img/random)，侵删），评论字数限制以及评论表情，文章访问量统计，热门文章，音乐播放器（By [Aplayer](https://github.com/MoePlayer/APlayer)&[Meting](https://github.com/metowolf/MetingJS)）等功能。
+2. 支持文章头图设置（随机头图来源[typecho-theme-material](https://github.com/viosey/typecho-theme-material/tree/master/img/random)，侵删），评论字数限制以及评论表情，音乐播放器（By [Aplayer](https://github.com/MoePlayer/APlayer)&[Meting](https://github.com/metowolf/MetingJS)）等功能。
 3. 使用[Highlight](https://highlightjs.org/)渲染代码片并资瓷行号显示，[MathJax](https://www.mathjax.org/)渲染`LaTeX`数学公式（毕竟我是个OIer嘛QAQ）。
 4. 一点都不丰富的自定义设置。~~（这哪里是特性了）~~
 5. 中文最棒啦，所以不支持多语言。高版浏览器最棒啦，所以不兼容低版浏览器。~~（这完全是敷衍吧）~~
@@ -33,6 +33,10 @@
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
 
 ## 版本更新
+
+### 1.1.6
+
+把访问量统计去掉了，感觉华而不实……
 
 ### 1.1.5
 

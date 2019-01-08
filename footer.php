@@ -52,7 +52,6 @@
 		}
 	};
 </script>
-<script src="<?php Helper::options()->themeUrl(); ?>js/tagcanvas.min.js"></script>
 
 <script type="text/x-mathjax-config">
 	MathJax.Hub.Config({
