@@ -259,7 +259,6 @@ echo $commentClass;
 				myField.value += tag,
 				myField.focus()
 			);
-			this.hideBox();
 		}
 	}
 </script>

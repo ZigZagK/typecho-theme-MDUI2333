@@ -21,10 +21,10 @@
 				</div>
 				<div class="mdui-card-actions">
 					<a href="/" class="mdui-btn mdui-ripple mdui-color-theme-accent">返回首页</a>
-					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-tooltip="{content:'右上角可以搜索文章哦<del>（点我什么都不会发生）</del>',position:'top'}">帮助 1</button>
-					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-tooltip="{content:'左上角导航栏里有分类和标签啊<del>（点我也是什么都不会发生）</del>',position:'top'}">帮助 2</button>
-					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-tooltip="{content:'不想看文章了也可以左下角听歌呢<del>（点我依然什么都不会发生）</del>',position:'top'}">帮助 3</button>
-					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" onclick="mdui.snackbar({message:'你还真的点了QAQ，实际上会有事发生XD',position:'right-bottom'});" mdui-tooltip="{content:'你是有多无聊才把帮助都看了一遍<del>（点我还是什么都不会发生）</del>',position:'top'}">我是凑数</button>
+					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-tooltip="{content:'右上角可以搜索文章哦',position:'top'}">帮助 1</button>
+					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-tooltip="{content:'左上角导航栏里有分类和标签啊',position:'top'}">帮助 2</button>
+					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-tooltip="{content:'不想看文章了也可以左下角听歌呢',position:'top'}">帮助 3</button>
+					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" onclick="mdui.snackbar({message:'你是有多无聊才把帮助都点了一遍',position:'right-bottom'});" mdui-tooltip="{content:'<del>你是有多无聊才把帮助都看了一遍</del>',position:'top'}">我是凑数</button>
 				</div>
 			</div>
 		</div>

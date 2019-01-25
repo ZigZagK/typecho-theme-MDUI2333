@@ -84,7 +84,7 @@
 				</div>
 				<div class="mdui-card-actions">
 					<a href="/" class="mdui-btn mdui-ripple mdui-color-theme-accent">返回首页</a>
-					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-tooltip="{content:'侧边栏的分类和标签也可以帮助你查找文章<del>（点我什么都不会发生）</del>',position:'top'}">帮助</button>
+					<button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-tooltip="{content:'侧边栏的分类和标签也可以帮助你查找文章',position:'top'}">帮助</button>
 				</div>
 			</div>
 			<?php } ?>
