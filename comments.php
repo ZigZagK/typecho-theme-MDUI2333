@@ -191,9 +191,12 @@ echo $commentClass;
 	<?php $comments->pageNav('前一页','后一页',1,'...',array('wrapTag' => 'div','wrapClass' => 'page-navigator mdui-card mdui-p-a-1 mdui-m-y-2 mdui-text-center')); ?>
 	<?php endif; ?>
 	<?php else: ?>
-	<div class="mdui-typo">
-		<h4 class="mdui-text-center mdui-text-color-theme"><?php _e('评论已关闭>_<'); ?> <small>可以去留言板留言QwQ</small></h4>
-	</div>
+	<center>
+		<div class="mdui-chip mdui-m-t-1">
+			<span class="mdui-chip-icon"><i class="mdui-icon material-icons">comment</i></span>
+			<span class="mdui-chip-title">这个页面的评论已关闭>_<，可以去留言板留言QwQ</span>
+		</div>
+	</center>
 	<?php endif; ?>
 </div>
 
