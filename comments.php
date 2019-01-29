@@ -194,7 +194,7 @@ echo $commentClass;
 	<center>
 		<div class="mdui-chip mdui-m-t-1">
 			<span class="mdui-chip-icon"><i class="mdui-icon material-icons">comment</i></span>
-			<span class="mdui-chip-title">这个页面的评论已关闭>_<，可以去留言板留言QwQ</span>
+			<span class="mdui-chip-title">评论已关闭>_<</span>
 		</div>
 	</center>
 	<?php endif; ?>
