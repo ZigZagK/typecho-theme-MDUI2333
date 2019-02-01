@@ -25,6 +25,18 @@
 	<script src="<?php Helper::options()->themeUrl(); ?>js/Meting.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/mdui@0.4.2/dist/js/mdui.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			extensions: ["tex2jax.js"],
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath:  [ ["$", "$"],  ["\\(","\\)"] ],
+				displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
+				processEscapes: true
+			},
+			"HTML-CSS": { availableFonts: ["TeX"] }
+		});
+	</script>
 	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/highlight.min.js"></script>
 	<style>
