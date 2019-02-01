@@ -21,6 +21,12 @@
 	<link rel="stylesheet" href="https://at.alicdn.com/t/font_909068_po540uas8v.css">
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 	<script src="<?php Helper::options()->themeUrl(); ?>js/tagcanvas.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+	<script src="<?php Helper::options()->themeUrl(); ?>js/Meting.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mdui@0.4.2/dist/js/mdui.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/highlight.min.js"></script>
 	<style>
 		a {color:unset;text-decoration:unset;}
 		body {background:<?php if ($this->options->backgroundPic) echo 'url(' . $this->options->backgroundPic . ')'; else echo '#b3d4fc'; ?>;background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;}

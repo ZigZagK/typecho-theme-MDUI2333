@@ -1,9 +1,6 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 
 <?php if ($this->options->AplayerCode) echo $this->options->AplayerCode; ?>
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-<script src="<?php Helper::options()->themeUrl(); ?>js/Meting.min.js"></script>
-
 <a href="#top" class="mdui-fab mdui-fab-fixed mdui-fab-mini mdui-color-theme-accent mdui-ripple mdui-fab-hide" id="gototop" style="z-index:1"><i class="mdui-icon material-icons">keyboard_arrow_up</i></a>
 <footer id="footer" role="contentinfo">
 	<div class="mdui-color-white">
@@ -31,9 +28,6 @@
 		</div>
 	</div>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/mdui@0.4.2/dist/js/mdui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
 
 <script type="text/javascript">
 	window.onload = function() {
@@ -65,8 +59,6 @@
 		"HTML-CSS": { availableFonts: ["TeX"] }
 	});
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 <script>

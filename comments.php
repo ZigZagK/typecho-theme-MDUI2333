@@ -75,7 +75,8 @@ echo $commentClass;
 			<div class="mdui-card">
 				<div class="mdui-card-content mdui-row">
 					<div class="mdui-textfield mdui-col-xs-12 mdui-col-sm-4">
-						<i class="mdui-icon" style="width:32px;height:32px;"><img src="https://cdn.v2ex.com/gravatar/?s=100&r=&d=mystery" class="ajax-avatar" style="border-radius:100%;" /></i>
+						<i class="mdui-icon" style="width:32px;height:32px;"><img src="https://cdn.v2ex.com/gravatar/?s=100&r=&d=mystery" id="ajax-avatar" style="border-radius:100%;" /></i>
+						<div class="mdui-spinner" id="ajax-loading" style="display:none;position:absolute;left:16px;"></div>
 						<input type="text" name="author" id="author" class="text mdui-textfield-input" placeholder="名称" value="<?php $this->remember('author'); ?>" required />
 						<div class="mdui-textfield-error">名称不能为空</div>
 					</div>
@@ -219,21 +220,31 @@ echo $commentClass;
 	mdui.JQ('#QAQ').on('open.mdui.dialog', function () { QAQTab.handleUpdate(); });
 </script>
 <script>
+	document.getElementById('ajax-loading').style.display="inline-block";
+	document.getElementById('ajax-avatar').style.display="none";
+	var _email = $("input#mail").val();
+	$.ajax({
+		type: 'GET',
+		data: {action: 'ajax_avatar_get',form: '<?php $this->permalink() ?>',email: _email},
+		success: function(data) {$('#ajax-avatar').attr('src', data);}
+	});
+	setTimeout(function(){
+		document.getElementById('ajax-loading').style.display="none";
+		document.getElementById('ajax-avatar').style.display="inline";
+	},750);
 	$("input#mail").blur(function() {
+		document.getElementById('ajax-loading').style.display="inline-block";
+		document.getElementById('ajax-avatar').style.display="none";
 		var _email = $(this).val();
-		if (_email != '') {
 		$.ajax({
 			type: 'GET',
-			data: {
-				action: 'ajax_avatar_get',  
-				form: '<?php $this->permalink() ?>',
-				email: _email
-			},
-			success: function(data) {
-				$('.ajax-avatar').attr('src', data);
-			}
-			});
-		}
+			data: {action: 'ajax_avatar_get',form: '<?php $this->permalink() ?>',email: _email},
+			success: function(data) {$('#ajax-avatar').attr('src', data);}
+		});
+		setTimeout(function(){
+			document.getElementById('ajax-loading').style.display="none";
+			document.getElementById('ajax-avatar').style.display="inline";
+		},750);
 		return false;
 	});
 </script>
@@ -249,18 +260,11 @@ echo $commentClass;
 		insertTag : function (tag) {
 			myField = Smilies.dom('commenttextarea');
 			myField.selectionStart || myField.selectionStart == '0' ? (
-				startPos = myField.selectionStart,
-				endPos = myField.selectionEnd,
-				cursorPos = startPos,
-				myField.value = myField.value.substring(0, startPos)
-				+ tag + myField.value.substring(endPos, myField.value.length),
-				cursorPos += tag.length,
-				myField.focus(),
-				myField.selectionStart = cursorPos,
-				myField.selectionEnd = cursorPos
+				startPos = myField.selectionStart,endPos = myField.selectionEnd,cursorPos = startPos,
+				myField.value = myField.value.substring(0, startPos) + tag + myField.value.substring(endPos, myField.value.length),
+				cursorPos += tag.length,myField.focus(),myField.selectionStart = cursorPos,myField.selectionEnd = cursorPos
 			) : (
-				myField.value += tag,
-				myField.focus()
+				myField.value += tag,myField.focus()
 			);
 		}
 	}

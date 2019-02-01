@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.1.5
+作者：ZigZagK | 版本：1.1.6
 
 ## 主题特性
 
@@ -33,6 +33,12 @@
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
 
 ## 版本更新
+
+### 1.1.6
+
+增加了评论框中Ajax头像加载时的进度条，虽然这个进度条的进度功能其实是假的……
+
+以及1.1.5(Fix)~1.1.6版本中各种各样的修修补补……
 
 ### 1.1.5(Fix)
 
