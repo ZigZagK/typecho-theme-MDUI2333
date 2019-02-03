@@ -62,6 +62,7 @@
 		document.getElementById('pjax-loading').style.display="none";
 		document.getElementById('pjax-overlay').classList.remove("pjax-overlay-show");
 		document.getElementsByTagName('body')[0].classList.remove("mdui-locked");
+		mdui.mutation();
 	});
 	window.onscroll=function(){
 		var top = document.getElementById('gototop');
