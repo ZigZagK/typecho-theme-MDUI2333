@@ -6,9 +6,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="renderer" content="webkit">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-	<link rel="icon shortcut" type="image/ico" href="<?php echo $this->options->favicon ?>">
-	<link rel="icon" sizes="192x192" href="<?php echo $this->options->favicon ?>">
-	<link rel="apple-touch-icon" href="<?php echo $this->options->favicon ?>">
 	<title><?php $this->archiveTitle(array(
 			'category'  =>  _t('分类 %s 下的文章'),
 			'search'	=>  _t('包含关键字 %s 的文章'),
