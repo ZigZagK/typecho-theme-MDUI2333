@@ -70,7 +70,7 @@ echo $commentClass;
 						<img class="mdui-chip-icon" src="https://cdn.v2ex.com/gravatar/<?php echo HashTheMail($this->user->mail) ?>?s=100&r=&d=mystery" />
 						<span class="mdui-chip-title"><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a></span>
 					</div>
-					<a href="<?php $this->options->logoutUrl(); ?>" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple" mdui-tooltip="{content: '退出登录', position: 'top'}"><i class="mdui-icon material-icons">exit_to_app</i></a>
+					<a href="<?php $this->options->logoutUrl(); ?>" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple" mdui-tooltip="{content: '退出登录', position: 'top'}"><i class="mdui-icon material-icons" no-pjax>exit_to_app</i></a>
 			<?php else: ?>
 			<div class="mdui-card">
 				<div class="mdui-card-content mdui-row">
