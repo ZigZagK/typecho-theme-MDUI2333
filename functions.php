@@ -125,3 +125,12 @@ function convertSmilies($widget){
 	}
 	echo $output;
 }
+function AddMDUITable($content){
+	return preg_replace('/<table>/s','<table class="mdui-table mdui-table-hoverable">',$content);
+}
+function AddFancybox($content){
+	return preg_replace('/<img(.*?)src="(.*?)"(.*?)>/s','<a data-fancybox="gallery" href="${2}" class="Fancybox"><img${1}src="${2}"${3}></a>',$content);
+}
+function RewriteContent($content){
+	return AddMDUITable(AddFancybox($content));
+}

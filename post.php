@@ -42,7 +42,7 @@
 					<?php endif;?>
 					<div class="mdui-divider mdui-m-t-1"></div>
 					<div class="mdui-typo mdui-p-y-2" id="post-container" style="padding-left:4%;padding-right:4%;">
-		  				<?php $this->content(); ?>
+		  				<?php echo RewriteContent($this->content); ?>
 		  				<?php if ($this->options->copyright){ ?>
 		  				<div class="mdui-card">
 		  					<div class="mdui-card-content mdui-color-grey-50">
@@ -60,10 +60,11 @@
 	</div>
 </div>
 
+<style>
+	a.Fancybox:hover:before,a.Fancybox:focus:before {display:none!important;}
+</style>
+
 <script>
-	var tab=document.getElementById("post-container").getElementsByTagName('table');var len=tab.length;
-	for (var i=0;i<len;i++) tab[i].classList.add("mdui-table");
-	for (var i=0;i<len;i++) tab[i].classList.add("mdui-table-hoverable");
 	(function () {
 		window.TypechoComment = {
 			dom : function (id) {return document.getElementById(id);},
