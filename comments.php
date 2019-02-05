@@ -222,30 +222,19 @@ echo $commentClass;
 <script>
 	document.getElementById('ajax-loading').style.display="inline-block";
 	document.getElementById('ajax-avatar').style.display="none";
-	var _email = $("input#mail").val();
-	$.ajax({
-		type: 'GET',
-		data: {action: 'ajax_avatar_get',form: '<?php $this->permalink() ?>',email: _email},
-		success: function(data) {$('#ajax-avatar').attr('src', data);}
-	});
+	$('#ajax-avatar').attr('src','https://cdn.v2ex.com/gravatar/'+md5($("input#mail").val())+'?s=100&r=&d=mystery');
 	setTimeout(function(){
 		document.getElementById('ajax-loading').style.display="none";
 		document.getElementById('ajax-avatar').style.display="inline";
 	},750);
-	$("input#mail").blur(function() {
+	$("input#mail").blur(function(){
 		document.getElementById('ajax-loading').style.display="inline-block";
 		document.getElementById('ajax-avatar').style.display="none";
-		var _email = $(this).val();
-		$.ajax({
-			type: 'GET',
-			data: {action: 'ajax_avatar_get',form: '<?php $this->permalink() ?>',email: _email},
-			success: function(data) {$('#ajax-avatar').attr('src', data);}
-		});
+		$('#ajax-avatar').attr('src','https://cdn.v2ex.com/gravatar/'+md5($("input#mail").val())+'?s=100&r=&d=mystery');
 		setTimeout(function(){
 			document.getElementById('ajax-loading').style.display="none";
 			document.getElementById('ajax-avatar').style.display="inline";
 		},750);
-		return false;
 	});
 </script>
 <script>

@@ -38,12 +38,6 @@ function themeConfig($form) {
 }
 function themeInit($archive) {
 	Helper::options()->commentsAntiSpam = false; //反垃圾和PJAX撞了，我又搞不来，我也很绝望啊
-	if(isset($_GET['action']) == 'ajax_avatar_get' && 'GET' == $_SERVER['REQUEST_METHOD'] ) {
-		$host = 'https://cdn.v2ex.com/gravatar/';
-		$email = strtolower( $_GET['email']);$hash = md5($email);
-		$sjtx = 'mystery';$avatar = $host . $hash . '?d='.$sjtx;
-		echo $avatar;die();
-	} else { return; }
 }
 function HashtheMail($mail) {$mailHash = NULL;if (!empty($mail)) $mailHash = md5(strtolower($mail));return $mailHash;}
 function comment_gravatar($comment, $size = 32, $default = NULL) {
