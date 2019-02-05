@@ -64,9 +64,6 @@
 	var tab=document.getElementById("post-container").getElementsByTagName('table');var len=tab.length;
 	for (var i=0;i<len;i++) tab[i].classList.add("mdui-table");
 	for (var i=0;i<len;i++) tab[i].classList.add("mdui-table-hoverable");
-	var h1=document.getElementById("post-container").getElementsByTagName('h1');var len=tab.length;
-	for (var i=0;i<len;i++) tab[i].classList.add("mdui-table");
-	for (var i=0;i<len;i++) tab[i].classList.add("mdui-table-hoverable");
 	(function () {
 		window.TypechoComment = {
 			dom : function (id) {return document.getElementById(id);},
