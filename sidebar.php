@@ -77,6 +77,7 @@
 		<?php endwhile; ?>
 			</div>
 		</div>
+		<?php if ($this->options->tagcloudmode=='ball'){ ?>
 		<div class="mdui-collapse-item">
 			<div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
 				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-amber">local_offer</i>
@@ -97,13 +98,26 @@
 				</div>
 			</div>
 		</div>
+		<?php } else { ?>
+			<?php $this->widget('Widget_Contents_Page_List')->to($tagcloud); ?>
+			<?php while ($tagcloud->next()): ?>
+				<?php if ($tagcloud->template=='page-tags.php'){ ?>
+		<a href="<?php $tagcloud->permalink() ?>" class="mdui-list-item mdui-ripple">
+			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-amber">insert_drive_file</i>
+			<div class="mdui-list-item-content"><?php $tagcloud->title() ?></div>
+		</a>
+				<?php } ?>
+			<?php endwhile; ?>
+		<?php } ?>
 		<div class="mdui-divider"></div>
 		<?php $this->widget('Widget_Contents_Page_List')->to($pages); ?>
 		<?php while ($pages->next()): ?>
+			<?php if ($pages->template!='page-tags.php'){ ?>
 		<a href="<?php $pages->permalink() ?>" class="mdui-list-item mdui-ripple">
 			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">insert_drive_file</i>
 			<div class="mdui-list-item-content"><?php $pages->title() ?></div>
 		</a>
+			<?php } ?>
 		<?php endwhile; ?>
 		<div class="mdui-divider"></div>
 		<div class="mdui-list-item mdui-ripple">

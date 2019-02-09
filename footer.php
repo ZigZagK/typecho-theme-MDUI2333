@@ -29,6 +29,7 @@
 	</div>
 </footer>
 
+<?php if ($this->options->tagcloudmode=='ball'){ ?>
 <script type="text/javascript">
 	window.onload = function() {
 		try {
@@ -46,7 +47,9 @@
 		}
 	};
 </script>
+<?php } ?>
 <script>hljs.initHighlightingOnLoad();</script>
+
 <script>
 	var sidebar = new mdui.Drawer('#sidebar',{overlay:true});
 	mdui.JQ('#togglesidebar').on('click', function () { sidebar.toggle(); });

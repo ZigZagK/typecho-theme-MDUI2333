@@ -219,6 +219,7 @@ echo $commentClass;
 	var QAQTab = new mdui.Tab('#QAQTab');
 	mdui.JQ('#QAQ').on('open.mdui.dialog', function () { QAQTab.handleUpdate(); });
 </script>
+<?php if (!$this->user->hasLogin()){ ?>
 <script>
 	document.getElementById('ajax-loading').style.display="inline-block";
 	document.getElementById('ajax-avatar').style.display="none";
@@ -237,6 +238,7 @@ echo $commentClass;
 		},750);
 	});
 </script>
+<?php } ?>
 <script>
 	Smilies = {
 		dom : function(id) {
