@@ -40,6 +40,8 @@ function themeConfig($form) {
 		'false' => '不启用'
 	),'true',_t('评论表情'),_t(''));
 	$form->addInput($commentpicture->multiMode());
+	$baidustatistics = new Typecho_Widget_Helper_Form_Element_Textarea('baidustatistics', NULL, NULL, _t('百度统计代码'), _t('在此填入百度统计提供的代码，如果不知道这是啥可以无视QAQ'));
+	$form->addInput($baidustatistics);
 }
 function themeInit($archive) {
 	Helper::options()->commentsAntiSpam = false; //反垃圾和PJAX撞了，我又搞不来，我也很绝望啊

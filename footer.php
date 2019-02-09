@@ -50,6 +50,8 @@
 <?php } ?>
 <script>hljs.initHighlightingOnLoad();</script>
 
+<?php if ($this->options->baidustatistics) echo $this->options->baidustatistics; ?>
+
 <script>
 	var sidebar = new mdui.Drawer('#sidebar',{overlay:true});
 	mdui.JQ('#togglesidebar').on('click', function () { sidebar.toggle(); });
