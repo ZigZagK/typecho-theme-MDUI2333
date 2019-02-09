@@ -103,7 +103,7 @@
 			<?php while ($tagcloud->next()): ?>
 				<?php if ($tagcloud->template=='page-tags.php'){ ?>
 		<a href="<?php $tagcloud->permalink() ?>" class="mdui-list-item mdui-ripple">
-			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-amber">insert_drive_file</i>
+			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-amber">local_offer</i>
 			<div class="mdui-list-item-content"><?php $tagcloud->title() ?></div>
 		</a>
 				<?php } ?>
