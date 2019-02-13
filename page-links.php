@@ -7,7 +7,7 @@
 $this->need('header.php'); ?>
 
 <div class="mdui-container">
-	<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-row-xl-5 mdui-m-y-2">
+	<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-m-y-2">
 		<?php if (class_exists("Links_Plugin")): ?>
 			<?php Links_Plugin::output('
 			<div class="mdui-col">
