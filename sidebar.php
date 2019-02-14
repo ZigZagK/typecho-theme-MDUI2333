@@ -40,12 +40,13 @@
 				<i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
 			</div>
 			<div class="mdui-collapse-item-body mdui-list">
-				<?php $this->widget('Widget_Comments_Recent','pageSize=5')->parse('
-				<a href="{permalink}" class="mdui-list-item mdui-ripple" mdui-tooltip=\'{content: "{text}", position: "right"}\'>
-					<div class="mdui-list-item-content mdui-text-truncate">{text}</div>
-					<div class="mdui-text-color-blue-900">{author}</div>
+				<?php $this->widget('Widget_Comments_Recent','pageSize=5')->to($comment); ?>
+				<?php while($comment->next()): ?>
+				<a href="<?php $comment->permalink(); ?>" class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '<?php $comment->date(); ?>', position: 'right'}">
+					<div class="mdui-list-item-content mdui-text-truncate"><?php $comment->text(); ?></div>
+					<div class="mdui-text-color-blue-900"><?php echo $comment->author; ?></div>
 				</a>
-				'); ?>
+				<?php endwhile; ?>
 			</div>
 		</div>
 		<div class="mdui-divider"></div>
