@@ -46,12 +46,12 @@
 		::selection {background:#b3d4fc;text-shadow:none;}
 		.pre-numbering {float:left!important;font-size:14px!important;padding:10px!important;margin:0!important;border-right:1px solid #C3CCD0!important;background:#EEE!important;text-align:right!important;color:#666!important;list-style:none!important;line-height:1.6!important;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 		pre {padding:0!important;background:#f7f7f7!important;}
-		.hljs {padding:10px!important;background:#f7f7f7!important;}
-		.hljs a {color:unset!important;}
-		.hljs a:hover:before,.hljs a:focus:before {display:none!important;}
+		pre code {padding:10px!important;background:#f7f7f7!important;display:block;white-space:pre;overflow-x:auto;}
+		pre code a {color:unset!important;}
+		pre code a:hover:before,.hljs a:focus:before {display:none!important;}
 		code {font-size:14px!important;line-height:1.6!important;}
-		.pjax-overlay {position: fixed;top: -5000px;right: -5000px;bottom: -5000px;left: -5000px;z-index: 2000;visibility: hidden;background: rgba(0,0,0,.4);opacity: 0;-webkit-transition-duration: .3s;transition-duration: .3s;-webkit-transition-property: opacity,visibility;transition-property: opacity,visibility;-webkit-backface-visibility: hidden;backface-visibility: hidden;will-change: opacity;}
-		.pjax-overlay-show {visibility: visible;opacity: 1;}
+		.pjax-overlay {position:fixed;top:-5000px;right:-5000px;bottom:-5000px;left:-5000px;z-index:2000;visibility:hidden;background:rgba(0,0,0,.4);opacity:0;-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:opacity,visibility;transition-property:opacity,visibility;-webkit-backface-visibility:hidden;backface-visibility:hidden;will-change:opacity;}
+		.pjax-overlay-show {visibility:visible;opacity:1;}
 	</style>
 	<?php $this->header(); ?>
 </head>
