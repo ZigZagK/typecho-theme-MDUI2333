@@ -44,10 +44,6 @@
 	</div>
 </div>
 
-<style>
-	a.Fancybox:hover:before,a.Fancybox:focus:before {display:none!important;}
-</style>
-
 <script>
 	(function () {
 		window.TypechoComment = {

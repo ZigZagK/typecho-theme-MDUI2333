@@ -201,20 +201,6 @@ echo $commentClass;
 	<?php endif; ?>
 </div>
 
-<style>
-	div#comments ol.comment-list {padding:0!important;}
-	span.comment-reply a:hover:before,span.comment-reply a:focus:before {display:none!important;}
-	div.cancel-comment-reply a:hover:before,div.cancel-comment-reply a:focus:before {display:none!important;}
-	#QAQ {height:75%!important;}
-	#QAQ .mdui-dialog-content {height:calc(100% - 100px)!important;}
-	#QAQ a {color:unset!important;}
-	#QAQ a:hover:before,#QAQ a:focus:before {display:none!important;}
-	#QAQ .mdui-dialog-content .QAQPicture .mdui-btn {min-width:unset;padding:5px;height:unset;margin-bottom:-13px;}
-	div.page-navigator {list-style:none;}
-	div.page-navigator li {display:inline-block;padding:0 20px;}
-	div.page-navigator li.current a {color:black!important;}
-</style>
-
 <script>
 	var QAQTab = new mdui.Tab('#QAQTab');
 	mdui.JQ('#QAQ').on('open.mdui.dialog', function () { QAQTab.handleUpdate(); });
