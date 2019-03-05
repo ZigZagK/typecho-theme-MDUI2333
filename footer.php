@@ -15,7 +15,8 @@
 				</div>
 				<div class="mdui-typo mdui-col-xs-4 mdui-col-md-4">
 					<div class="mdui-text-center">
-						Copyright © <?php echo date("Y"); ?> <a href="/"><?php $this->options->title(); ?></a>
+						<div>Copyright © <?php echo date("Y"); ?> <a href="/"><?php $this->options->title(); ?></a></div>
+						<?php if ($this->options->filing) { ?><div><a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow"><?php echo $this->options->filing; ?></a></div><?php } ?>
 					</div>
 				</div>
 				<div class="mdui-typo mdui-col-xs-4 mdui-col-md-3">
