@@ -42,6 +42,11 @@ function themeConfig($form) {
 		'false' => '不启用'
 	),'true',_t('评论表情'),_t(''));
 	$form->addInput($commentpicture->multiMode());
+	$upyuncdn = new Typecho_Widget_Helper_Form_Element_Select('upyuncdn',array(
+		'true' => '启用',
+		'false' => '不启用'
+	),'false',_t('又拍云图标'),_t('在网站右下角显示又拍云图标'));
+	$form->addInput($upyuncdn->multiMode());
 	$baidustatistics = new Typecho_Widget_Helper_Form_Element_Textarea('baidustatistics', NULL, NULL, _t('百度统计代码'), _t('在此填入百度统计提供的代码，如果不知道这是啥可以无视QAQ'));
 	$form->addInput($baidustatistics);
 }
