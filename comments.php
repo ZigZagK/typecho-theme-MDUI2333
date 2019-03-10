@@ -83,8 +83,11 @@ echo $commentClass;
 					<div class="mdui-textfield mdui-col-xs-12 mdui-col-sm-4">
 						<i class="mdui-icon material-icons">email</i>
 						<input type="email" name="mail" id="mail" class="text mdui-textfield-input" placeholder="邮箱" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
+						<?php $all = Typecho_Plugin::export(); ?>
+						<?php if (array_key_exists('CommentToMail', $all['activated'])){ ?>
 						<input type="hidden" name="receiveMail" id="receiveMail" value="yes" />
-						<!-- CommentToMail插件，如果没有该插件可以无视上面这句话 -->
+						<!-- CommentToMail插件 -->
+						<?php } ?>
 						<div class="mdui-textfield-error">邮箱不能为空，请填写正确格式</div>
 					</div>
 					<div class="mdui-textfield mdui-col-xs-12 mdui-col-sm-4">

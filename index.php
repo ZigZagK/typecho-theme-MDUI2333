@@ -21,8 +21,9 @@
 							<div style="background:url(<?php ShowThumbnail($this); ?>);height:300px;background-position:center center;background-size:cover"></div>
 							<div class="mdui-card-media-covered">
 								<div class="mdui-card-primary">
-									<div class="mdui-card-primary-title"><?php $this->sticky(); ?><?php $this->title() ?></div>
-									<!-- 标题前面的是文章置顶插件，如果没有可以无视 -->
+									<?php $all = Typecho_Plugin::export(); ?>
+									<div class="mdui-card-primary-title"><?php if (array_key_exists('Sticky', $all['activated'])) $this->sticky(); ?><?php $this->title() ?></div>
+									<!-- Sticky插件 -->
 								</div>
 							</div>
 						</div>

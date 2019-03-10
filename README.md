@@ -14,7 +14,7 @@
 
 ## 演示
 
-可以参考[ZigZagK的博客](https://zigzagk.top)（可能需要科学上网TAT）。
+可以参考[ZigZagK的博客](https://zigzagk.top)。
 
 ## 如何使用
 
