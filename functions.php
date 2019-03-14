@@ -58,7 +58,7 @@ function comment_gravatar($comment, $size = 32, $default = NULL) {
 	$mailHash = HashtheMail($comment->mail);
 	$url = 'https://cdn.v2ex.com/gravatar/';if (!empty($comment->mail)) $url .= $mailHash;
 	$url .= '?s=' . $size;$url .= '&r=' . $rating;$url .= '&d=' . $default;
-	echo '<img class="avatar mdui-chip-icon" src="' . $url . '" alt="' . $comment->author . '" width="' . $size . '" height="' . $size . '" />';
+	echo '<img class="avatar mdui-chip-icon mdui-color-grey-200" src="' . $url . '" alt="' . $comment->author . '" width="' . $size . '" height="' . $size . '" />';
 }
 function comment_author($comment) {
 	if ($comment->url) echo '<a target="_blank" href="' , $comment->url , '"' , ($noFollow ? ' rel="external nofollow"' : NULL) , '>' , $comment->author , '</a>'; else echo $comment->author;
@@ -67,7 +67,7 @@ function post_gravatar($user, $size = 40, $default = NULL, $class = NULL) {
 	$mailHash = HashtheMail($user->mail);
 	$url = 'https://cdn.v2ex.com/gravatar/';if (!empty($user->mail)) $url .= $mailHash;
 	$url .= '?s=' . $size;$url .= '&r=' . $rating;$url .= '&d=' . $default;
-	echo '<img class="avatar mdui-chip-icon" src="' . $url . '" alt="' . $user->screenName . '" width="' . $size . '" height="' . $size . '" />';
+	echo '<img class="avatar mdui-chip-icon mdui-color-grey-200" src="' . $url . '" alt="' . $user->screenName . '" width="' . $size . '" height="' . $size . '" />';
 }
 function ShowThumbnail($widget) {
 	$fields = unserialize($widget->fields);if ($fields['picUrl']) {echo $fields['picUrl'];return;}
