@@ -25,6 +25,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
 	<script type="text/x-mathjax-config">
 		MathJax.Hub.Config({
+			showProcessingMessages: false,
+			messageStyle: "none",
 			extensions: ["tex2jax.js"],
 			jax: ["input/TeX", "output/HTML-CSS"],
 			tex2jax: {
