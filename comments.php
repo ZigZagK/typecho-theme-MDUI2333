@@ -100,7 +100,7 @@ echo $commentClass;
 						<i class="mdui-icon material-icons">message</i>
 						<textarea name="text" id="commenttextarea" class="textarea mdui-textfield-input" placeholder="Dalao们快来评论啊QAQ" required <?php if ($this->options->commenttextlimit) echo 'maxlength="'.$this->options->commenttextlimit.'"';?>><?php $this->remember('text'); ?></textarea>
 						<div class="mdui-textfield-error">评论不能为空</div>
-						<div class="mdui-textfield-helper">资瓷Markdown和LaTex数学公式</div>
+						<div class="mdui-textfield-helper">资瓷Markdown和LaTeX数学公式</div>
 					</div>
 					<?php if ($this->options->commentpicture == 'true'){ ?>
 					<div class="mdui-text-color-theme-accent mdui-btn mdui-btn-icon mdui-float-left" mdui-tooltip="{content: '使用表情',position: 'top'}" mdui-dialog="{target: '#QAQ'}"><i class="mdui-icon material-icons">sentiment_very_satisfied</i></div>
