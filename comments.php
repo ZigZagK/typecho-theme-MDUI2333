@@ -23,6 +23,7 @@ if ($comments->levels > 0) {
 $comments->alt(' comment-odd', ' comment-even');
 echo $commentClass;
 ?>" mdui-panel>
+	<?php if ($comments->levels==0) { ?>
 	<div class="mdui-panel-item mdui-panel-item-open">
 		<div class="mdui-panel-item-header">
 			<div class="mdui-panel-item-title">
@@ -36,8 +37,8 @@ echo $commentClass;
 			<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
 		</div>
 		<div class="comment-meta mdui-panel-item-body">
-			<span class="mdui-typo-caption mdui-text-color-theme-accent mdui-hidden-sm-up"><?php $comments->date(); ?></span>
-			<?php convertSmilies($comments->content); ?>
+			<span class="mdui-typo-caption mdui-text-color-theme-accent mdui-hidden-sm-up"><?php $comments->date(); ?><br></span>
+			<?php echo RewriteComment($comments); ?>
 			<div class="mdui-chip">
 				<?php if ($comments->authorId == $comments->ownerId){ ?>
 				<span class="mdui-chip-icon mdui-color-theme-accent" ><i class="mdui-icon material-icons">account_circle</i></span>
@@ -49,12 +50,46 @@ echo $commentClass;
 			</div>
 			<span class="comment-reply mdui-float-right"><?php $comments->reply('<button class="mdui-btn mdui-color-theme-accent mdui-ripple">回复</button>'); ?></span>
 			<?php if ($comments->children) { ?>
-			<div class="comment-children">
-				<?php $comments->threadedComments($options); ?>
-			</div>
+				<div class="comment-children">
+					<?php $comments->threadedComments($options); ?>
+				</div>
 			<?php } ?>
 		</div>
 	</div>
+	<?php } else { ?>
+	<div class="mdui-panel-item mdui-panel-item-open">
+		<div class="mdui-panel-item-header">
+			<div class="mdui-panel-item-title">
+				<div class="comment-author mdui-chip mdui-hidden-xs-down">
+					<?php comment_gravatar($comments,100,'mystery'); ?>
+					<span class="fn mdui-chip-title"><?php comment_author($comments); ?></span>
+				</div>
+				<div class="mdui-hidden-sm-up"><?php comment_gravatar($comments,100,'mystery'); ?></div>
+			</div>
+			<div class="mdui-panel-item-summary"><span class="mdui-hidden-xs-down"><?php $comments->date(); ?></span><span class="fn mdui-chip-title mdui-hidden-sm-up"><?php comment_author($comments); ?></span></div>
+			<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+		</div>
+		<div class="comment-meta mdui-panel-item-body">
+			<span class="mdui-typo-caption mdui-text-color-theme-accent mdui-hidden-sm-up"><?php $comments->date(); ?><br></span>
+			<?php echo RewriteComment($comments); ?>
+			<div class="mdui-chip">
+				<?php if ($comments->authorId == $comments->ownerId){ ?>
+				<span class="mdui-chip-icon mdui-color-theme-accent" ><i class="mdui-icon material-icons">account_circle</i></span>
+				<div class="mdui-chip-title">博主</div>
+				<?php } else { ?>
+				<span class="mdui-chip-icon" ><i class="mdui-icon material-icons">remove_red_eye</i></span>
+				<div class="mdui-chip-title">访客</div>
+				<?php } ?>
+			</div>
+			<span class="comment-reply mdui-float-right"><?php $comments->reply('<button class="mdui-btn mdui-color-theme-accent mdui-ripple">回复</button>'); ?></span>
+		</div>
+	</div>
+		<?php if ($comments->children) { ?>
+	<div class="comment-children">
+		<?php $comments->threadedComments($options); ?>
+	</div>
+		<?php } ?>
+	<?php } ?>
 </div>
 <?php } ?>
 
@@ -98,7 +133,7 @@ echo $commentClass;
 			<?php endif; ?>
 					<div class="mdui-textfield mdui-col-xs-12">
 						<i class="mdui-icon material-icons">message</i>
-						<textarea name="text" id="commenttextarea" class="textarea mdui-textfield-input" placeholder="Dalao们快来评论啊QAQ" required <?php if ($this->options->commenttextlimit) echo 'maxlength="'.$this->options->commenttextlimit.'"';?>><?php $this->remember('text'); ?></textarea>
+						<textarea name="text" id="commenttextarea" class="textarea mdui-textfield-input" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('commentsumbit').click();return false};" placeholder="Dalao们快来评论啊QAQ" required <?php if ($this->options->commenttextlimit) echo 'maxlength="'.$this->options->commenttextlimit.'"';?>><?php $this->remember('text'); ?></textarea>
 						<div class="mdui-textfield-error">评论不能为空</div>
 						<div class="mdui-textfield-helper">资瓷Markdown和LaTeX数学公式</div>
 					</div>
@@ -182,7 +217,7 @@ echo $commentClass;
 						<div class="mdui-dialog-actions"><div class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-dialog-close>关闭表情</div></div>
 					</div>
 					<?php } ?>
-					<button type="submit" class="submit mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" mdui-tooltip="{content: '提交评论', position: 'top'}"><i class="mdui-icon material-icons">check</i></button>
+					<button id="commentsumbit" type="submit" class="submit mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" mdui-tooltip="{content: '提交评论(Ctrl+Enter)', position: 'top'}"><i class="mdui-icon material-icons">check</i></button>
 					<div class="cancel-comment-reply mdui-float-right" style="display:inline">
 						<?php $comments->cancelReply('<button class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple" mdui-tooltip=\'{content: "取消回复", position: "top"}\'><i class="mdui-icon material-icons">close</i></button>'); ?>
 					</div>

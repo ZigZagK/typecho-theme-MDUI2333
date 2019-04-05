@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.1.8
+作者：ZigZagK | 版本：1.1.9
 
 ## 主题特性
 
@@ -33,6 +33,12 @@
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
 
 ## 版本更新
+
+## 1.1.9
+
+将评论改为两层@式并添加Ctrl+Enter回复，效果可以参考[留言板](https://zigzagk.top/messages)。
+
+其实是为了间接解决移动端评论框太小的问题……
 
 ### 1.1.8
 

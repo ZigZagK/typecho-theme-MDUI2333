@@ -52,6 +52,7 @@ function themeConfig($form) {
 }
 function themeInit($archive) {
 	Helper::options()->commentsAntiSpam = false; //反垃圾和PJAX撞了，我又搞不来，我也很绝望啊
+	Helper::options()->commentsMaxNestingLevels = 19260817; //评论"无限"层
 }
 function HashtheMail($mail) {$mailHash = NULL;if (!empty($mail)) $mailHash = md5(strtolower($mail));return $mailHash;}
 function comment_gravatar($comment, $size = 32, $default = NULL) {
@@ -137,7 +138,15 @@ function convertSmilies($widget){
 		}
 		$output .= $content;
 	}
-	echo $output;
+	return $output;
+}
+function RewriteComment($comment){
+	$content=convertSmilies($comment->content);
+	if ($comment->parent){
+		$db=Typecho_Db::get();$fa=$db->fetchRow($db->select('coid,author')->from('table.comments')->where('coid = ?',$comment->parent));
+		$content='<strong><a href="#comment-' . $fa['coid'] . '">@' . $fa['author'] .'&nbsp;</a></strong>' . $content;
+	}
+	return $content;
 }
 function AddMDUITable($content){
 	return preg_replace('/<\/table>/s','</table></div>',preg_replace('/<table>/s','<div class="mdui-table-fluid"><table class="mdui-table mdui-table-hoverable">',$content));
