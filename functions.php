@@ -26,6 +26,8 @@ function themeConfig($form) {
 	$form->addInput($zhihulink);
 	$filing = new Typecho_Widget_Helper_Form_Element_Text('filing', NULL, NULL, _t('备案信息'), _t('用于显示网站备案信息，不填则不显示备案信息'));
 	$form->addInput($filing);
+	$gafiling = new Typecho_Widget_Helper_Form_Element_Text('gafiling', NULL, NULL, _t('公安备案信息'), _t('用于显示网站公安备案信息，不填则不显示公安备案信息'));
+	$form->addInput($gafiling);
 	$AplayerCode = new Typecho_Widget_Helper_Form_Element_Text('AplayerCode', NULL, NULL, _t('全站音乐播放器APlayer代码'), _t('参考 <a target="_blank" href="https://i-meto.com/ghost-aplayer/">Meting</a> 文档填写，若不加<code>data-fixed="true"</code>参数则显示在最下方，若不想在切换页面时停止播放请加上<code>no-destroy</code>的<code>class</code>。如果不填则不启用APlayer'));
 	$form->addInput($AplayerCode);
 	$highlightstyle = new Typecho_Widget_Helper_Form_Element_Text('highlightstyle', NULL, NULL, _t('代码片渲染样式'), _t('参考 <a target="_blank" href="https://highlightjs.org/static/demo/">highlightjs</a> 样式，如果不填则使用<code>default</code>'));
