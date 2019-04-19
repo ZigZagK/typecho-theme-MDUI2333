@@ -10,9 +10,11 @@
 			<div class="mdui-card-header-subtitle"><?php $this->options->description(); ?></div>
 		</div>
 	</div>
+	<?php if ($this->options->ExSearch == 'false'){ ?>
 	<form id="search" class="mdui-textfield mdui-hidden-sm-up" style="width:90%;margin-left:auto;margin-right:auto;" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
 		<input type="text" id="s" name="s" class="mdui-textfield-input" type="text" placeholder="输入关键字搜索"/>
 	</form>
+	<?php } ?>
 	<div class="mdui-list" mdui-collapse="{accordion: true}">
 		<a href="/" class="mdui-list-item mdui-ripple">
 			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>

@@ -60,6 +60,14 @@
 	mdui.JQ('#togglesidebar').on('click', function () { sidebar.toggle(); });
 	var QAQTab = new mdui.Tab('#QAQTab');
 	mdui.JQ('#QAQ').on('open.mdui.dialog', function () { QAQTab.handleUpdate(); });
+	<?php if ($this->options->ExSearch == 'true'){ ?>
+	function ExSearchCall(item){
+		if (item&&item.length){
+			$('.ins-close').click();let url=item.attr('data-url');
+			$.pjax({url:url,container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
+		}
+	}
+	<?php } ?>
 	$(function(){
 		$('pre code').each(function(){
 			var lines = $(this).text().split('\n').length;
@@ -67,6 +75,13 @@
 			for(i=1;i<=lines;i++) $numbering.append($('<li/>').text(i));
 			$(this).addClass('has-numbering').parent().prepend($numbering);
 		});
+		<?php if ($this->options->posttoc == 'true'){ ?>
+		$("#post-container").headIndex({
+			articleWrapSelector: '#post-container',
+			indexBoxSelector: '#post-toc',
+			offset: -420
+		});
+		<?php } ?>
 		document.getElementById('pjax-loading').style.display="none";
 		document.getElementById('pjax-overlay').classList.remove("pjax-overlay-show");
 		document.getElementsByTagName('body')[0].classList.remove("mdui-locked");
@@ -98,7 +113,7 @@
 	})
 	$(document).on('pjax:complete',
 	function() {
-		MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+		MathJax.Hub.Typeset(document.getElementById('pjax-container'));
 		hljs.initHighlighting.called = false;hljs.initHighlighting();
 		$('pre code').each(function(){
 			var lines = $(this).text().split('\n').length;
@@ -106,6 +121,13 @@
 			for(i=1;i<=lines;i++) $numbering.append($('<li/>').text(i));
 			$(this).addClass('has-numbering').parent().prepend($numbering);
 		});
+		<?php if ($this->options->posttoc == 'true'){ ?>
+		$("#post-container").headIndex({
+			articleWrapSelector: '#post-container',
+			indexBoxSelector: '#post-toc',
+			offset: -420
+		});
+		<?php } ?>
 		document.getElementById('pjax-loading').style.display="none";
 		document.getElementById('pjax-overlay').classList.remove("pjax-overlay-show");
 		document.getElementsByTagName('body')[0].classList.remove("mdui-locked");

@@ -14,6 +14,9 @@
 	.pjax-overlay {position:fixed;top:-5000px;right:-5000px;bottom:-5000px;left:-5000px;z-index:2000;visibility:hidden;background:rgba(0,0,0,.4);opacity:0;-webkit-transition-duration:.3s;transition-duration:.3s;-webkit-transition-property:opacity,visibility;transition-property:opacity,visibility;-webkit-backface-visibility:hidden;backface-visibility:hidden;will-change:opacity;}
 	.pjax-overlay-show {visibility:visible;opacity:1;}
 	#pjax-container {flex:1;}
+	.ins-search::before {z-index:19260817!important;}
+	.ins-search-container {z-index:19260817!important;}
+	.ins-section-wrapper::-webkit-scrollbar {background:#fff!important;}
 	/*comments.php*/
 	div#comments ol.comment-list {padding:0!important;}
 	span.comment-reply a:hover:before,span.comment-reply a:focus:before {display:none!important;}
@@ -28,4 +31,7 @@
 	div.page-navigator li.current a {color:black!important;}
 	/*post.php & page.php*/
 	a.Fancybox:hover:before,a.Fancybox:focus:before {display:none!important;}
+	@media (min-width:600px) {#post-tocbtn {top:80px!important;}}
+	@media (orientation: landscape) and (max-width: 959px) {#post-tocbtn {top:64px!important;}}
+	#post-toc {width:unset!important;min-width:168px!important;}
 </style>

@@ -31,7 +31,11 @@
 						<span class="mdui-chip-title">查看标签</span>
 					</div>
 					<ul class="mdui-menu" id="posttag<?php echo $this->cid(); ?>">
+						<?php if (count($this->tags)>0){ ?>
 						<li class="mdui-menu-item mdui-ripple"><?php $this->tags('<li class="mdui-menu-item mdui-ripple">',true,''); ?></li>
+						<?php } else { ?>
+						<li class="mdui-menu-item mdui-ripple"><a>并没有标签QAQ</a></li>
+						<?php } ?>
 					</ul>
 					<div class="mdui-chip">
 						<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">comment</i></span>
@@ -59,6 +63,10 @@
 		</div>
 	</div>
 </div>
+<?php if ($this->options->posttoc == 'true'){ ?>
+<button class="mdui-hidden-xs-down mdui-fab mdui-fab-mini mdui-color-theme-accent mdui-ripple" id="post-tocbtn" style="position:fixed;top:72px;left:16px;z-index:1;border-radius:4px;" mdui-tooltip="{content: '文章目录',position: 'right'}" mdui-menu="{target: '#post-toc',fixed: 'true'}"><i class="mdui-icon material-icons">toc</i></button>
+<div class="mdui-menu" id="post-toc"></div>
+<?php } ?>
 
 <script>
 	(function () {

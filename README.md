@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.1.9
+作者：ZigZagK | 版本：1.2.0
 
 ## 主题特性
 
@@ -33,6 +33,12 @@
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
 
 ## 版本更新
+
+### 1.2.0
+
+添加了文章目录以及实时搜索（然而都不是我自己写的QAQ），感谢[mnnyang](https://github.com/mnnyang/jquery_headindex)大佬和[AlanDecode](https://github.com/AlanDecode/Typecho-Plugin-ExSearch)大佬Orz。
+
+将自己加载的APlayer和Meting去掉了，改用[Meting](https://github.com/MoePlayer/APlayer-Typecho)插件。
 
 ### 1.1.9
 

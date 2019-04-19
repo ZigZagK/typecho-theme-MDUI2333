@@ -13,14 +13,13 @@
 			'author'	=>  _t('%s 发布的文章')
 		), '', ' - '); ?><?php $this->options->title(); ?></title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.2/dist/css/mdui.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/styles/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "default"?>.min.css">
 	<link rel="stylesheet" href="https://at.alicdn.com/t/font_909068_po540uas8v.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
+	<link rel="stylesheet" href="<?php Helper::options()->themeUrl(); ?>css/jquery.headindex.css" />
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 	<script src="<?php Helper::options()->themeUrl(); ?>js/tagcanvas.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-	<script src="<?php Helper::options()->themeUrl(); ?>js/Meting.min.js"></script>
+	<script src="<?php Helper::options()->themeUrl(); ?>js/jquery.headindex.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/mdui@0.4.2/dist/js/mdui.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
 	<script type="text/x-mathjax-config">
@@ -50,6 +49,9 @@
 			<a class="mdui-btn mdui-btn-icon" id="togglesidebar"><i class="mdui-icon material-icons">menu</i></a>
 			<a href="/" class="mdui-typo-title"><?php $this->options->title(); ?></a>
 			<div class="mdui-toolbar-spacer"></div>
+			<?php if ($this->options->ExSearch == 'true'){ ?>
+			<button class="mdui-btn mdui-btn-icon search-form-input" mdui-tooltip="{content: '文章搜索'}"><i class="mdui-icon material-icons">search</i></button>
+			<?php } else { ?>
 			<div class="mdui-hidden-xs-down">
 				<div class="mdui-textfield mdui-textfield-expandable mdui-float-right">
 					<form id="search" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
@@ -59,6 +61,7 @@
 					</form>
 				</div>
 			</div>
+			<?php } ?>
 			<?php if ($this->user->hasLogin()){ ?>
 				<a href="/admin" target="_blank" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '控制台'}"><i class="mdui-icon material-icons">tune</i></a>
 			<?php } else { ?>
