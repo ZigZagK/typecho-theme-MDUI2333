@@ -16,7 +16,7 @@
 				<div class="mdui-typo mdui-col-xs-4 mdui-col-md-4">
 					<div class="mdui-text-center">
 						<div>Copyright © <?php echo date("Y"); ?> <a href="/"><?php $this->options->title(); ?></a></div>
-						<?php if ($this->options->filing) { ?><div><a href="http://www.miitbeian.gov.cn" target="_blank" rel="nofollow"><?php echo $this->options->filing; ?></a></div><?php } ?>
+						<?php if ($this->options->filing) { ?><div><a href="http://www.beian.miit.gov.cn" target="_blank" rel="nofollow"><?php echo $this->options->filing; ?></a></div><?php } ?>
 						<?php if ($this->options->gafiling) { ?><div><img src="<?php Helper::options()->themeUrl(); ?>/img/gaba.png" /><?php echo $this->options->gafiling; ?></div><?php } ?>
 					</div>
 				</div>
