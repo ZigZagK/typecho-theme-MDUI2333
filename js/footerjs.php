@@ -22,8 +22,6 @@
 	<?php } ?>
 	//代码高亮
 	hljs.initHighlightingOnLoad();
-	//百度统计代码
-	<?php if ($this->options->baidustatistics) echo $this->options->baidustatistics; ?>
 	//即时搜索
 	<?php if ($this->options->ExSearch=='true'){ ?>
 	function ExSearchCall(item){
@@ -104,3 +102,5 @@
 		<?php } ?>
 	})
 </script>
+<!-- 百度统计代码 -->
+<?php if ($this->options->baidustatistics) echo $this->options->baidustatistics; ?>
