@@ -2,11 +2,11 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.2.0
+作者：ZigZagK | 版本：1.2.5
 
 ## 主题特性
 
-1. 基于[MDUI](https://www.mdui.org/)，结合PJAX。有丰富（拥挤）的侧边栏栏目比如用[tagcanvas](http://www.goat1000.com/tagcanvas.php)实现的标签云。
+1. 基于[MDUI](https://www.mdui.org/)，结合PJAX，AJAX评论。有丰富（拥挤）的侧边栏栏目比如用[tagcanvas](http://www.goat1000.com/tagcanvas.php)实现的标签云。
 2. 支持文章头图设置（随机头图来源[typecho-theme-material](https://github.com/viosey/typecho-theme-material/tree/master/img/random)，侵删），评论字数限制以及评论表情，音乐播放器（By [Aplayer](https://github.com/MoePlayer/APlayer)&[Meting](https://github.com/metowolf/MetingJS)）等功能。
 3. 使用[Highlight](https://highlightjs.org/)渲染代码片并资瓷行号显示，[MathJax](https://www.mathjax.org/)渲染`LaTeX`数学公式（毕竟我是个OIer嘛QAQ）以及[Fancybox](https://fancyapps.com/fancybox/3/)灯箱功能。
 4. 一点都不丰富的自定义设置。~~（这哪里是特性了）~~
@@ -22,10 +22,6 @@
 2. 在设置外观中设置一下主题色强调色，背景图片等。（ps：已删除网站图标设置，只需在网站根目录下放入网站图标`favicon.ico`，此方法对全站适用）
 3. 友情链接页面使用方法：先安装插件[typecho-links-material](https://github.com/idawnlight/typecho-links-material)并添加友情链接。然后创建一个空页面，将模板改为友情链接页面。
 
-## 待填坑
-
-评论无刷新。（对这个一脸懵逼，希望有大佬指点Orz）
-
 ## 预览
 
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/screenshot.png)
@@ -33,6 +29,12 @@
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
 
 ## 版本更新
+
+### 1.2.5
+
+评论无限加载和AJAX评论上线啦！顺便整理了一下代码。
+
+大概会长期处于这个版本QwQ（无耻地发出咕咕咕的声音）。
 
 ### 1.2.0
 

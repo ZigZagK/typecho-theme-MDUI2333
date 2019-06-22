@@ -43,7 +43,7 @@
 	<?php $this->need('css/MDUI2333css.php'); ?>
 	<?php $this->header(); ?>
 </head>
-<body class="mdui-theme-primary-<?php if ($this->options->themeprimary) echo $this->options->themeprimary; else echo "indigo"; ?> mdui-theme-accent-<?php if ($this->options->themeaccent) echo $this->options->themeaccent; else echo "blue" ?> mdui-appbar-with-toolbar mdui-locked" id="top">
+<body class="mdui-theme-primary-<?php if ($this->options->themeprimary) echo $this->options->themeprimary; else echo "indigo"; ?> mdui-theme-accent-<?php if ($this->options->themeaccent) echo $this->options->themeaccent; else echo "blue" ?> mdui-appbar-with-toolbar mdui-locked">
 	<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
 		<div class="mdui-toolbar mdui-color-theme">
 			<a class="mdui-btn mdui-btn-icon" id="togglesidebar"><i class="mdui-icon material-icons">menu</i></a>

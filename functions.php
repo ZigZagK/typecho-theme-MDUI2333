@@ -49,6 +49,11 @@ function themeConfig($form) {
 	$form->addInput($ExSearch->multiMode());
 	$commenttextlimit = new Typecho_Widget_Helper_Form_Element_Text('commenttextlimit', NULL, NULL, _t('评论字数限制'), _t('这里可以限制评论的最大字数，不填则没有限制'));
 	$form->addInput($commenttextlimit);
+	$commentchinese = new Typecho_Widget_Helper_Form_Element_Select('commentchinese',array(
+		'true' => '启用',
+		'false' => '不启用'
+	),'false',_t('非中文评论过滤'),_t('开启后评论中必须含有至少一个汉字'));
+	$form->addInput($commentchinese->multiMode());
 	$commentpicture = new Typecho_Widget_Helper_Form_Element_Select('commentpicture',array(
 		'true' => '启用',
 		'false' => '不启用'
@@ -63,32 +68,32 @@ function themeConfig($form) {
 	$form->addInput($baidustatistics);
 }
 function themeInit($archive) {
-	Helper::options()->commentsAntiSpam = false; //反垃圾和PJAX撞了，我又搞不来，我也很绝望啊
 	Helper::options()->commentsMaxNestingLevels = 19260817; //评论"无限"层
+	if ($archive->is('single') && $archive->request->isPost() && $archive->request->is('themeAction=comment')) ajaxComment($archive); //AJAX评论
 }
 function HashtheMail($mail) {$mailHash = NULL;if (!empty($mail)) $mailHash = md5(strtolower($mail));return $mailHash;}
-function comment_gravatar($comment, $size = 32, $default = NULL) {
-	$mailHash = HashtheMail($comment->mail);
-	$url = 'https://cdn.v2ex.com/gravatar/';if (!empty($comment->mail)) $url .= $mailHash;
-	$url .= '?s=' . $size;$url .= '&r=' . $rating;$url .= '&d=' . $default;
-	echo '<img class="avatar mdui-chip-icon mdui-color-grey-200" src="' . $url . '" alt="' . $comment->author . '" width="' . $size . '" height="' . $size . '" />';
+function comment_gravatar($comment,$size,$default){
+	$mailHash=HashtheMail($comment->mail);
+	$url='https://cdn.v2ex.com/gravatar/';if (!empty($comment->mail)) $url.=$mailHash;
+	$url.='?s='.$size;$url.='&r='.$rating;$url.='&d='.$default;
+	echo '<img class="avatar mdui-chip-icon mdui-color-grey-200" src="'.$url.'" alt="'.$comment->author.'" width="'.$size.'" height="'.$size.'" />';
 }
-function comment_author($comment) {
-	if ($comment->url) echo '<a target="_blank" href="' , $comment->url , '"' , ($noFollow ? ' rel="external nofollow"' : NULL) , '>' , $comment->author , '</a>'; else echo $comment->author;
+function comment_author($comment){
+	if ($comment->url) echo '<a target="_blank" href="',$comment->url,'"',($noFollow?' rel="external nofollow"' : NULL),'>',$comment->author,'</a>'; else echo $comment->author;
 }
-function post_gravatar($user, $size = 40, $default = NULL, $class = NULL) {
-	$mailHash = HashtheMail($user->mail);
-	$url = 'https://cdn.v2ex.com/gravatar/';if (!empty($user->mail)) $url .= $mailHash;
-	$url .= '?s=' . $size;$url .= '&r=' . $rating;$url .= '&d=' . $default;
-	echo '<img class="avatar mdui-chip-icon mdui-color-grey-200" src="' . $url . '" alt="' . $user->screenName . '" width="' . $size . '" height="' . $size . '" />';
+function post_gravatar($user,$size,$default){
+	$mailHash=HashtheMail($user->mail);
+	$url='https://cdn.v2ex.com/gravatar/';if (!empty($user->mail)) $url.=$mailHash;
+	$url.='?s='.$size;$url.='&r='.$rating;$url.='&d='.$default;
+	echo '<img class="avatar mdui-chip-icon mdui-color-grey-200" src="'.$url.'" alt="'.$user->screenName.'" width="'.$size.'" height="'.$size.'" />';
 }
-function ShowThumbnail($widget) {
-	$fields = unserialize($widget->fields);if ($fields['picUrl']) {echo $fields['picUrl'];return;}
-	$rand = rand(1,19);$random = Helper::options()->themeUrl . '/img/random/material-' . $rand . '.png';echo $random;
+function ShowThumbnail($widget){
+	$fields=unserialize($widget->fields);if ($fields['picUrl']) {echo $fields['picUrl'];return;}
+	$rand=rand(1,19);$random=Helper::options()->themeUrl.'/img/random/material-'.$rand.'.png';echo $random;
 }
 function CountCateOrTag($id){
-	$db = Typecho_Db::get();$po=$db->select('table.metas.count')->from ('table.metas')->where ('parent = ?', $id)->orWhere('mid = ? ', $id);
-	$pom = $db->fetchAll($po);$num = count($pom);$shu = 0;for ($x=0; $x<$num; $x++) $shu=$pom[$x]['count']+$shu;return $shu;
+	$db=Typecho_Db::get();$po=$db->select('table.metas.count')->from('table.metas')->where('parent = ?',$id)->orWhere('mid = ? ',$id);
+	$pom=$db->fetchAll($po);$num=count($pom);$shu=0;for ($x=0;$x<$num;$x++) $shu=$pom[$x]['count']+$shu;return $shu;
 }
 function convertSmilies($widget){
 	$smiliesTrans = array(
@@ -152,12 +157,14 @@ function convertSmilies($widget){
 	}
 	return $output;
 }
+function GetCommentAt($coid){
+	$db=Typecho_Db::get();$fa=$db->fetchRow($db->select('coid,author')->from('table.comments')->where('coid = ?',$coid));
+	$content='<strong class="haveat"><a href="#comment-'.$fa['coid'].'">@'.$fa['author'].'&nbsp;</a></strong>';
+	return $content;
+}
 function RewriteComment($comment){
 	$content=convertSmilies($comment->content);
-	if ($comment->parent){
-		$db=Typecho_Db::get();$fa=$db->fetchRow($db->select('coid,author')->from('table.comments')->where('coid = ?',$comment->parent));
-		$content='<strong><a href="#comment-' . $fa['coid'] . '">@' . $fa['author'] .'&nbsp;</a></strong>' . $content;
-	}
+	if ($comment->parent) $content=GetCommentAt($comment->parent).$content;
 	return $content;
 }
 function AddMDUITable($content){
@@ -168,4 +175,141 @@ function AddFancybox($content){
 }
 function RewriteContent($content){
 	return AddMDUITable(AddFancybox($content));
+}
+function ajaxComment($archive){
+	$options = Helper::options();
+	$user = Typecho_Widget::widget('Widget_User');
+	$db = Typecho_Db::get();
+	/** 评论关闭 */
+	if(!$archive->allow('comment')){
+		$archive->response->throwJson(array('status'=>0,'msg'=>_t('评论已关闭')));
+	}
+	/** 检查ip评论间隔 */
+	if (!$user->pass('editor', true) && $archive->authorId != $user->uid &&
+	$options->commentsPostIntervalEnable){
+		$latestComment = $db->fetchRow($db->select('created')->from('table.comments')
+					->where('cid = ?', $archive->cid)
+					->where('ip = ?', $archive->request->getIp())
+					->order('created', Typecho_Db::SORT_DESC)
+					->limit(1));
+		if ($latestComment && ($options->gmtTime - $latestComment['created'] > 0 &&
+		$options->gmtTime - $latestComment['created'] < $options->commentsPostInterval)) {
+			$archive->response->throwJson(array('status'=>0,'msg'=>_t('对不起, 您的发言过于频繁, 请稍侯再次发布')));
+		}		
+	}
+	$comment = array(
+		'cid'	   =>  $archive->cid,
+		'created'   =>  $options->gmtTime,
+		'agent'	 =>  $archive->request->getAgent(),
+		'ip'		=>  $archive->request->getIp(),
+		'ownerId'   =>  $archive->author->uid,
+		'type'	  =>  'comment',
+		'status'	=>  !$archive->allow('edit') && $options->commentsRequireModeration ? 'waiting' : 'approved'
+	);
+	/** 判断父节点 */
+	if ($parentId = $archive->request->filter('int')->get('parent')) {
+		if ($options->commentsThreaded && ($parent = $db->fetchRow($db->select('coid', 'cid')->from('table.comments')
+		->where('coid = ?', $parentId))) && $archive->cid == $parent['cid']) {
+			$comment['parent'] = $parentId;
+		} else {
+			$archive->response->throwJson(array('status'=>0,'msg'=>_t('父级评论不存在')));
+		}
+	}
+	$feedback = Typecho_Widget::widget('Widget_Feedback');
+	//检验格式
+	$validator = new Typecho_Validate();
+	$validator->addRule('author', 'required', _t('必须填写用户名'));
+	$validator->addRule('author', 'xssCheck', _t('请不要在用户名中使用特殊字符'));
+	$validator->addRule('author', array($feedback, 'requireUserLogin'), _t('您所使用的用户名已经被注册,请登录后再次提交'));
+	$validator->addRule('author', 'maxLength', _t('用户名最多包含200个字符'), 200);
+	if ($options->commentsRequireMail && !$user->hasLogin()) {
+		$validator->addRule('mail', 'required', _t('必须填写电子邮箱地址'));
+	}
+	$validator->addRule('mail', 'email', _t('邮箱地址不合法'));
+	$validator->addRule('mail', 'maxLength', _t('电子邮箱最多包含200个字符'), 200);
+	if ($options->commentsRequireUrl && !$user->hasLogin()) {
+		$validator->addRule('url', 'required', _t('必须填写个人主页'));
+	}
+	$validator->addRule('url', 'url', _t('个人主页地址格式错误'));
+	$validator->addRule('url', 'maxLength', _t('个人主页地址最多包含200个字符'), 200);
+	$validator->addRule('text', 'required', _t('必须填写评论内容'));
+	$comment['text'] = $archive->request->text;
+	/** 对一般匿名访问者,将用户数据保存一个月 */
+	if (!$user->hasLogin()) {
+		/** Anti-XSS */
+		$comment['author'] = $archive->request->filter('trim')->author;
+		$comment['mail'] = $archive->request->filter('trim')->mail;
+		$comment['url'] = $archive->request->filter('trim')->url;
+		/** 修正用户提交的url */
+		if (!empty($comment['url'])) {
+			$urlParams = parse_url($comment['url']);
+			if (!isset($urlParams['scheme'])) {
+				$comment['url'] = 'http://' . $comment['url'];
+			}
+		}
+		$expire = $options->gmtTime + $options->timezone + 30*24*3600;
+		Typecho_Cookie::set('__typecho_remember_author', $comment['author'], $expire);
+		Typecho_Cookie::set('__typecho_remember_mail', $comment['mail'], $expire);
+		Typecho_Cookie::set('__typecho_remember_url', $comment['url'], $expire);
+	} else {
+		$comment['author'] = $user->screenName;
+		$comment['mail'] = $user->mail;
+		$comment['url'] = $user->url;
+		/** 记录登录用户的id */
+		$comment['authorId'] = $user->uid;
+	}
+	/** 评论者之前须有评论通过了审核 */
+	if (!$options->commentsRequireModeration && $options->commentsWhitelist) {
+		if ($feedback->size($feedback->select()->where('author = ? AND mail = ? AND status = ?', $comment['author'], $comment['mail'], 'approved'))) {
+			$comment['status'] = 'approved';
+		} else {
+			$comment['status'] = 'waiting';
+		}
+	}
+	if ($error = $validator->run($comment)) {
+		$archive->response->throwJson(array('status'=>0,'msg'=> implode(';',$error)));
+	}
+	if ($options->commentchinese=='true' && preg_match("/[\x{4e00}-\x{9fa5}]/u", $comment['text']) == 0) {
+		$archive->response->throwJson(array('status'=>0,'msg'=>_t('评论内容请不少于一个中文汉字')));
+	}
+	/** 添加评论 */
+	$commentId = $feedback->insert($comment);
+	if(!$commentId){
+		$archive->response->throwJson(array('status'=>0,'msg'=>_t('评论失败')));
+	}
+	Typecho_Cookie::delete('__typecho_remember_text');
+	$db->fetchRow($feedback->select()->where('coid = ?', $commentId)
+	->limit(1), array($feedback, 'push'));
+	// 邮件通知插件接口
+	$feedback->pluginHandle()->finishComment($feedback);
+	// 返回评论数据
+	$data = array(
+		'cid' => $feedback->cid,
+		'coid' => $feedback->coid,
+		'parent' => $feedback->parent,
+		'mail' => $feedback->mail,
+		'url' => $feedback->url,
+		'ip' => $feedback->ip,
+		'agent' => $feedback->agent,
+		'author' => $feedback->author,
+		'authorId' => $feedback->authorId,
+		'permalink' => $feedback->permalink,
+		'created' => $feedback->created,
+		'datetime' => $feedback->date->format($options->commentDateFormat),
+		'status' => $feedback->status,
+	);
+	// 评论内容
+	ob_start();
+	$feedback->content();
+	$data['content'] = convertSmilies(ob_get_clean());
+	if ($data['parent']) $data['content'] = GetCommentAt($data['parent']) . $data['content'];
+	// 身份标识
+	if ($data['authorId']==$comment['ownerId']) $data['ifauthor'] = '<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">account_circle</i></span><div class="mdui-chip-title">博主</div>';
+	else $data['ifauthor'] = '<span class="mdui-chip-icon"><i class="mdui-icon material-icons">remove_red_eye</i></span><div class="mdui-chip-title">访客</div>';
+	// 网址链接
+	if ($data['url']) $data['authorurl']='<a target="_blank" href="'.$data['url'].'">'.$data['author'].'</a>';
+	else $data['authorurl']=$data['author'];
+	// gravatar头像
+	$data['avatar'] = 'https://cdn.v2ex.com/gravatar/'.HashTheMail($data['mail']).'?s=100&r=&d=mystery';
+	$archive->response->throwJson(array('status'=>1,'comment'=>$data));
 }
