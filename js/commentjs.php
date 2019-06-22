@@ -148,8 +148,8 @@
 			beforeSend: function() {mdui.snackbar({message:'正在提交评论QwQ',position:'right-bottom',timeout:'1000'});$('#commentsumbit').css('display','none');$('#commenting').css('display','block');},
 			complete: function() {mdui.mutation();},
 			success: function(result){
+				$('#commenting').css('display','none');$('#commentsumbit').css('display','block');
 				if (result.status==1){
-					$('#commenting').css('display','none');$('#commentsumbit').css('display','block');
 					mdui.dialog({content:'评论成功啦ヾ(≧∇≦*)ゝ',onClose:function(){$('html,body').animate({scrollTop:$('#comment-'+result.comment.coid).offset().top},'fast');},cssClass:'mdui-dialog-alert',buttons:[{text:'ok'}]});
 					appendComment(result.comment);
 					var number=parseInt($('#commentsnumber').text())+1;
