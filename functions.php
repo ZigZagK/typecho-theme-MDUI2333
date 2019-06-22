@@ -303,6 +303,7 @@ function ajaxComment($archive){
 	$feedback->content();
 	$data['content'] = convertSmilies(ob_get_clean());
 	if ($data['parent']) $data['content'] = GetCommentAt($data['parent']) . $data['content'];
+	$data['text'] = $comment['text'];
 	// 身份标识
 	if ($data['authorId']==$comment['ownerId']) $data['ifauthor'] = '<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">account_circle</i></span><div class="mdui-chip-title">博主</div>';
 	else $data['ifauthor'] = '<span class="mdui-chip-icon"><i class="mdui-icon material-icons">remove_red_eye</i></span><div class="mdui-chip-title">访客</div>';

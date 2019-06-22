@@ -41,7 +41,7 @@
 				<div class="mdui-list-item-content">最新评论</div>
 				<i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
 			</div>
-			<div class="mdui-collapse-item-body mdui-list">
+			<div class="mdui-collapse-item-body mdui-list" id="recentcomments">
 				<?php $this->widget('Widget_Comments_Recent','pageSize=5')->to($comment); ?>
 				<?php while($comment->next()): ?>
 				<a href="<?php $comment->permalink(); ?>" class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '<?php $comment->date(); ?>', position: 'right'}">
