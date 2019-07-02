@@ -40,8 +40,7 @@ echo $commentClass;
 			<?php echo RewriteComment($comments); ?>
 			<div class="mdui-chip">
 				<?php if ($comments->authorId == $comments->ownerId){ ?>
-				<span class="mdui-chip-icon mdui-color-theme-accent" ><i class="mdui-icon material-icons">account_circle</i></span>
-				<span class="mdui-chip-title">博主</span>
+				<span class="mdui-chip-icon mdui-color-theme-accent" ><i class="mdui-icon material-icons">account_circle</i></span><span class="mdui-chip-title">博主</span>
 				<?php } else { ?>
 				<span class="mdui-chip-icon" ><i class="mdui-icon material-icons">remove_red_eye</i></span><span class="mdui-chip-title">访客</span>
 				<?php } ?>
@@ -72,11 +71,9 @@ echo $commentClass;
 			<?php echo RewriteComment($comments); ?>
 			<div class="mdui-chip">
 				<?php if ($comments->authorId == $comments->ownerId){ ?>
-				<span class="mdui-chip-icon mdui-color-theme-accent" ><i class="mdui-icon material-icons">account_circle</i></span>
-				<div class="mdui-chip-title">博主</div>
+				<span class="mdui-chip-icon mdui-color-theme-accent" ><i class="mdui-icon material-icons">account_circle</i></span><div class="mdui-chip-title">博主</div>
 				<?php } else { ?>
-				<span class="mdui-chip-icon" ><i class="mdui-icon material-icons">remove_red_eye</i></span>
-				<div class="mdui-chip-title">访客</div>
+				<span class="mdui-chip-icon" ><i class="mdui-icon material-icons">remove_red_eye</i></span><div class="mdui-chip-title">访客</div>
 				<?php } ?>
 			</div>
 			<span class="comment-reply mdui-float-right"><?php $comments->reply('<button class="mdui-btn mdui-color-theme-accent mdui-ripple">回复</button>'); ?></span>
