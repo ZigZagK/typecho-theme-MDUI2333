@@ -160,6 +160,14 @@
 					var number=parseInt($('#commentsnumber').text())+1;
 					$('#commentsnumber').text(number+" 条评论");
 					form.find('textarea').val('');$('#cancel-comment-reply-link').click();
+					hljs.initHighlighting.called = false;hljs.initHighlighting();
+					MathJax.Hub.Typeset(document.getElementById('#comment-'+result.comment.coid));
+					$('#comment-'+result.comment.coid).find('pre code').each(function(){
+						var lines = $(this).text().split('\n').length;
+						var $numbering = $('<ul/>').addClass('pre-numbering');
+						for(i=1;i<=lines;i++) $numbering.append($('<li/>').text(i));
+						$(this).addClass('has-numbering').parent().prepend($numbering);
+					});
 				} else {mdui.alert(undefined === result.msg ? '发生了未知错误Orz' : result.msg);}
 			},
 			error: function(xhr,ajaxOptions,thrownError) {mdui.alert('提交评论失败了QAQ');	}
