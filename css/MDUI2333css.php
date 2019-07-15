@@ -26,7 +26,9 @@
 	#QAQ a {color:unset!important;}
 	#QAQ a:hover:before,#QAQ a:focus:before {display:none!important;}
 	#QAQ .mdui-dialog-content .QAQPicture .mdui-btn {min-width:unset;padding:5px;height:unset;margin-bottom:-13px;}
-	div.page-navigator a:not([class~="next"]) {display:none;}
+	div.page-navigator {list-style:none;}
+	div.page-navigator li {display:inline-block;padding:0 20px;}
+	div.page-navigator li.current a {color:black!important;}
 	/*post.php & page.php*/
 	a.Fancybox:hover:before,a.Fancybox:focus:before {display:none!important;}
 	@media (min-width:600px) {#post-tocbtn {top:80px!important;}}

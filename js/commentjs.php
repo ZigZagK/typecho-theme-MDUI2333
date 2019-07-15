@@ -80,27 +80,6 @@
 		},750);
 	});
 	<?php } ?>
-	//评论无限加载
-	$('a.next').click(function(){
-		$this=$(this);$this.hide();$("#commenet-load").show();
-		var href=$this.attr('href');
-		if (href!=undefined){
-			$.ajax({
-				url: href,
-				type: 'get',
-				error: function() {mdui.alert("评论加载出错了QAQ");},
-				success: function(data){
-					var $res=$(data).find('#allcomment');
-					$("#allcomment").append($res);mdui.mutation();
-					var newhref=$(data).find('a.next').attr('href');
-					if (newhref!=undefined) {$('a.next').attr('href', newhref);}
-					else {$('a.next').remove();}
-				},
-				complete: function() {$("#commenet-load").hide();$this.show();}
-			});
-		}
-		return false;
-	});
 	//AJAX评论
 	$('#comment-form').submit(function(){
 		var form=$(this),params=form.serialize();
@@ -132,7 +111,6 @@
 				}
 				el=$('#comment-'+comment.parent).find('.comment-children .comment-list:first');
 			} else {
-				if ($('a.next').length) $('#allcomment .comment-list .comment-parent:last').remove();
 				if (el.length<1){
 					$('<ol class="comment-list"></ol>').appendTo($('#allcomment'));
 					el=$('#allcomment .comment-list:first');
@@ -159,7 +137,8 @@
 					appendComment(result.comment);
 					var number=parseInt($('#commentsnumber').text())+1;
 					$('#commentsnumber').text(number+" 条评论");
-					form.find('textarea').val('');$('#cancel-comment-reply-link').click();
+					form.find('textarea').val('');form.find('textarea').css('height','');
+					if ($('#cancel-comment-reply-link').css('display')!='none') $('#cancel-comment-reply-link').click();
 					hljs.initHighlighting.called = false;hljs.initHighlighting();
 					MathJax.Hub.Typeset(document.getElementById('#comment-'+result.comment.coid));
 					$('#comment-'+result.comment.coid).find('pre code').each(function(){

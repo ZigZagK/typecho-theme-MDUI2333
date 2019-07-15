@@ -148,8 +148,7 @@ echo $commentClass;
 	<?php $comments->listComments(); ?>
 	</div>
 	<?php if ($comments->have()): ?>
-	<div class="mdui-progress mdui-m-b-1" id="commenet-load" style="display:none"><div class="mdui-progress-indeterminate"></div></div>
-	<?php $comments->pageNav('','查看更多评论',0,'',array('wrapTag' => 'div','wrapClass' => 'page-navigator','itemTag' => '','nextClass' => 'next mdui-btn mdui-btn-block mdui-ripple mdui-color-theme-accent mdui-m-b-1')); ?>
+	<?php $comments->pageNav('前一页','后一页',1,'...',array('wrapTag' => 'div','wrapClass' => 'page-navigator mdui-card mdui-p-a-1 mdui-m-y-2 mdui-text-center')); ?>
 	<?php endif; ?>
 	<?php else: ?>
 	<center>
