@@ -20,6 +20,7 @@
 						<?php if ($this->options->gafiling) { ?><div><img src="<?php Helper::options()->themeUrl(); ?>/img/gaba.png" /><?php echo $this->options->gafiling; ?></div><?php } ?>
 					</div>
 				</div>
+				<!-- 如果您能保留下面的主题信息，会使我更有动力哒QwQ -->
 				<div class="mdui-typo mdui-col-xs-4 mdui-col-md-3">
 					<div class="mdui-float-right">
 						<div>Powered by <a href="http://typecho.org" target="_blank">Typecho</a></div>
