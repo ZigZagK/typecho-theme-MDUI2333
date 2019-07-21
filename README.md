@@ -32,7 +32,7 @@
 
 ### 1.2.6
 
-现在可以（稍微）优雅地自定义表情啦，灵感来~~（抄）~~自于[ohmyga](https://github.com/ohmyga233/castle-Typecho-Theme)的主题。
+现在可以（稍微）优雅地自定义表情啦，灵感来 ~~（抄）~~ 自于[ohmyga](https://github.com/ohmyga233/castle-Typecho-Theme)的主题。
 
 本来还兴致勃勃地想学习插件开发，然而Typecho插件开发的教程几乎没有，所以就弃了……
 

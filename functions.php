@@ -71,6 +71,10 @@ function themeInit($archive) {
 	Helper::options()->commentsMaxNestingLevels = 19260817; //评论"无限"层
 	if ($archive->is('single') && $archive->request->isPost() && $archive->request->is('themeAction=comment')) ajaxComment($archive); //AJAX评论
 }
+function ThemeName(){
+	$db=Typecho_Db::get();$query=$db->select('value')->from('table.options')->where('name = ?', 'theme');
+	$result=$db->fetchAll($query);return $result[0]["value"];
+}
 function HashtheMail($mail) {$mailHash = NULL;if (!empty($mail)) $mailHash = md5(strtolower($mail));return $mailHash;}
 function comment_gravatar($comment,$size,$default){
 	$mailHash=HashtheMail($comment->mail);
@@ -96,7 +100,9 @@ function CountCateOrTag($id){
 	$pom=$db->fetchAll($po);$num=count($pom);$shu=0;for ($x=0;$x<$num;$x++) $shu=$pom[$x]['count']+$shu;return $shu;
 }
 function convertSmilies($widget){
-	$getJson = file_get_contents(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json");
+	if (get_headers(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json",1)[0]=='HTTP/1.1 200 OK')
+		$getJson=file_get_contents(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json");
+		else $getJson=file_get_contents(Helper::options()->themeFile(ThemeName(),"img/QAQ/QAQ.json"));
 	$QAQTAB = json_decode($getJson,true);$TABName = array_keys($QAQTAB);$length = count($TABName);
 	for ($i=0;$i<$length;$i++){
 		$key=$TABName[$i];$tot=count($QAQTAB[$key]['content']);
