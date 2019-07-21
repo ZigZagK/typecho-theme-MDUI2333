@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.2.5
+作者：ZigZagK | 版本：1.2.6
 
 ## 主题特性
 
@@ -29,6 +29,14 @@
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
 
 ## 版本更新
+
+### 1.2.6
+
+现在可以（稍微）优雅地自定义表情啦，灵感来~~（抄）~~自于[ohmyga](https://github.com/ohmyga233/castle-Typecho-Theme)的主题。
+
+本来还兴致勃勃地想学习插件开发，然而Typecho插件开发的教程几乎没有，所以就弃了……
+
+配置格式详见[这篇文章](https://zigzagk.top/2019/07/22/MDUI2333QAQTAB)。
 
 ### 1.2.5(Fix)
 
@@ -84,7 +92,7 @@
 
 > 自定义评论表情：要更改`function.php`中`function convertSmilies($widget)`的内容以及`comments.php`中`<div class="mdui-dialog-content">`的内容，看我已有的配置应该可以看得懂QAQ。
 
-评论表情是参考[ohmyga](https://ohmyga.net/)的主题的，希望Dalao不要捶我Orz。
+评论表情是参考[ohmyga](https://github.com/ohmyga233/castle-Typecho-Theme)的主题的，希望Dalao不要捶我Orz。
 
 ### 1.1
 

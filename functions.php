@@ -96,50 +96,13 @@ function CountCateOrTag($id){
 	$pom=$db->fetchAll($po);$num=count($pom);$shu=0;for ($x=0;$x<$num;$x++) $shu=$pom[$x]['count']+$shu;return $shu;
 }
 function convertSmilies($widget){
-	$smiliesTrans = array(
-		':tieba1:'=>'tieba/1.png',
-		':tieba2:'=>'tieba/2.png',
-		':tieba3:'=>'tieba/3.png',
-		':tieba4:'=>'tieba/4.png',
-		':tieba5:'=>'tieba/5.png',
-		':tieba6:'=>'tieba/6.png',
-		':tieba7:'=>'tieba/7.png',
-		':tieba8:'=>'tieba/8.png',
-		':tieba9:'=>'tieba/9.png',
-		':tieba10:'=>'tieba/10.png',
-		':tieba11:'=>'tieba/11.png',
-		':tieba12:'=>'tieba/12.png',
-		':tieba13:'=>'tieba/13.png',
-		':tieba14:'=>'tieba/14.png',
-		':tieba15:'=>'tieba/15.png',
-		':tieba16:'=>'tieba/16.png',
-		':tieba17:'=>'tieba/17.png',
-		':tieba18:'=>'tieba/18.png',
-		':tieba19:'=>'tieba/19.png',
-		':tieba20:'=>'tieba/20.png',
-		':tieba21:'=>'tieba/21.png',
-		':tieba22:'=>'tieba/22.png',
-		':tieba23:'=>'tieba/23.png',
-		':tieba24:'=>'tieba/24.png',
-		':tieba25:'=>'tieba/25.png',
-		':tieba26:'=>'tieba/26.png',
-		':orz1:'=>'Orz/1.png',
-		':orz2:'=>'Orz/2.png',
-		':orz3:'=>'Orz/3.png',
-		':orz4:'=>'Orz/4.png',
-		':orz5:'=>'Orz/5.png',
-		':orz6:'=>'Orz/6.gif',
-		':orz7:'=>'Orz/7.png',
-		':orz8:'=>'Orz/8.png',
-		':orz9:'=>'Orz/9.png',
-		':orz10:'=>'Orz/10.png',
-		':orz11:'=>'Orz/11.png',
-		':orz12:'=>'Orz/12.png',
-		':orz13:'=>'Orz/13.gif',
-		':orz14:'=>'Orz/14.png',
-		':orz15:'=>'Orz/15.png',
-		':orz16:'=>'Orz/16.png',
-	);
+	$getJson = file_get_contents(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json");
+	$QAQTAB = json_decode($getJson,true);$TABName = array_keys($QAQTAB);$length = count($TABName);
+	for ($i=0;$i<$length;$i++){
+		$key=$TABName[$i];$tot=count($QAQTAB[$key]['content']);
+		if ($QAQTAB[$key]['type']=='picture')
+			for ($j=0;$j<$tot;$j++) $smiliesTrans[':'.$key.$QAQTAB[$key]['content'][$j]['id'].':']='/'.$key.'/'.$QAQTAB[$key]['content'][$j]['path'];
+	}
 	$imgUrl = Typecho_Widget::widget('Widget_Options')->themeUrl . '/img/QAQ/';
 	foreach($smiliesTrans as $smiley => $img) {
 		$smiliesTag[] = $smiley;
