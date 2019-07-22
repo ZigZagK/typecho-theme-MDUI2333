@@ -69,6 +69,9 @@ function themeConfig($form) {
 }
 function themeInit($archive) {
 	Helper::options()->commentsMaxNestingLevels = 19260817; //评论"无限"层
+	Helper::options()->commentsMarkdown = true; //评论支持Markdown
+	Helper::options()->commentsPageBreak = false; //评论不分页，方便AJAX评论
+	Helper::options()->commentsOrder = 'DESC'; //新的评论显示在前，方便AJAX评论
 	if ($archive->is('single') && $archive->request->isPost() && $archive->request->is('themeAction=comment')) ajaxComment($archive); //AJAX评论
 }
 function ThemeName(){
