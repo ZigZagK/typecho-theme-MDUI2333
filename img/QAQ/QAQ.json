@@ -54,6 +54,38 @@
 			{"id":"25","path":"25.png","tip":""}
 		]
 	},
+	"qq":{
+		"type":"picture",
+		"title":"QQ",
+		"width":"35",
+		"height":"35",
+		"content":[
+			{"id":"1","path":"1.gif","tip":""},
+			{"id":"2","path":"2.gif","tip":""},
+			{"id":"3","path":"3.gif","tip":""},
+			{"id":"4","path":"4.gif","tip":""},
+			{"id":"5","path":"5.gif","tip":""},
+			{"id":"6","path":"6.gif","tip":""},
+			{"id":"7","path":"7.gif","tip":""},
+			{"id":"8","path":"8.gif","tip":""},
+			{"id":"9","path":"9.gif","tip":""},
+			{"id":"10","path":"10.gif","tip":""},
+			{"id":"11","path":"11.gif","tip":""},
+			{"id":"12","path":"12.gif","tip":""},
+			{"id":"13","path":"13.gif","tip":""},
+			{"id":"14","path":"14.gif","tip":""},
+			{"id":"15","path":"15.gif","tip":""},
+			{"id":"16","path":"16.gif","tip":""},
+			{"id":"17","path":"17.gif","tip":""},
+			{"id":"18","path":"18.gif","tip":""},
+			{"id":"19","path":"19.gif","tip":""},
+			{"id":"20","path":"20.gif","tip":""},
+			{"id":"21","path":"21.gif","tip":""},
+			{"id":"22","path":"22.gif","tip":""},
+			{"id":"23","path":"23.gif","tip":""},
+			{"id":"24","path":"24.gif","tip":""}
+		]
+	},
 	"orz":{
 		"type":"picture",
 		"title":"Orz",

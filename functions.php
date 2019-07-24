@@ -109,13 +109,22 @@ function convertSmilies($widget){
 	$QAQTAB = json_decode($getJson,true);$TABName = array_keys($QAQTAB);$length = count($TABName);
 	for ($i=0;$i<$length;$i++){
 		$key=$TABName[$i];$tot=count($QAQTAB[$key]['content']);
-		if ($QAQTAB[$key]['type']=='picture')
-			for ($j=0;$j<$tot;$j++) $smiliesTrans[':'.$key.$QAQTAB[$key]['content'][$j]['id'].':']='/'.$key.'/'.$QAQTAB[$key]['content'][$j]['path'];
+		if ($QAQTAB[$key]['type']=='picture'){
+			$width=$QAQTAB[$key]['width'];$height=$QAQTAB[$key]['height'];
+			for ($j=0;$j<$tot;$j++){
+				$string=':'.$key.$QAQTAB[$key]['content'][$j]['id'].':';
+				$smiliesTrans[$string][0]='/'.$key.'/'.$QAQTAB[$key]['content'][$j]['path'];
+				if ($width!='') $smiliesTrans[$string][1]=$width;
+				if ($QAQTAB[$key]['content'][$j]['width']!='') $smiliesTrans[$string][1]=$QAQTAB[$key]['content'][$j]['width'];
+				if ($height!='') $smiliesTrans[$string][2]=$height;
+				if ($QAQTAB[$key]['content'][$j]['height']!='') $smiliesTrans[$string][2]=$QAQTAB[$key]['content'][$j]['height'];
+			}
+		}
 	}
 	$imgUrl = Typecho_Widget::widget('Widget_Options')->themeUrl . '/img/QAQ/';
 	foreach($smiliesTrans as $smiley => $img) {
 		$smiliesTag[] = $smiley;
-		$smiliesReplace[] = "<img src=\"$imgUrl$img\" alt=\"\" class=\"smiley\" />";
+		$smiliesReplace[] = "<img src=\"$imgUrl$img[0]\" alt=\"\" class=\"smiley\" width=\"$img[1]\" height=\"$img[2]\" />";
 	}   
 	$output = '';
 	$textArr = preg_split("/(<.*>)/U", $widget, -1, PREG_SPLIT_DELIM_CAPTURE);
