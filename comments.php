@@ -118,6 +118,10 @@ echo $commentClass;
 						<input type="hidden" name="receiveMail" id="receiveMail" value="yes" />
 						<!-- CommentToMail插件 -->
 						<?php } ?>
+						<?php if (array_key_exists('Mailer', $all['activated'])){ ?>
+						<input type="hidden" name="receiveMail" value="yes" checked />
+						<!-- Mailer插件 -->
+						<?php } ?>
 						<div class="mdui-textfield-error">邮箱不能为空，请填写正确格式</div>
 					</div>
 					<div class="mdui-textfield mdui-col-xs-12 mdui-col-sm-4">
