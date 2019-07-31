@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.2.6
+作者：ZigZagK | 版本：1.2.7
 
 ## 主题特性
 
@@ -18,7 +18,7 @@
 
 ## 如何使用
 
-1. 下载之后改名为MDUI2333放入主题目录，之后启动主题。
+1. 在[Releases](https://github.com/ZigZagK/typecho-theme-MDUI2333/releases)中下载最新版，改名为MDUI2333放入主题目录，之后启用主题。
 2. 在设置外观中设置一下主题色强调色，背景图片等。（ps：已删除网站图标设置，只需在网站根目录下放入网站图标`favicon.ico`，此方法对全站适用）
 3. 友情链接页面使用方法：先安装插件[typecho-links-material](https://github.com/idawnlight/typecho-links-material)并添加友情链接。然后创建一个空页面，将模板改为友情链接页面。
 4. 自定义评论表情框：详见[这篇文章](https://zigzagk.top/2019/07/22/MDUI2333QAQTAB)。
@@ -30,6 +30,10 @@
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
 
 ## 版本更新
+
+### 1.2.7
+
+加入主题更新提示。
 
 ### 1.2.6
 

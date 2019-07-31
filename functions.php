@@ -1,9 +1,28 @@
 <?php
+define('Version','1.2.7');
+
+function getcontents($url){
+	$headerArray=array("Content-type:application/json;","Accept:application/json");
+	$ch=curl_init();
+	curl_setopt($ch,CURLOPT_URL,$url);
+	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE); 
+	curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE); 
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+	curl_setopt($url,CURLOPT_HTTPHEADER,$headerArray);
+	$output=curl_exec($ch);curl_close($ch);
+	return $output;
+}
 function themeFields($layout) {
 	$picUrl = new Typecho_Widget_Helper_Form_Element_Text('picUrl', NULL, NULL, _t('图片地址'), _t('在这里填入一个图片 URL 地址, 作为文章的头图，如果不填则显示随机图片'));
 	$layout->addItem($picUrl);
 }
 function themeConfig($form) {
+	$getJson=getcontents('https://api.zigzagk.top/?s=MDUI2333.info&version='.Version);
+	$themeinfo=json_decode($getJson,true);
+	echo '<center><strong>您现在的版本是'.Version.'</strong></center>';
+	echo '<center><strong>最新的版本是<a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/releases">'.$themeinfo['data']['latest'].'</a></strong></center>';
+	echo '<center><strong>'.$themeinfo['data']['text'].'</strong></center>';
+	echo '<style>ul.typecho-option-submit button{position:fixed;bottom:20px;right:20px;}</style>';
 	echo '<center><h2>这里是MDUI2333主题的一些设置QwQ</h2></center>';
 	echo '<center><h3>网站标题等基本信息需要在控制台中填写</h3></center>';
 	$themeprimary = new Typecho_Widget_Helper_Form_Element_Text('themeprimary', NULL, NULL, _t('主题使用的主色'), _t('顶部栏颜色等主题色。填颜色名，参考 <a target="_blank" href="https://www.mdui.org/docs/color#color">MDUI</a> 文档。如果不填则默认使用<code>indigo</code>'));
@@ -74,10 +93,6 @@ function themeInit($archive) {
 	Helper::options()->commentsOrder = 'DESC'; //新的评论显示在前，方便AJAX评论
 	if ($archive->is('single') && $archive->request->isPost() && $archive->request->is('themeAction=comment')) ajaxComment($archive); //AJAX评论
 }
-function ThemeName(){
-	$db=Typecho_Db::get();$query=$db->select('value')->from('table.options')->where('name = ?', 'theme');
-	$result=$db->fetchAll($query);return $result[0]["value"];
-}
 function HashtheMail($mail) {$mailHash = NULL;if (!empty($mail)) $mailHash = md5(strtolower($mail));return $mailHash;}
 function comment_gravatar($comment,$size,$default){
 	$mailHash=HashtheMail($comment->mail);
@@ -103,9 +118,7 @@ function CountCateOrTag($id){
 	$pom=$db->fetchAll($po);$num=count($pom);$shu=0;for ($x=0;$x<$num;$x++) $shu=$pom[$x]['count']+$shu;return $shu;
 }
 function convertSmilies($widget){
-	if (get_headers(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json",1)[0]=='HTTP/1.1 200 OK')
-		$getJson=file_get_contents(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json");
-		else $getJson=file_get_contents(Helper::options()->themeFile(ThemeName(),"img/QAQ/QAQ.json"));
+	$getJson=getcontents(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json");
 	$QAQTAB = json_decode($getJson,true);$TABName = array_keys($QAQTAB);$length = count($TABName);
 	for ($i=0;$i<$length;$i++){
 		$key=$TABName[$i];$tot=count($QAQTAB[$key]['content']);
