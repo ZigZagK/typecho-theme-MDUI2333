@@ -6,12 +6,11 @@ function themeFields($layout) {
 	$layout->addItem($picUrl);
 }
 function themeConfig($form) {
-	echo '<style>ul.typecho-option-submit button{position:fixed;bottom:20px;right:20px;}</style>';
+	echo '<style>div#info {border:4px solid #448aff;padding:10px;} ul.typecho-option-submit button {position:fixed;bottom:20px;right:20px;}</style>';
 	echo '<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>';
 	echo '<script>$.ajax({type:"GET",url:"https://api.zigzagk.top/?s=MDUI2333.info&version='.Version.'",beforeSend:function(xhr){},success:function(data){$("#infolatest").html(data.data.latest);$("#infotext").html(data.data.text);},error:function(xhr,textStatus,errorThrown){$("#infolatest").html(" 出错了QAQ ");$("#infotext").html(" 出错了QAQ ");}});</script>';
-	echo '<center><strong>您现在的版本是'.Version.'</strong></center>';
-	echo '<center><strong>最新的版本是<a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/releases"><span id="infolatest"> Loading... </span></a></strong></center>';
-	echo '<center><strong><span id="infotext"> Loading... </span></strong></center>';
+	echo '<div id="info"><center>您现在的版本是<strong>'.Version.'</strong>，最新的版本是<strong><a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/releases"><span id="infolatest"> Loading... </span></a></strong></center>';
+	echo '<center><span id="infotext"> Loading... </span></center></div>';
 	echo '<center><h2>这里是MDUI2333主题的一些设置QwQ</h2></center>';
 	echo '<center><h3>网站标题等基本信息需要在控制台中填写</h3></center>';
 	$themeprimary = new Typecho_Widget_Helper_Form_Element_Text('themeprimary', NULL, NULL, _t('主题使用的主色'), _t('顶部栏颜色等主题色。填颜色名，参考 <a target="_blank" href="https://www.mdui.org/docs/color#color">MDUI</a> 文档。如果不填则默认使用<code>indigo</code>'));
