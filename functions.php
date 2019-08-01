@@ -8,7 +8,7 @@ function themeFields($layout) {
 function themeConfig($form) {
 	echo '<style>div#info {border:4px solid #448aff;padding:10px;} ul.typecho-option-submit button {position:fixed;bottom:20px;right:20px;}</style>';
 	echo '<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>';
-	echo '<script>$.ajax({type:"GET",url:"https://api.zigzagk.top/?s=MDUI2333.info&version='.Version.'",beforeSend:function(xhr){},success:function(data){$("#infolatest").html(data.data.latest);$("#infotext").html(data.data.text);},error:function(xhr,textStatus,errorThrown){$("#infolatest").html(" 出错了QAQ ");$("#infotext").html(" 出错了QAQ ");}});</script>';
+	echo '<script>$.ajax({type:"GET",url:"https://api.zigzagk.top/?s=MDUI2333.info&version='.Version.'",beforeSend:function(xhr){},success:function(data){$("#infolatest").html(data.latest);$("#infotext").html(data.text);},error:function(xhr,textStatus,errorThrown){$("#infolatest").html(" 出错了QAQ ");$("#infotext").html(" 出错了QAQ ");}});</script>';
 	echo '<div id="info"><center>您现在的版本是<strong>'.Version.'</strong>，最新的版本是<strong><a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/releases"><span id="infolatest"> Loading... </span></a></strong></center>';
 	echo '<center><span id="infotext"> Loading... </span></center></div>';
 	echo '<center><h2>这里是MDUI2333主题的一些设置QwQ</h2></center>';
