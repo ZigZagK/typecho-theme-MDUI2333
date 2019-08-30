@@ -33,6 +33,9 @@
 	<?php } ?>
 	//第一次加载
 	$(function(){
+		<?php if ($this->options->announcement!=''){ ?>
+		mdui.snackbar({message:"<?php echo $this->options->announcement; ?>",position:'right-top',closeOnOutsideClick:false});
+		<?php } ?>
 		$('pre code').each(function(){
 			var lines = $(this).text().split('\n').length;
 			var $numbering = $('<ul/>').addClass('pre-numbering');

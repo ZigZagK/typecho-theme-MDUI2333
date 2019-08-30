@@ -39,6 +39,8 @@ function themeConfig($form) {
 	$form->addInput($AplayerCode);
 	$highlightstyle = new Typecho_Widget_Helper_Form_Element_Text('highlightstyle', NULL, NULL, _t('代码片渲染样式'), _t('参考 <a target="_blank" href="https://highlightjs.org/static/demo/">highlightjs</a> 样式，如果不填则使用<code>default</code>'));
 	$form->addInput($highlightstyle);
+	$announcement = new Typecho_Widget_Helper_Form_Element_Text('announcement', NULL, NULL, _t('网站公告'), _t('在访客进入网站时显示在右上角的公告'));
+	$form->addInput($announcement);
 	$tagcloudmode = new Typecho_Widget_Helper_Form_Element_Select('tagcloudmode',array(
 		'ball' => '侧边栏球形标签云',
 		'page' => '独立页面文字标签云'

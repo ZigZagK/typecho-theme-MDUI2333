@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.2.7
+作者：ZigZagK | 版本：1.2.8
 
 ## 主题特性
 
@@ -30,6 +30,10 @@
 ![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
 
 ## 版本更新
+
+### 1.2.8
+
+加入网站公告。
 
 ### 1.2.7
 
