@@ -25,6 +25,8 @@
 	"tieba":{
 		"type":"picture",
 		"title":"贴吧",
+		"width":"32",
+		"height":"32",
 		"content":[
 			{"id":"9","path":"9.png","tip":"滑天下之大稽"},
 			{"id":"26","path":"26.png","tip":"我的滑稽会冒汗"},
@@ -51,7 +53,14 @@
 			{"id":"22","path":"22.png","tip":""},
 			{"id":"23","path":"23.png","tip":""},
 			{"id":"24","path":"24.png","tip":""},
-			{"id":"25","path":"25.png","tip":""}
+			{"id":"25","path":"25.png","tip":""},
+			{"id":"27","path":"27.png","tip":""},
+			{"id":"28","path":"28.png","tip":""},
+			{"id":"29","path":"29.png","tip":""},
+			{"id":"30","path":"30.png","tip":""},
+			{"id":"31","path":"31.png","tip":""},
+			{"id":"32","path":"32.png","tip":""},
+			{"id":"33","path":"33.png","tip":""}
 		]
 	},
 	"qq":{

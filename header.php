@@ -64,7 +64,7 @@
 			</div>
 			<?php } ?>
 			<?php if ($this->user->hasLogin()){ ?>
-				<a href="/admin" target="_blank" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '控制台'}"><i class="mdui-icon material-icons">tune</i></a>
+				<a href="/admin" target="_blank" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '控制台'}"><i class="mdui-icon material-icons">settings</i></a>
 			<?php } else { ?>
 				<a href="/admin" target="_blank" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '登录'}"><i class="mdui-icon material-icons">account_circle</i></a>
 			<?php } ?>
