@@ -21,19 +21,23 @@
 1. 在[Releases](https://github.com/ZigZagK/typecho-theme-MDUI2333/releases)中下载最新版，改名为MDUI2333放入主题目录，之后启用主题。
 2. 在设置外观中设置一下主题色强调色，背景图片等。（ps：已删除网站图标设置，只需在网站根目录下放入网站图标`favicon.ico`，此方法对全站适用）
 3. 友情链接页面使用方法：先安装插件[typecho-links-material](https://github.com/idawnlight/typecho-links-material)并添加友情链接。然后创建一个空页面，将模板改为友情链接页面。
-4. 自定义评论表情框：详见[这篇文章](https://zigzagk.top/2019/07/22/MDUI2333QAQTAB)。
+4. 标签云页面使用方法：创建一个空页面，将模板改为标签云页面，再前往主题设置将标签云模式改为独立页面文字标签云。
+5. 日记页面使用方法：创建一个空页面，将模板改为日记页面。打开该页面即可以评论的方式发表日记。
+6. 自定义评论表情框：详见[这篇文章](https://zigzagk.top/2019/07/22/MDUI2333QAQTAB)。
 
 ## 预览
 
-![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/screenshot.png)
+![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/screenshot.jpg)
 
-![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.png)
+![](https://raw.githubusercontent.com/ZigZagK/typecho-theme-MDUI2333/master/preview.jpg)
 
 ## 版本更新
 
 ### 1.2.8
 
-加入网站公告。
+加入网站公告，日记页面。
+
+还把贴吧表情包补全了一下，顺便换了更清晰的。
 
 ### 1.2.7
 
