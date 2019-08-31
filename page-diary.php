@@ -7,7 +7,7 @@
 $this->need('header.php'); ?>
 <?php function threadedComments($comments, $options) { ?>
 <div class="mdui-col">
-	<div class="mdui-card mdui-m-t-2">
+	<div id="<?php $comments->theId(); ?>" class="mdui-card mdui-m-t-2">
 		<div class="mdui-card-header">
 			<img class="mdui-card-header-avatar" src="https://cdn.v2ex.com/gravatar/<?php echo HashTheMail($comments->mail) ?>?s=100&r=&d=mystery" />
 			<div class="mdui-card-header-title"><?php echo $comments->author; ?></div>
