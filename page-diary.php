@@ -60,6 +60,8 @@ $this->need('header.php'); ?>
 	</div>
 </div>
 <script>
+	var QAQTab=new mdui.Tab('#QAQTab');
+	mdui.JQ('#QAQ').on('open.mdui.dialog',function(){QAQTab.handleUpdate();});
 	Smilies={
 		dom: function(id) {return document.getElementById(id);},
 		grin: function(tag){
