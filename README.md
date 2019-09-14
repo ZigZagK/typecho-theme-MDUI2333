@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款typecho主题，私用为主QAQ……若喜欢可以Star，谢谢QwQ。
 
-作者：ZigZagK | 版本：1.2.8
+作者：ZigZagK | 版本：1.2.9
 
 ## 主题特性
 

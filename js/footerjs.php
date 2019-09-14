@@ -103,6 +103,7 @@
 		<?php if (array_key_exists('Meting',$all['activated'])){ ?>
 		loadMeting();
 		<?php } ?>
+		if (typeof _hmt!='undefined') {_hmt.push(['_trackPageview',location.pathname+location.search]);}  
 	})
 </script>
 <!-- 百度统计代码 -->
