@@ -46,6 +46,11 @@ function themeConfig($form) {
 		'page' => '独立页面文字标签云'
 	),'ball',_t('标签云模式'),_t('ps:独立页面文字标签云需要手动创建页面，将页面模板改为标签云页面'));
 	$form->addInput($tagcloudmode->multiMode());
+	$linksmode = new Typecho_Widget_Helper_Form_Element_Select('linksmode',array(
+		'default' => '默认顺序',
+		'rand' => '随机顺序'
+	),'default',_t('友链显示顺序'),_t('ps:默认顺序即友情链接管理中的顺序，请注意 <a target="_blank" href="https://github.com/ZigZagK/typecho-links-material">Links插件</a> 需要使用MDUI2333的配套魔改版'));
+	$form->addInput($linksmode->multiMode());
 	$posttoc = new Typecho_Widget_Helper_Form_Element_Select('posttoc',array(
 		'true' => '启用',
 		'false' => '不启用'

@@ -149,7 +149,7 @@
 					});
 				} else {mdui.alert(undefined === result.msg ? '发生了未知错误Orz' : result.msg);}
 			},
-			error: function(xhr,ajaxOptions,thrownError) {mdui.alert('提交评论失败了QAQ');	}
+			error: function(xhr,ajaxOptions,thrownError) {$('#commenting').css('display','none');$('#commentsumbit').css('display','block');mdui.alert('提交评论失败了QAQ');}
 		});
 		return false;
 	});
