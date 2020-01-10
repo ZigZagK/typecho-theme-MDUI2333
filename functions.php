@@ -1,5 +1,5 @@
 <?php
-define('Version','1.2.9');
+define('Version','1.3.0');
 
 function themeFields($layout) {
 	$picUrl = new Typecho_Widget_Helper_Form_Element_Text('picUrl', NULL, NULL, _t('图片地址'), _t('在这里填入一个图片 URL 地址, 作为文章的头图，如果不填则显示随机图片'));
@@ -35,7 +35,7 @@ function themeConfig($form) {
 	$form->addInput($filing);
 	$gafiling = new Typecho_Widget_Helper_Form_Element_Text('gafiling', NULL, NULL, _t('公安备案信息'), _t('用于显示网站公安备案信息，不填则不显示公安备案信息'));
 	$form->addInput($gafiling);
-	$AplayerCode = new Typecho_Widget_Helper_Form_Element_Text('AplayerCode', NULL, NULL, _t('全站音乐播放器APlayer代码'), _t('ps:需要下载METO大佬的 <a target="_blank" href="https://github.com/MoePlayer/APlayer-Typecho">Meting</a> 插件。格式参考 <a target="_blank" href="https://github.com/metowolf/MetingJS">Meting</a> 文档填写，若不加<code>data-fixed="true"</code>参数则显示在最下方，若不想在切换页面时停止播放请参考 <a target="_blank" href="https://github.com/MoePlayer/APlayer-Typecho/pull/60">这里</a> 。如果不填则不启用APlayer'));
+	$AplayerCode = new Typecho_Widget_Helper_Form_Element_Text('AplayerCode', NULL, NULL, _t('全站音乐播放器APlayer代码'), _t('ps:需要下载METO大佬的 <a target="_blank" href="https://github.com/MoePlayer/APlayer-Typecho">Meting</a> 插件。格式参考 <a target="_blank" href="https://github.com/metowolf/MetingJS/tree/3ded12563fe1fd0744d762da3103abac585e5ec7">Meting</a> 文档填写，若不加<code>data-fixed="true"</code>参数则显示在最下方，若不想在切换页面时停止播放请参考 <a target="_blank" href="https://github.com/MoePlayer/APlayer-Typecho/pull/60">这里</a> 。如果不填则不启用APlayer'));
 	$form->addInput($AplayerCode);
 	$highlightstyle = new Typecho_Widget_Helper_Form_Element_Text('highlightstyle', NULL, NULL, _t('代码片渲染样式'), _t('参考 <a target="_blank" href="https://highlightjs.org/static/demo/">highlightjs</a> 样式，如果不填则使用<code>default</code>'));
 	$form->addInput($highlightstyle);
@@ -117,10 +117,8 @@ function CountCateOrTag($id){
 	$pom=$db->fetchAll($po);$num=count($pom);$shu=0;for ($x=0;$x<$num;$x++) $shu=$pom[$x]['count']+$shu;return $shu;
 }
 function convertSmilies($widget){
-	if (get_headers(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json",1)[0]=='HTTP/1.1 200 OK')
-		$getJson=file_get_contents(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json");
-		else $getJson=file_get_contents(Helper::options()->themeFile(ThemeName(),"img/QAQ/QAQ.json"));
-	$QAQTAB = json_decode($getJson,true);$TABName = array_keys($QAQTAB);$length = count($TABName);
+	$getJson=file_get_contents(Helper::options()->themeFile(ThemeName(),"img/QAQ/QAQ.json"));
+	$QAQTAB=json_decode($getJson,true);$TABName=array_keys($QAQTAB);$length=count($TABName);
 	for ($i=0;$i<$length;$i++){
 		$key=$TABName[$i];$tot=count($QAQTAB[$key]['content']);
 		if ($QAQTAB[$key]['type']=='picture'){
@@ -300,8 +298,8 @@ function ajaxComment($archive){
 	if ($data['parent']) $data['content'] = GetCommentAt($data['parent']) . $data['content'];
 	$data['text'] = $comment['text'];
 	// 身份标识
-	if ($data['authorId']==$comment['ownerId']) $data['ifauthor'] = '<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">account_circle</i></span><div class="mdui-chip-title">博主</div>';
-	else $data['ifauthor'] = '<span class="mdui-chip-icon"><i class="mdui-icon material-icons">remove_red_eye</i></span><div class="mdui-chip-title">访客</div>';
+	if ($data['authorId']==$comment['ownerId']) {$data['ifowner'] = true;$data['identity'] = '<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">account_circle</i></span><div class="mdui-chip-title">博主</div>';}
+	else {$data['ifowner'] = false;$data['identity'] = '<span class="mdui-chip-icon"><i class="mdui-icon material-icons">remove_red_eye</i></span><div class="mdui-chip-title">访客</div>';}
 	// 网址链接
 	if ($data['url']) $data['authorurl']='<a target="_blank" href="'.$data['url'].'">'.$data['author'].'</a>';
 	else $data['authorurl']=$data['author'];

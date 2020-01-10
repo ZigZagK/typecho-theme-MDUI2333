@@ -1,7 +1,5 @@
 <?php
-	if (get_headers(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json",1)[0]=='HTTP/1.1 200 OK')
-		$getJson=file_get_contents(Typecho_Widget::widget('Widget_Options')->themeUrl."/img/QAQ/QAQ.json");
-		else $getJson=file_get_contents(Helper::options()->themeFile(ThemeName(),"img/QAQ/QAQ.json"));
+	$getJson=file_get_contents(Helper::options()->themeFile(ThemeName(),"img/QAQ/QAQ.json"));
 	$QAQTAB=json_decode($getJson,true);$TABName=array_keys($QAQTAB);$length=count($TABName);
 ?>
 <div class="mdui-text-color-theme-accent mdui-btn mdui-btn-icon mdui-float-left" mdui-tooltip="{content: '使用表情',position: 'top'}" mdui-dialog="{target: '#QAQ'}"><i class="mdui-icon material-icons">sentiment_very_satisfied</i></div>

@@ -85,7 +85,7 @@
 		var form=$(this),params=form.serialize();
 		params+='&themeAction=comment';
 		var appendComment=function(comment){
-			var html='<div id="comment-{coid}" class="mdui-panel" mdui-panel><div class="mdui-panel-item mdui-panel-item-open"><div class="mdui-panel-item-header"><div class="mdui-panel-item-title"><div class="comment-author mdui-chip mdui-hidden-xs-down"><img class="avatar mdui-chip-icon mdui-color-grey-200" src="{avatar}" alt="{author}" width="100" height="100" />\n<span class="fn mdui-chip-title">{authorurl}</span></div><div class="mdui-hidden-sm-up"><img class="avatar mdui-chip-icon mdui-color-grey-200" src="{avatar}" alt="{author}" width="100" height="100" /></div></div><div class="mdui-panel-item-summary"><span class="mdui-hidden-xs-down">{datetime}</span><span class="fn mdui-chip-title mdui-hidden-sm-up">{authorurl}</span></div><i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i></div><div class="comment-meta mdui-panel-item-body"><span class="mdui-typo-caption mdui-text-color-theme-accent mdui-hidden-sm-up">{datetime}<br></span>{content}<div class="mdui-chip">{ifauthor}</div><span class="comment-reply mdui-float-right"><a href="?replyTo={coid}#<?php $this->respondId(); ?>" onclick="return TypechoComment.reply(\'comment-{coid}\',{coid});" class="mdui-btn mdui-color-theme-accent mdui-ripple">回复</a></span>';
+			var html='<div id="comment-{coid}" class="mdui-panel" mdui-panel><div class="mdui-panel-item mdui-panel-item-open"><div class="mdui-panel-item-header"><div class="mdui-panel-item-title"><div class="comment-author mdui-chip mdui-hidden-xs-down"><img class="avatar mdui-chip-icon mdui-color-grey-200" src="{avatar}" alt="{author}" width="100" height="100" />\n<span class="fn mdui-chip-title">{authorurl}</span></div><div class="mdui-hidden-sm-up"><img class="avatar mdui-chip-icon mdui-color-grey-200" src="{avatar}" alt="{author}" width="100" height="100" /></div></div><div class="mdui-panel-item-summary"><span class="mdui-hidden-xs-down">{datetime}</span><span class="fn mdui-chip-title mdui-hidden-sm-up">{authorurl}</span></div><i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i></div><div class="comment-meta mdui-panel-item-body"><span class="mdui-typo-caption mdui-text-color-theme-accent mdui-hidden-sm-up">{datetime}<br></span>{content}<div class="mdui-chip">{identity}</div><span class="comment-reply mdui-float-right"><a href="?replyTo={coid}#<?php $this->respondId(); ?>" onclick="return TypechoComment.reply(\'comment-{coid}\',{coid});" class="mdui-btn mdui-color-theme-accent mdui-ripple">回复</a></span>';
 			var sidebarhtml='<a href="{permalink}" class="mdui-list-item mdui-ripple" mdui-tooltip="{content: \'{datetime}\', position: \'right\'}"><div class="mdui-list-item-content mdui-text-truncate">{text}</div><div class="mdui-text-color-blue-900">{author}</div></a>';
 			$.each(comment,function(k,v){
 				regExp=new RegExp('{'+k+'}','g');
@@ -119,9 +119,11 @@
 				}
 			}
 			$(html).prependTo(el);
-			$(sidebarhtml).prependTo('#recentcomments');
-			if ($('#recentcomments').find('.mdui-list-item').length>5)
-				$('#recentcomments .mdui-list-item:last').remove();
+			if (comment.ifowner==false){
+				$(sidebarhtml).prependTo('#recentcomments');
+				if ($('#recentcomments').find('.mdui-list-item').length>5)
+					$('#recentcomments .mdui-list-item:last').remove();
+			}
 		}
 		$.ajax({
 			url: '<?php $this->permalink();?>',

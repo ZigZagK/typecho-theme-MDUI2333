@@ -5,59 +5,85 @@
  * @package custom
  */
 $this->need('header.php'); ?>
-<?php function threadedComments($comments, $options) { ?>
+<?php global $total;global $diary;$total=0; ?>
+<?php function threadedComments($comments, $options){
+$GLOBALS['diary'][$GLOBALS['total']][0]=$comments->date;
+$GLOBALS['diary'][$GLOBALS['total']][1]='
 <div class="mdui-col">
-	<div id="<?php $comments->theId(); ?>" class="mdui-card mdui-m-t-2">
+	<div id="'.$comments->theId.'" class="mdui-card mdui-m-t-2">
 		<div class="mdui-card-header">
-			<img class="mdui-card-header-avatar" src="https://cdn.v2ex.com/gravatar/<?php echo HashTheMail($comments->mail) ?>?s=100&r=&d=mystery" />
-			<div class="mdui-card-header-title"><?php echo $comments->author; ?></div>
-			<div class="mdui-card-header-subtitle"><?php $comments->date(); ?></div>
+			<img class="mdui-card-header-avatar" src="https://cdn.v2ex.com/gravatar/'.HashTheMail($comments->mail).'?s=100&r=&d=mystery" />
+			<div class="mdui-card-header-title">'.$comments->author.'</div>
+			<div class="mdui-card-header-subtitle">'.$comments->date->format(Helper::options()->commentDateFormat).'</div>
 		</div>
-		<div class="mdui-card-content" style="min-height:200px"><?php echo RewriteComment($comments); ?></div>
+		<div class="mdui-card-content" style="min-height:200px">'.RewriteComment($comments).'</div>
 	</div>
-</div>
-<?php } ?>
+</div>';
+$GLOBALS['total']++;
+} ?>
 
 <div class="mdui-container mdui-m-b-2">
 	<?php $this->comments()->to($comments); ?>
-	<div class="mdui-typo" id="comments">
-		<?php $this->comments()->to($comments); ?>
-		<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4">
-			<?php if ($this->user->hasLogin()){ ?>
-			<div class="mdui-col">
-				<div class="mdui-card mdui-m-t-2">
-					<div class="mdui-card-header">
-						<i class="mdui-card-header-avatar mdui-text-color-theme-accent mdui-icon material-icons" style="font-size:35px">edit</i>
-						<div class="mdui-card-header-title">发表日记</div>
-						<div class="mdui-card-header-subtitle">在下方输入日记内容</div>
-						<a href="<?php $this->options->adminUrl(); ?>manage-comments.php?cid=<?php echo $this->cid; ?>" target="_blank" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-color-theme-accent mdui-float-right mdui-ripple" style="position:absolute;right:16px;top:16px" mdui-tooltip="{content: '管理日记', position: 'top'}"><i class="mdui-icon material-icons">archive</i></a>
+	<?php $comments->listComments(array('before'=>'','after'=>'')); ?>
+	<div class="mdui-tab mdui-color-theme" mdui-tab>
+	<?php
+	$last='2333333';
+	for ($i=0;$i<$total;$i++){
+		if ($diary[$i][0]->format('Y-n')!=$last) echo '<a href="#'.$diary[$i][0]->format('Y-n').'" class="mdui-ripple">'.$diary[$i][0]->format('Y.n').'</a>';
+		$last=$diary[$i][0]->format('Y-n');
+	}
+	?>
+	</div>
+	<?php if ($this->user->hasLogin()){ ?>
+	<div class="mdui-typo mdui-card mdui-m-t-2">
+		<div class="mdui-card-header">
+			<i class="mdui-card-header-avatar mdui-text-color-theme-accent mdui-icon material-icons" style="font-size:35px">edit</i>
+			<div class="mdui-card-header-title">发表日记</div>
+			<div class="mdui-card-header-subtitle">在下方输入日记内容</div>
+			<a href="<?php $this->options->adminUrl(); ?>manage-comments.php?cid=<?php echo $this->cid; ?>" target="_blank" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-color-theme-accent mdui-float-right mdui-ripple" style="position:absolute;right:16px;top:16px" mdui-tooltip="{content: '管理日记', position: 'top'}"><i class="mdui-icon material-icons">archive</i></a>
+		</div>
+		<div class="mdui-card-content">
+			<?php if($this->allow('comment')): ?>
+			<div id="<?php $this->respondId(); ?>" class="respond">
+				<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
+					<div class="mdui-textfield" style="padding-top:0">
+						<i class="mdui-icon material-icons">message</i>
+						<textarea name="text" id="commenttextarea" class="textarea mdui-textfield-input" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('commentsumbit').click();return false};" placeholder="在这里写下你想说的QwQ" required><?php $this->remember('text'); ?></textarea>
+						<div class="mdui-textfield-error">内容不能为空</div>
+						<div class="mdui-textfield-helper">资瓷Markdown和LaTeX数学公式</div>
 					</div>
-					<div class="mdui-card-content" style="min-height:200px">
-						<?php if($this->allow('comment')): ?>
-						<div id="<?php $this->respondId(); ?>" class="respond">
-							<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
-								<div class="mdui-textfield" style="padding-top:0">
-									<i class="mdui-icon material-icons">message</i>
-									<textarea name="text" id="commenttextarea" class="textarea mdui-textfield-input" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('commentsumbit').click();return false};" placeholder="在这里写下你想说的QwQ" required><?php $this->remember('text'); ?></textarea>
-									<div class="mdui-textfield-error">内容不能为空</div>
-									<div class="mdui-textfield-helper">资瓷Markdown和LaTeX数学公式</div>
-								</div>
-								<div class="actions mdui-p-b-2">
-									<?php if ($this->options->commentpicture == 'true'){ ?><?php $this->need('php/QAQTAB.php'); ?><?php } ?>
-									<button id="commentsumbit" type="submit" class="submit mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" mdui-tooltip="{content: '发布(Ctrl+Enter)', position: 'top'}"><i class="mdui-icon material-icons">check</i></button>
-								</div>
-							</form>
-						</div>
-						<?php else: ?>
-						<p>未开启评论QAQ！请在控制台中开启此页面的评论。</p>
-						<?php endif; ?>
+					<div class="actions mdui-p-b-2">
+						<?php if ($this->options->commentpicture == 'true'){ ?><?php $this->need('php/QAQTAB.php'); ?><?php } ?>
+						<button id="commentsumbit" type="submit" class="submit mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" mdui-tooltip="{content: '发布(Ctrl+Enter)', position: 'top'}"><i class="mdui-icon material-icons">check</i></button>
 					</div>
-				</div>
+				</form>
 			</div>
-			<?php } ?>
-			<?php $comments->listComments(array('before'=>'')); ?>
+			<?php else: ?>
+			<p>未开启评论QAQ！请在控制台中开启此页面的评论。</p>
+			<?php endif; ?>
 		</div>
 	</div>
+	<?php } ?>
+	<?php
+	$last='2333333';
+	for ($i=0;$i<$total;$i++){
+		if ($diary[$i][0]->format('Y-n')!=$last){
+			if ($last!='2333333') echo '
+			</div>
+		</div>
+			';
+			echo '
+		<div class="mdui-typo" id="'.$diary[$i][0]->format('Y-n').'">
+			<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4">
+			';
+		}
+		echo $diary[$i][1];
+		$last=$diary[$i][0]->format('Y-n');
+	}
+	if ($last!='2333333') echo '
+		</div>
+	</div>';
+	?>
 </div>
 <script>
 	var QAQTab=new mdui.Tab('#QAQTab');
