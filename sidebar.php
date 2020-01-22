@@ -45,7 +45,7 @@
 				<?php $this->widget('Widget_Comments_Recent','pageSize=5&ignoreAuthor=true')->to($comment); ?>
 				<?php while($comment->next()): ?>
 				<a href="<?php $comment->permalink(); ?>" class="mdui-list-item mdui-ripple" mdui-tooltip="{content: '<?php $comment->date(); ?>', position: 'right'}">
-					<div class="mdui-list-item-content mdui-text-truncate"><?php echo htmlspecialchars(substr($comment->text,0,50)); ?></div>
+					<div class="mdui-list-item-content mdui-text-truncate"><?php echo htmlspecialchars($comment->text); ?></div>
 					<div class="mdui-text-color-blue-900"><?php echo $comment->author; ?></div>
 				</a>
 				<?php endwhile; ?>
