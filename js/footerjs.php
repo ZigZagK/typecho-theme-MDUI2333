@@ -1,28 +1,14 @@
+<?php $plugin=Typecho_Plugin::export(); ?>
 <script>
-	//返回顶部
 	$('#gototop').click(function(){$('html,body').animate({scrollTop:'0px'},'normal');});
-	window.onscroll=function(){
-		var top = document.getElementById('gototop');
-		if ($(window).scrollTop()>200) top.classList.remove('mdui-fab-hide');
-		else top.classList.add('mdui-fab-hide');
-	}
-	//侧边栏按钮
+	$(window).scroll(function(){
+		if ($(window).scrollTop()>200) $('#gototop').removeClass('mdui-fab-hide');
+		else $('#gototop').addClass('mdui-fab-hide');
+	});
 	var sidebar=new mdui.Drawer('#sidebar',{overlay:true});
-	mdui.JQ('#togglesidebar').on('click',function() {sidebar.toggle();});
-	//表情框按钮
+	$('#togglesidebar').on('click',function(){sidebar.toggle();});
 	var QAQTab=new mdui.Tab('#QAQTab');
-	mdui.JQ('#QAQ').on('open.mdui.dialog',function() {QAQTab.handleUpdate();});
-	//球形标签云加载
-	<?php if ($this->options->tagcloudmode=='ball'){ ?>
-	window.onload=function(){
-		try{
-			TagCanvas.Start('TagCloud','',{textColour: null,outlineColour: '#039BE5',weight: true,reverse: true,depth: 1,maxSpeed: 0.05,freezeDecel: true});
-		} catch(e) {document.getElementById('MyTagCloud').style.display = 'none';}
-	};
-	<?php } ?>
-	//代码高亮
-	hljs.initHighlightingOnLoad();
-	//即时搜索
+	$('#QAQ').on('open.mdui.dialog',function(){QAQTab.handleUpdate();});
 	<?php if ($this->options->ExSearch=='true'){ ?>
 	function ExSearchCall(item){
 		if (item&&item.length){
@@ -31,80 +17,69 @@
 		}
 	}
 	<?php } ?>
-	//第一次加载
+	function animatecss(element,animationName,speed,callback){
+		const node=document.querySelector(element);
+		node.classList.add('animated',animationName);
+		$(element).css('animation-duration',speed);
+		function handleAnimationEnd(){
+			node.classList.remove('animated',animationName);
+			node.removeEventListener('animationend',handleAnimationEnd);
+			if (typeof callback==='function') callback();
+		}
+		node.addEventListener('animationend',handleAnimationEnd);
+	}
 	$(function(){
 		<?php if ($this->options->announcement!=''){ ?>
-		mdui.snackbar({message:"<?php echo $this->options->announcement; ?>",position:'right-top',closeOnOutsideClick:false});
+		mdui.snackbar({message:"<?php echo $this->options->announcement; ?>",position:'<?php echo $this->options->announcementpos; ?>',closeOnOutsideClick:false});
 		<?php } ?>
+		hljs.initHighlightingOnLoad();
 		$('pre code').each(function(){
-			var lines = $(this).text().split('\n').length;
-			var $numbering = $('<ul/>').addClass('pre-numbering');
-			for(i=1;i<=lines;i++) $numbering.append($('<li/>').text(i));
-			$(this).addClass('has-numbering').parent().prepend($numbering);
+			var lines=$(this).text().split('\n').length;
+			var numbering=$('<ul/>').addClass('pre-numbering');
+			for(var i=1;i<=lines;i++) numbering.append($('<li/>').text(i));
+			$(this).addClass('has-numbering').parent().prepend(numbering);
 		});
 		<?php if ($this->options->posttoc=='true'){ ?>
 		$("#post-container").headIndex({
-			articleWrapSelector: '#post-container',
-			indexBoxSelector: '#post-toc',
-			offset: -420
+			articleWrapSelector:'#post-container',
+			indexBoxSelector:'#post-toc',
+			offset:-470
 		});
 		<?php } ?>
-		document.getElementById('pjax-loading').style.display="none";
-		document.getElementById('pjax-overlay').classList.remove("pjax-overlay-show");
-		document.getElementsByTagName('body')[0].classList.remove("mdui-locked");
 		mdui.mutation();
 	});
-	//PJAX
-	$(document).pjax('a:not(a[target="_blank"],a[no-pjax])',{
-		container: '#pjax-container',
-		fragment: '#pjax-container',
-		timeout: 8000
-	})
-	$(document).on('submit','#search',function(event){
-		$.pjax.submit(event,{
-			container: '#pjax-container',
-			fragment: '#pjax-container',
-			timeout: 8000
-		});
-	})
-	//PJAX重载
-	$(document).on('pjax:send',
-	function() {
+	$(document).pjax('a:not(a[target="_blank"],a[no-pjax])',{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
+	$(document).on('submit','#search',function(event){$.pjax.submit(event,{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});});
+	$(document).on('pjax:send',function(){
 		sidebar.close();
-		document.getElementsByTagName('body')[0].classList.add("mdui-locked");
-		document.getElementById('pjax-overlay').classList.add("pjax-overlay-show");
-		document.getElementById('pjax-loading').style.display="block";
-	})
-	$(document).on('pjax:complete',
-	function() {
+		$('#pjax-overlay').css('display','block');animatecss('#pjax-overlay','fadeIn','0.2s');
+		$('#pjax-progress').css('display','block');animatecss('#pjax-progress','fadeIn','0.2s');
+	});
+	$(document).on('pjax:complete',function(){
 		MathJax.Hub.Typeset(document.getElementById('pjax-container'));
-		hljs.initHighlighting.called = false;hljs.initHighlighting();
+		hljs.initHighlighting.called=false;hljs.initHighlighting();
 		$('pre code').each(function(){
-			var lines = $(this).text().split('\n').length;
-			var $numbering = $('<ul/>').addClass('pre-numbering');
-			for(i=1;i<=lines;i++) $numbering.append($('<li/>').text(i));
-			$(this).addClass('has-numbering').parent().prepend($numbering);
+			var lines=$(this).text().split('\n').length;
+			var numbering=$('<ul/>').addClass('pre-numbering');
+			for(var i=1;i<=lines;i++) numbering.append($('<li/>').text(i));
+			$(this).addClass('has-numbering').parent().prepend(numbering);
 		});
 		<?php if ($this->options->posttoc=='true'){ ?>
 		$("#post-container").headIndex({
-			articleWrapSelector: '#post-container',
-			indexBoxSelector: '#post-toc',
-			offset: -420
+			articleWrapSelector:'#post-container',
+			indexBoxSelector:'#post-toc',
+			offset:-470
 		});
 		<?php } ?>
-		document.getElementById('pjax-loading').style.display="none";
-		document.getElementById('pjax-overlay').classList.remove("pjax-overlay-show");
-		document.getElementsByTagName('body')[0].classList.remove("mdui-locked");
-	})
-	$(document).on('pjax:end',
-	function() {
+		setTimeout("animatecss('#pjax-overlay','fadeOut','0.8s',function(){$('#pjax-overlay').css('display','none');})",200);
+		setTimeout("animatecss('#pjax-progress','bounceOut','0.8s',function(){$('#pjax-progress').css('display','none');})",200);
+	});
+	$(document).on('pjax:end',function(){
 		mdui.mutation();
-		<?php $all=Typecho_Plugin::export(); ?>
-		<?php if (array_key_exists('Meting',$all['activated'])){ ?>
+		<?php if (array_key_exists('Meting',$plugin['activated'])){ ?>
 		loadMeting();
 		<?php } ?>
-		if (typeof _hmt!='undefined') {_hmt.push(['_trackPageview',location.pathname+location.search]);}  
-	})
+		<?php echo $this->options->pjaxreload; ?>
+	});
 </script>
-<!-- 百度统计代码 -->
-<?php if ($this->options->baidustatistics) echo $this->options->baidustatistics; ?>
+<?php if ($this->options->customjs) echo $this->options->customjs; ?>

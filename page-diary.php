@@ -4,24 +4,26 @@
  *
  * @package custom
  */
-$this->need('header.php'); ?>
-<?php global $total;global $diary;$total=0; ?>
-<?php function threadedComments($comments, $options){
-$GLOBALS['diary'][$GLOBALS['total']][0]=$comments->date;
-$GLOBALS['diary'][$GLOBALS['total']][1]='
-<div class="mdui-col">
-	<div id="'.$comments->theId.'" class="mdui-card mdui-m-t-2">
-		<div class="mdui-card-header">
-			<img class="mdui-card-header-avatar" src="https://cdn.v2ex.com/gravatar/'.HashTheMail($comments->mail).'?s=100&r=&d=mystery" />
-			<div class="mdui-card-header-title">'.$comments->author.'</div>
-			<div class="mdui-card-header-subtitle">'.$comments->date->format(Helper::options()->commentDateFormat).'</div>
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+Helper::options()->commentsPageBreak=false; //评论不分页，获取所有评论
+$this->need('header.php');
+global $total;global $diary;$total=0;
+function threadedComments($comment,$options){
+	$GLOBALS['diary'][$GLOBALS['total']][0]=$comment->date;
+	$GLOBALS['diary'][$GLOBALS['total']][1]='
+	<div class="mdui-col">
+		<div id="'.$comment->theId.'" class="mdui-card mdui-m-t-2">
+			<div class="mdui-card-header">
+				<img class="mdui-card-header-avatar" src="'.GravatarURL($comment->mail,100).'" />
+				<div class="mdui-card-header-title">'.$comment->author.'</div>
+				<div class="mdui-card-header-subtitle">'.$comment->date->format(Helper::options()->commentDateFormat).'</div>
+			</div>
+			<div class="mdui-card-content" style="min-height:200px">'.RewriteComment($comment).'</div>
 		</div>
-		<div class="mdui-card-content" style="min-height:200px">'.RewriteComment($comments).'</div>
-	</div>
-</div>';
-$GLOBALS['total']++;
-} ?>
-
+	</div>';
+	$GLOBALS['total']++;
+}
+?>
 <div class="mdui-container mdui-m-b-2">
 	<?php $this->comments()->to($comments); ?>
 	<?php $comments->listComments(array('before'=>'','after'=>'')); ?>
@@ -37,30 +39,27 @@ $GLOBALS['total']++;
 	<?php if ($this->user->hasLogin()){ ?>
 	<div class="mdui-typo mdui-card mdui-m-t-2">
 		<div class="mdui-card-header">
-			<i class="mdui-card-header-avatar mdui-text-color-theme-accent mdui-icon material-icons" style="font-size:35px">edit</i>
+			<i class="mdui-card-header-avatar mdui-text-color-theme-accent mdui-icon material-icons" style="font-size:35px">&#xe3c9;</i>
 			<div class="mdui-card-header-title">发表日记</div>
 			<div class="mdui-card-header-subtitle">在下方输入日记内容</div>
-			<a href="<?php $this->options->adminUrl(); ?>manage-comments.php?cid=<?php echo $this->cid; ?>" target="_blank" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-color-theme-accent mdui-float-right mdui-ripple" style="position:absolute;right:16px;top:16px" mdui-tooltip="{content: '管理日记', position: 'top'}"><i class="mdui-icon material-icons">archive</i></a>
+			<a href="<?php $this->options->adminUrl(); ?>manage-comments.php?cid=<?php echo $this->cid; ?>" target="_blank" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-color-theme-accent mdui-float-right mdui-ripple" style="position:absolute;right:16px;top:16px" mdui-tooltip="{content:'管理日记',position:'top'}"><i class="mdui-icon material-icons">&#xe149;</i></a>
 		</div>
-		<div class="mdui-card-content">
-			<?php if($this->allow('comment')): ?>
-			<div id="<?php $this->respondId(); ?>" class="respond">
-				<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
-					<div class="mdui-textfield" style="padding-top:0">
-						<i class="mdui-icon material-icons">message</i>
-						<textarea name="text" id="commenttextarea" class="textarea mdui-textfield-input" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('commentsumbit').click();return false};" placeholder="在这里写下你想说的QwQ" required><?php $this->remember('text'); ?></textarea>
-						<div class="mdui-textfield-error">内容不能为空</div>
-						<div class="mdui-textfield-helper">资瓷Markdown和LaTeX数学公式</div>
+		<div class="mdui-card-content mdui-row">
+			<?php if ($this->allow('comment')){ ?>
+			<div id="<?php $this->respondId(); ?>">
+				<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" style="margin:0px;" role="form">
+					<div class="mdui-textfield mdui-col-xs-12" style="padding-top:0">
+						<i class="mdui-icon material-icons">&#xe0c9;</i>
+						<textarea name="text" id="commenttextarea" class="textarea mdui-textfield-input" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('commentsumbit').click();return false};" placeholder="在这里写下你想说的QwQ"><?php $this->remember('text'); ?></textarea>
+						<div class="mdui-textfield-helper"><?php echo $this->options->commenthelper; ?></div>
 					</div>
-					<div class="actions mdui-p-b-2">
-						<?php if ($this->options->commentpicture == 'true'){ ?><?php $this->need('php/QAQTAB.php'); ?><?php } ?>
-						<button id="commentsumbit" type="submit" class="submit mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" mdui-tooltip="{content: '发布(Ctrl+Enter)', position: 'top'}"><i class="mdui-icon material-icons">check</i></button>
-					</div>
+					<?php if ($this->options->commentpicture=='true') $this->need('php/QAQTAB.php'); ?>
+					<button id="commentsumbit" type="submit" class="submit mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" style="margin:0 8px;" mdui-tooltip="{content:'发布(Ctrl+Enter)',position:'top'}"><i class="mdui-icon material-icons">&#xe5ca;</i></button>
 				</form>
 			</div>
-			<?php else: ?>
+			<?php } else { ?>
 			<p>未开启评论QAQ！请在控制台中开启此页面的评论。</p>
-			<?php endif; ?>
+			<?php } ?>
 		</div>
 	</div>
 	<?php } ?>
@@ -87,14 +86,14 @@ $GLOBALS['total']++;
 </div>
 <script>
 	var QAQTab=new mdui.Tab('#QAQTab');
-	mdui.JQ('#QAQ').on('open.mdui.dialog',function(){QAQTab.handleUpdate();});
+	$('#QAQ').on('open.mdui.dialog',function(){QAQTab.handleUpdate();});
 	Smilies={
-		dom: function(id) {return document.getElementById(id);},
-		grin: function(tag){
+		dom:function(id) {return document.getElementById(id);},
+		grin:function(tag){
 			tag=' '+tag+' ';myField=this.dom('commenttextarea');
 			document.selection?(myField.focus(),sel=document.selection.createRange(),sel.text=tag,myField.focus()):this.insertTag(tag);
 		},
-		insertTag: function(tag){
+		insertTag:function(tag){
 			myField=Smilies.dom('commenttextarea');
 			myField.selectionStart || myField.selectionStart=='0'?(
 				startPos=myField.selectionStart,endPos=myField.selectionEnd,cursorPos=startPos,
@@ -104,6 +103,5 @@ $GLOBALS['total']++;
 		}
 	}
 </script>
-
-<?php include('sidebar.php'); ?>
-<?php include('footer.php'); ?>
+<?php $this->need('sidebar.php'); ?>
+<?php $this->need('footer.php'); ?>

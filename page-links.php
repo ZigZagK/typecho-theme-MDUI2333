@@ -4,6 +4,7 @@
  *
  * @package custom
  */
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('header.php');
 if (class_exists("Links_Plugin")){
 	$Links=Links_Plugin::output('
@@ -22,12 +23,10 @@ if (class_exists("Links_Plugin")){
 	$tot=count($Links);if ($this->options->linksmode=='rand') shuffle($Links);
 }
 ?>
-
 <div class="mdui-container">
 	<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-m-y-2">
 		<?php if (class_exists("Links_Plugin")) for ($i=0;$i<$tot;$i++) echo $Links[$i]; ?>
 	</div>
 </div>
-
-<?php include('sidebar.php'); ?>
-<?php include('footer.php'); ?>
+<?php $this->need('sidebar.php'); ?>
+<?php $this->need('footer.php'); ?>

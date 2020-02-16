@@ -1,8 +1,9 @@
 <?php
-	$getJson=file_get_contents(Helper::options()->themeFile(ThemeName(),"img/QAQ/QAQ.json"));
-	$QAQTAB=json_decode($getJson,true);$TABName=array_keys($QAQTAB);$length=count($TABName);
+	//魔改自Castle(https://github.com/ohmyga233/castle-Typecho-Theme)的表情框配置
+	$QAQjson=file_get_contents(Helper::options()->themeFile(ThemeName(),"img/QAQ/QAQ.json"));
+	$QAQTAB=json_decode($QAQjson,true);$TABName=array_keys($QAQTAB);$length=count($TABName);
 ?>
-<div class="mdui-text-color-theme-accent mdui-btn mdui-btn-icon mdui-float-left" mdui-tooltip="{content: '使用表情',position: 'top'}" mdui-dialog="{target: '#QAQ'}"><i class="mdui-icon material-icons">sentiment_very_satisfied</i></div>
+<div class="mdui-text-color-theme-accent mdui-btn mdui-btn-icon mdui-float-left" style="margin:0 8px;" mdui-tooltip="{content:'使用表情',position:'top'}" mdui-dialog="{target:'#QAQ'}"><i class="mdui-icon material-icons">sentiment_very_satisfied</i></div>
 <div class="mdui-dialog" id="QAQ">
 	<div class="mdui-tab mdui-tab-full-width" id="QAQTab">
 	<?php for ($i=0;$i<$length;$i++){ ?>

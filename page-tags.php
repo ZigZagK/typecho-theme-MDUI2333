@@ -4,8 +4,9 @@
  *
  * @package custom
  */
-$this->need('header.php'); ?>
-
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+$this->need('header.php');
+?>
 <div class="mdui-container">
 	<div class="mdui-row">
 		<div class="mdui-col-md-10 mdui-col-offset-md-1">
@@ -17,15 +18,13 @@ $this->need('header.php'); ?>
 					<div class="mdui-card-primary-subtitle">共计<?php echo $total; ?>个标签</div>
 				</div>
 				<div class="mdui-card-content" id="tag-container">
-				<?php while ($tag->next()): ?>
-					<a href="<?php $tag->permalink(); ?>" class="mdui-hoverable mdui-p-a-1" style="font-size: <?php echo round($tag->count/$max*1+1,2); ?>em;color: #<?php $color = sprintf('%02s',base_convert(round(119-85*$tag->count/$max),10,16));echo $color.$color.$color; ?>"><?php $tag->name(); ?></a>
-				<?php endwhile; ?>
+				<?php while ($tag->next()){ ?>
+					<a href="<?php $tag->permalink(); ?>" class="mdui-hoverable mdui-p-a-1" style="font-size:<?php echo round($tag->count/$max*1+1,2); ?>em;color:#<?php $color=sprintf('%02s',base_convert(round(119-85*$tag->count/$max),10,16));echo $color.$color.$color; ?>"><?php $tag->name(); ?></a>
+				<?php } ?>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<style>#tag-container a {display:inline-block;}</style>
-
-<?php include('sidebar.php'); ?>
-<?php include('footer.php'); ?>
+<?php $this->need('sidebar.php'); ?>
+<?php $this->need('footer.php'); ?>

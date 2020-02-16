@@ -1,6 +1,5 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
-
 <div class="mdui-container">
 	<div class="mdui-row">
 		<div class="mdui-col-md-10 mdui-col-offset-md-1">
@@ -17,7 +16,7 @@
 						<p>当用户不小心访问了某一个不存在的页面并且没有设置错误提示 时，用户会怎么做？如果是初次到访的访客，那么回头率是多少呢？毫无疑问，会抱怨为何出现错误，之后当然是直接关闭窗口离开。所以设置了 404页面也相当于是做了一个针对用户的提示页面，当用户访问了某一个 不存在的页面后就会转到404页面，然后因为你在这个404页面上有友好 的提示，并且有首页和主要栏目页的连接，用户就很有可能会再次点击进入你的首页。但是，Web服务器默认的404错误页面，无论是Apache还是IIS，均十分简陋、呆板且对用户不友好，无法给用户提供必要的信息以获取更 多线索，无疑这会造成用户的流失。 因此，很多网站均使用自定义404错误的方式提供用户体验避免用户流失。一般而言，自定义404页面通用的做法是在页面中放置网站快速导航链接、搜索框以及网页提供的特色服务，这样可以有效的帮助用户访问站点并获取需要的信息。</p>
 						<footer>百度百科 —— 404页面</footer>
 					</blockquote>
-					<del>在404页面划水也是不错的体验呢QwQ。</del>
+					<del>在404页面划水也是不错的体验呢。</del>
 				</div>
 				<div class="mdui-card-actions">
 					<a href="/" class="mdui-btn mdui-ripple mdui-color-theme-accent">返回首页</a>
@@ -30,6 +29,5 @@
 		</div>
 	</div>
 </div>
-
 <?php $this->need('sidebar.php'); ?>
 <?php $this->need('footer.php'); ?>

@@ -1,5 +1,4 @@
 <script>
-	//Typecho自带评论函数
 	window.TypechoComment = {
 		dom : function (id) {return document.getElementById(id);},
 		create : function (tag, attr) {
@@ -42,17 +41,15 @@
 			return false;
 		}
 	};
-	//表情框按钮
 	var QAQTab=new mdui.Tab('#QAQTab');
-	mdui.JQ('#QAQ').on('open.mdui.dialog',function(){QAQTab.handleUpdate();});
-	//表情框输入
+	$('#QAQ').on('open.mdui.dialog',function(){QAQTab.handleUpdate();});
 	Smilies={
-		dom: function(id) {return document.getElementById(id);},
-		grin: function(tag){
+		dom:function(id) {return document.getElementById(id);},
+		grin:function(tag){
 			tag=' '+tag+' ';myField=this.dom('commenttextarea');
 			document.selection?(myField.focus(),sel=document.selection.createRange(),sel.text=tag,myField.focus()):this.insertTag(tag);
 		},
-		insertTag: function(tag){
+		insertTag:function(tag){
 			myField=Smilies.dom('commenttextarea');
 			myField.selectionStart || myField.selectionStart=='0'?(
 				startPos=myField.selectionStart,endPos=myField.selectionEnd,cursorPos=startPos,
@@ -61,97 +58,52 @@
 			):(myField.value+=tag,myField.focus());
 		}
 	}
-	//动态加载评论头像
 	<?php if (!$this->user->hasLogin()){ ?>
-	document.getElementById('avatarloading').style.display="inline-block";
-	document.getElementById('emailavatar').style.display="none";
-	$('#emailavatar').attr('src','https://cdn.v2ex.com/gravatar/'+md5($("input#mail").val())+'?s=100&r=&d=mystery');
-	setTimeout(function(){
-		document.getElementById('avatarloading').style.display="none";
-		document.getElementById('emailavatar').style.display="inline";
-	},750);
-	$("input#mail").blur(function(){
-		document.getElementById('avatarloading').style.display="inline-block";
-		document.getElementById('emailavatar').style.display="none";
-		$('#emailavatar').attr('src','https://cdn.v2ex.com/gravatar/'+md5($("input#mail").val())+'?s=100&r=&d=mystery');
-		setTimeout(function(){
-			document.getElementById('avatarloading').style.display="none";
-			document.getElementById('emailavatar').style.display="inline";
-		},750);
-	});
+	$('#emailavatar').attr('src','<?php echo $this->options->gravatarurl; ?>'+md5($("input#mail").val())+'?s=100&d=mystery');
+	$("input#mail").blur(function(){$('#emailavatar').attr('src','<?php echo $this->options->gravatarurl; ?>'+md5($("input#mail").val())+'?s=100&d=mystery');});
 	<?php } ?>
-	//AJAX评论
-	$('#comment-form').submit(function(){
-		var form=$(this),params=form.serialize();
-		params+='&themeAction=comment';
-		var appendComment=function(comment){
-			var html='<div id="comment-{coid}" class="mdui-panel" mdui-panel><div class="mdui-panel-item mdui-panel-item-open"><div class="mdui-panel-item-header"><div class="mdui-panel-item-title"><div class="comment-author mdui-chip mdui-hidden-xs-down"><img class="avatar mdui-chip-icon mdui-color-grey-200" src="{avatar}" alt="{author}" width="100" height="100" />\n<span class="fn mdui-chip-title">{authorurl}</span></div><div class="mdui-hidden-sm-up"><img class="avatar mdui-chip-icon mdui-color-grey-200" src="{avatar}" alt="{author}" width="100" height="100" /></div></div><div class="mdui-panel-item-summary"><span class="mdui-hidden-xs-down">{datetime}</span><span class="fn mdui-chip-title mdui-hidden-sm-up">{authorurl}</span></div><i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i></div><div class="comment-meta mdui-panel-item-body"><span class="mdui-typo-caption mdui-text-color-theme-accent mdui-hidden-sm-up">{datetime}<br></span>{content}<div class="mdui-chip">{identity}</div><span class="comment-reply mdui-float-right"><a href="?replyTo={coid}#<?php $this->respondId(); ?>" onclick="return TypechoComment.reply(\'comment-{coid}\',{coid});" class="mdui-btn mdui-color-theme-accent mdui-ripple">回复</a></span>';
-			var sidebarhtml='<a href="{permalink}" class="mdui-list-item mdui-ripple" mdui-tooltip="{content: \'{datetime}\', position: \'right\'}"><div class="mdui-list-item-content mdui-text-truncate">{text}</div><div class="mdui-text-color-blue-900">{author}</div></a>';
-			$.each(comment,function(k,v){
-				regExp=new RegExp('{'+k+'}','g');
-				html=html.replace(regExp,v);
-				sidebarhtml=sidebarhtml.replace(regExp,v);
-			});
-			var el=$('#allcomment .comment-list:first');
-			if(comment.parent!=0){
-				el=$('#comment-'+comment.parent);
-				if (el.find('.haveat').length<1){
-					el=$('#comment-'+comment.parent).find('.comment-meta');
-					if (el.find('.comment-children').length<1){
-						$('<div class="comment-children"><ol class="comment-list"></ol></div>').appendTo(el);
-					} else if (el.find('.comment-children .comment-list').length<1){
-						$('<ol class="comment-list"></ol>').appendTo(el.find('.comment-children'));
-					}
-				} else {
-					if (el.find('.comment-children').length<1){
-						$('<div class="comment-children"><ol class="comment-list"></ol></div>').appendTo(el);
-					} else if(el.find('.comment-children .comment-list').length<1){
-						$('<ol class="comment-list"></ol>').appendTo(el.find('.comment-children'));
-					}
-				}
-				el=$('#comment-'+comment.parent).find('.comment-children .comment-list:first');
-			} else {
-				if (el.length<1){
-					$('<ol class="comment-list"></ol>').appendTo($('#allcomment'));
-					el=$('#allcomment .comment-list:first');
-				} else {
-					el=$('#allcomment .comment-list:first');
-				}
-			}
-			$(html).prependTo(el);
-			if (comment.ifowner==false){
-				$(sidebarhtml).prependTo('#recentcomments');
-				if ($('#recentcomments').find('.mdui-list-item').length>5)
-					$('#recentcomments .mdui-list-item:last').remove();
-			}
-		}
+	$('#comment-form').submit(function(event){
+		var commentdata=$(this).serializeArray();
 		$.ajax({
-			url: '<?php $this->permalink();?>',
-			type: 'POST',
-			data: params,
-			dataType: 'json',
-			beforeSend: function() {mdui.snackbar({message:'正在提交评论QwQ',position:'right-bottom',timeout:'1000'});$('#commentsumbit').css('display','none');$('#commenting').css('display','block');},
-			complete: function() {mdui.mutation();},
-			success: function(result){
+			url:$(this).attr('action'),
+			type:$(this).attr('method'),
+			data:commentdata,
+			beforeSend:function() {$('#commentsumbit').css('display','none');$('#commenting').css('display','block');},
+			error:function() {mdui.alert('发生了未知错误','评论失败');$('#commenting').css('display','none');$('#commentsumbit').css('display','block');},
+			success:function(data){
 				$('#commenting').css('display','none');$('#commentsumbit').css('display','block');
-				if (result.status==1){
-					mdui.dialog({content:'评论成功啦ヾ(≧∇≦*)ゝ',onClose:function(){$('html,body').animate({scrollTop:$('#comment-'+result.comment.coid).offset().top},'fast');},cssClass:'mdui-dialog-alert',buttons:[{text:'ok'}]});
-					appendComment(result.comment);
-					var number=parseInt($('#commentsnumber').text())+1;
-					$('#commentsnumber').text(number+" 条评论");
-					form.find('textarea').val('');form.find('textarea').css('height','');
+				var error=/<title>Error<\/title>/;
+				if (error.test(data)){
+					var text=data.match(/<div(.*?)>(.*?)<\/div>/is);
+					var str='发生了未知错误';if (text!=null) str=text[2];
+					mdui.alert(str,'评论失败');
+				} else {
+					$('#commenttextarea').val('');$('#commenttextarea').css('height','');
 					if ($('#cancel-comment-reply-link').css('display')!='none') $('#cancel-comment-reply-link').click();
-					hljs.initHighlighting.called = false;hljs.initHighlighting();
-					MathJax.Hub.Typeset(document.getElementById('#comment-'+result.comment.coid));
-					$('#comment-'+result.comment.coid).find('pre code').each(function(){
-						var lines = $(this).text().split('\n').length;
-						var $numbering = $('<ul/>').addClass('pre-numbering');
-						for(i=1;i<=lines;i++) $numbering.append($('<li/>').text(i));
-						$(this).addClass('has-numbering').parent().prepend($numbering);
+					var target='#comments',parent=true;
+					$.each(commentdata,function(i,field) {if (field.name=='parent') parent=false;});
+					if (!parent || !$('div.page-navigator .prev').length){
+						var latest=-19260817;
+						$('#comments .mdui-panel',data).each(function(){
+							var id=$(this).attr('id'),coid=parseInt(id.substring(8));
+							if (coid>latest) {latest=coid;target='#'+id;}
+						});
+					}
+					$('#recentcomment').html($('#recentcomment',data).html());
+					$('#commentsnumber').html($('#commentsnumber',data).html());
+					$('#commentcontent').html($('#commentcontent',data).html());
+					MathJax.Hub.Typeset(document.getElementById('commentcontent'));
+					document.querySelectorAll('#commentcontent pre code').forEach((block) => {hljs.highlightBlock(block);});
+					$('#commentcontent pre code').each(function(){
+						var lines=$(this).text().split('\n').length;
+						var numbering=$('<ul/>').addClass('pre-numbering');
+						for(var i=1;i<=lines;i++) numbering.append($('<li/>').text(i));
+						$(this).addClass('has-numbering').parent().prepend(numbering);
 					});
-				} else {mdui.alert(undefined === result.msg ? '发生了未知错误Orz' : result.msg);}
-			},
-			error: function(xhr,ajaxOptions,thrownError) {$('#commenting').css('display','none');$('#commentsumbit').css('display','block');mdui.alert('提交评论失败了QAQ');}
+					mdui.mutation();$('html,body').animate({scrollTop:$(target).offset().top},'fast');
+					mdui.snackbar({message:'<?php echo $this->options->commentsuccess; ?>',position:'right-bottom'});
+				}
+			}
 		});
 		return false;
 	});
