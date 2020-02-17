@@ -41,9 +41,8 @@
 		});
 		<?php if ($this->options->posttoc=='true'){ ?>
 		$("#post-container").headIndex({
-			articleWrapSelector:'#post-container',
-			indexBoxSelector:'#post-toc',
-			offset:-470
+			articleWrapSelector:'.post-container',
+			indexBoxSelector:'#post-toc'
 		});
 		<?php } ?>
 		mdui.mutation();
@@ -52,8 +51,8 @@
 	$(document).on('submit','#search',function(event){$.pjax.submit(event,{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});});
 	$(document).on('pjax:send',function(){
 		sidebar.close();
-		$('#pjax-overlay').css('display','block');animatecss('#pjax-overlay','fadeIn','0.2s');
-		$('#pjax-progress').css('display','block');animatecss('#pjax-progress','fadeIn','0.2s');
+		$('#pjax-overlay').css('display','block');
+		$('#pjax-progress').css('display','block');
 	});
 	$(document).on('pjax:complete',function(){
 		MathJax.Hub.Typeset(document.getElementById('pjax-container'));
@@ -66,13 +65,12 @@
 		});
 		<?php if ($this->options->posttoc=='true'){ ?>
 		$("#post-container").headIndex({
-			articleWrapSelector:'#post-container',
-			indexBoxSelector:'#post-toc',
-			offset:-470
+			articleWrapSelector:'.post-container',
+			indexBoxSelector:'#post-toc'
 		});
 		<?php } ?>
-		setTimeout("animatecss('#pjax-overlay','fadeOut','0.8s',function(){$('#pjax-overlay').css('display','none');})",200);
-		setTimeout("animatecss('#pjax-progress','bounceOut','0.8s',function(){$('#pjax-progress').css('display','none');})",200);
+		animatecss('#pjax-overlay','fadeOut','0.5s',function(){$('#pjax-overlay').css('display','none');});
+		animatecss('#pjax-progress','fadeOut','0.5s',function(){$('#pjax-progress').css('display','none');});
 	});
 	$(document).on('pjax:end',function(){
 		mdui.mutation();
