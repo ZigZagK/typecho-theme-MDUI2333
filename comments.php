@@ -45,7 +45,7 @@ function threadedComments($comment,$options){ ?>
 	<?php } ?>
 </div>
 <?php } ?>
-<div class="mdui-typo" id="comments">
+<div class="mdui-typo" id="comments" style="padding-left:4%;padding-right:4%;font-size:14px;">
 	<?php $this->comments()->to($comments); ?>
 	<?php if (!$this->allow('comment')){ ?>
 	<center>
@@ -105,7 +105,7 @@ function threadedComments($comment,$options){ ?>
 	<div id="commentcontent">
 		<?php $comments->listComments(); ?>
 		<?php if ($comments->have()){ ?>
-		<?php $comments->pageNav('<i class="mdui-icon material-icons">&#xe314;</i>','<i class="mdui-icon material-icons">&#xe315;</i>',2,'···',array('wrapTag' => 'div','wrapClass' => 'page-navigator mdui-text-center','itemTag' => 'div','currentClass' => 'current')); ?>
+		<?php $comments->pageNav('<i class="mdui-icon material-icons">&#xe314;</i>','<i class="mdui-icon material-icons">&#xe315;</i>',2,'···',array('wrapTag' => 'div','wrapClass' => 'page-navigator mdui-text-center mdui-m-b-2','itemTag' => 'div','currentClass' => 'current')); ?>
 		<?php } ?>
 	</div>
 </div>

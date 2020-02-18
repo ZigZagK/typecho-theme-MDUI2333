@@ -40,7 +40,7 @@
 			$(this).addClass('has-numbering').parent().prepend(numbering);
 		});
 		<?php if ($this->options->posttoc=='true'){ ?>
-		$("#post-container").headIndex({
+		$(".post-container").headIndex({
 			articleWrapSelector:'.post-container',
 			indexBoxSelector:'#post-toc'
 		});
@@ -64,7 +64,7 @@
 			$(this).addClass('has-numbering').parent().prepend(numbering);
 		});
 		<?php if ($this->options->posttoc=='true'){ ?>
-		$("#post-container").headIndex({
+		$(".post-container").headIndex({
 			articleWrapSelector:'.post-container',
 			indexBoxSelector:'#post-toc'
 		});

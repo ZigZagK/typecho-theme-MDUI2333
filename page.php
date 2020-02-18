@@ -30,13 +30,13 @@
 					<?php } ?>
 				</div>
 				<div class="mdui-divider"></div>
-				<div class="mdui-card-content" style="padding-left:4%;padding-right:4%;">
-					<div class="mdui-typo post-container" id="post-container">
+				<div class="mdui-card-content post-container" style="padding-left:4%;padding-right:4%;">
+					<div class="mdui-typo">
 		  				<?php echo RewriteContent($this->content); ?>
 					</div>
-					<div class="mdui-divider"></div>
-					<?php $this->need('comments.php'); ?>
 				</div>
+				<div class="mdui-divider"></div>
+				<?php $this->need('comments.php'); ?>
 			</div>
 		</div>
 	</div>

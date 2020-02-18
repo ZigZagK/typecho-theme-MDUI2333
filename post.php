@@ -45,11 +45,11 @@
 					<?php } ?>
 				</div>
 				<div class="mdui-divider"></div>
-				<div class="mdui-card-content" style="padding-left:4%;padding-right:4%;">
-					<div class="mdui-typo post-container" id="post-container">
+				<div class="mdui-card-content post-container" style="padding-left:4%;padding-right:4%;">
+					<div class="mdui-typo">
 		  				<?php echo RewriteContent($this->content); ?>
 		  				<?php if ($this->options->copyright){ ?>
-		  				<div class="mdui-card mdui-m-b-2">
+		  				<div class="mdui-card">
 		  					<div class="mdui-card-content mdui-color-grey-50">
 		  						<div><strong>本文链接：</strong><a href="<?php $this->permalink(); ?>"><?php $this->permalink(); ?></a></div>
 		  						<div><strong>版权声明：</strong><?php echo $this->options->copyright; ?></div>
@@ -57,9 +57,9 @@
 		  				</div>
 		  				<?php } ?>
 					</div>
-					<div class="mdui-divider"></div>
-					<?php $this->need('comments.php'); ?>
 				</div>
+				<div class="mdui-divider"></div>
+				<?php $this->need('comments.php'); ?>
 			</div>
 		</div>
 	</div>
