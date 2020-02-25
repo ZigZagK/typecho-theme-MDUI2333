@@ -32,7 +32,7 @@
 		<?php if ($this->options->announcement!=''){ ?>
 		mdui.snackbar({message:"<?php echo $this->options->announcement; ?>",position:'<?php echo $this->options->announcementpos; ?>',closeOnOutsideClick:false});
 		<?php } ?>
-		hljs.initHighlightingOnLoad();
+		<?php if ($this->options->highlightmode=='highlightjs'){ ?>hljs.initHighlightingOnLoad();<?php } ?>
 		$('pre code').each(function(){
 			var lines=$(this).text().split('\n').length;
 			var numbering=$('<ul/>').addClass('pre-numbering');
@@ -56,7 +56,11 @@
 	});
 	$(document).on('pjax:complete',function(){
 		MathJax.Hub.Typeset(document.getElementById('pjax-container'));
+		<?php if ($this->options->highlightmode=='highlightjs'){ ?>
 		hljs.initHighlighting.called=false;hljs.initHighlighting();
+		<?php } else { ?>
+		Prism.highlightAll(true,null);
+		<?php } ?>
 		$('pre code').each(function(){
 			var lines=$(this).text().split('\n').length;
 			var numbering=$('<ul/>').addClass('pre-numbering');

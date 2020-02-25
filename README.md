@@ -11,7 +11,7 @@
 | 自适应               | 可以适配各种屏幕尺寸（MDUI自带的嘛）。                       |
 | 全站PJAX & AJAX评论  | 切换页面、评论时音乐均不会停止，可以愉快地听歌。             |
 | 全站APlayer播放器    | 已对[Meting](https://github.com/MoePlayer/APlayer-Typecho)插件进行适配，可以添加全站音乐播放器。 |
-| 代码高亮             | 使用[highlight.js](https://highlightjs.org/)进行代码高亮，并且有行号显示。 |
+| 代码高亮             | 使用[highlight.js](https://highlightjs.org/)和[Prismjs](https://prismjs.com/)进行代码高亮，并且有行号显示。 |
 | 数学公式             | 使用[MathJax](https://www.mathjax.org/)渲染数学公式。        |
 | 图片灯箱             | 使用[Fancybox](https://fancyapps.com/fancybox/3/)添加图片灯箱。 |
 | 文章目录             | 使用[jquery_headindex](https://github.com/mnnyang/jquery_headindex)生成手风琴式的文章目录。 |

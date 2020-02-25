@@ -8,17 +8,19 @@
 	#pjax-overlay {position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:2000;background:rgb(0,0,0,0.8);}
 	#pjax-progress {top:calc(50% - 33px);display:block;height:66px;width:300px;z-index:9999;}
 	#pjax-container {flex:1;}
-	.pre-numbering {float:left!important;font-size:14px!important;padding:10px!important;margin:0!important;border-right:1px solid #C3CCD0!important;background:#EEE!important;text-align:right!important;color:#666!important;list-style:none!important;line-height:1.6!important;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
-	pre {padding:0!important;background:#f7f7f7!important;}
-	pre code {padding:10px!important;background:#f7f7f7!important;display:block;white-space:pre;overflow-x:auto;}
-	code {font-size:14px!important;line-height:1.6!important;}
+	.pre-numbering {float:left!important;font-size:16px!important;padding:10px!important;margin:0!important;border-right:1px solid #C3CCD0!important;background:#EEE!important;text-align:right!important;color:#666!important;list-style:none!important;line-height:24px!important;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+	pre {padding:0!important;}
+	pre code {font-size:16px!important;line-height:24px!important;padding:10px!important;display:block;white-space:pre;overflow-x:auto;border-left:none!important;box-shadow:none!important;text-shadow:none!important;}
+	.token.string,.style .token.string,.token.entity,.token.operator,.token.url {background:unset!important;}
 	.thumbnail {height:300px;background-position:center center!important;background-size:cover!important;}
 	.ins-search.show .ins-search-overlay {z-index:19260817!important;}
 	.ins-search-container {z-index:19260817!important;}
 	.ins-section-wrapper::-webkit-scrollbar {background:#fff!important;}
 	/*comments.php*/
-	div#comments ol.comment-list {padding:0!important;}
-	div#comments .mdui-panel-item p img {max-height:400px;}
+	div#comments form {margin-bottom:0;}
+	#commentcontent > .comment-list {margin:16px 0;}
+	#commentcontent > .comment-list > .mdui-panel > .mdui-panel-item > .mdui-panel-item-body > .comment-children {margin-top:16px;}
+	#commentcontent .mdui-panel-item p img {max-height:400px;}
 	div.cancel-comment-reply a:hover:before,div.cancel-comment-reply a:focus:before {display:none!important;}
 	#QAQ {height:75%!important;max-height:400px!important;}
 	#QAQ .mdui-dialog-content {height:calc(100% - 100px)!important;}
@@ -31,7 +33,9 @@
 	div.page-navigator div.next a,div.page-navigator div.prev a {line-height:28px!important;}
 	div.page-navigator div.current {background:<?php echo ThemePrimary(); ?>;}
 	/*post.php & page.php*/
+	.mdui-typo hr {margin:0 0 1.2em 0;height:4px;border:0;background:<?php echo ThemeAccent(); ?>;}
 	a.Fancybox:hover:before,a.Fancybox:focus:before {display:none!important;}
+	.post-container h1,.post-container h2,.post-container h3,.post-container h4,.post-container h5,.post-container h6 {color:<?php echo ThemePrimary(); ?>;}
 	@media (min-width:600px) {#post-tocbtn {top:80px!important;}}
 	@media (orientation:landscape) and (max-width:959px) {#post-tocbtn {top:64px!important;}}
 	#post-toc {width:unset!important;min-width:160px!important;}
@@ -43,6 +47,7 @@
 	#post-toc .index-link:hover {background-color:rgba(0,0,0,0.1);}
 	#post-toc .index-subItem-box .index-item {padding-left:1em;}
 	#tag-container a {display:inline-block;}
+	.dairy-content {height:200px;overflow-y:auto;}
 	/*footer.php*/
 	.footerlink {font-size:24px!important;}
 </style>

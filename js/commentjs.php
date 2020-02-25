@@ -93,7 +93,7 @@
 					$('#commentsnumber').html($('#commentsnumber',data).html());
 					$('#commentcontent').html($('#commentcontent',data).html());
 					MathJax.Hub.Typeset(document.getElementById('commentcontent'));
-					document.querySelectorAll('#commentcontent pre code').forEach((block) => {hljs.highlightBlock(block);});
+				document.querySelectorAll('#commentcontent pre code').forEach((block) => {<?php if ($this->options->highlightmode=='highlightjs'){ ?>hljs.highlightBlock(block);<?php } else { ?>Prism.highlightElement(block);<?php } ?>});
 					$('#commentcontent pre code').each(function(){
 						var lines=$(this).text().split('\n').length;
 						var numbering=$('<ul/>').addClass('pre-numbering');

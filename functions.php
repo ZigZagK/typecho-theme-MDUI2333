@@ -57,7 +57,12 @@ function themeConfig($form){
 		'https://cn.gravatar.com/avatar/' => 'Gravatar cn源'
 	),'https://gravatar.loli.net/avatar/',_t('Gravatar头像源'),_t(''));
 	$form->addInput($config->multiMode());
-	$config=new Typecho_Widget_Helper_Form_Element_Text('highlightstyle',NULL,NULL,_t('代码片渲染样式'),_t('参考 <a target="_blank" href="https://github.com/highlightjs/highlight.js/tree/master/src/styles">highlightjs</a> 样式，如<code>tomorrow.css</code>则填写<code>tomorrow</code>，如果不填则使用<code>default</code>'));
+	$config=new Typecho_Widget_Helper_Form_Element_Select('highlightmode',array(
+		'highlightjs' => 'highlightjs',
+		'prismjs' => 'Prismjs'
+	),'prismjs',_t('代码片渲染方案'),_t(''));
+	$form->addInput($config->multiMode());
+	$config=new Typecho_Widget_Helper_Form_Element_Text('highlightstyle',NULL,NULL,_t('代码片渲染样式'),_t('如果采用<code>highlightjs</code>：参考 <a target="_blank" href="https://github.com/highlightjs/highlight.js/tree/master/src/styles">highlightjs</a> 样式，如<code>tomorrow.css</code>则填写<code>tomorrow</code>，如果不填则使用<code>default</code><br>如果采用<code>Prismjs</code>：参考<a href="https://www.jsdelivr.com/package/npm/prismjs?path=themes" target="_blank">Prism</a>中的theme填写，如<code>prism-coy.css</code>则填写<code>prism-coy</code>，如果不填则使用<code>prism</code>'));
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Select('posttoc',array(
 		'true' => '启用',
@@ -94,7 +99,7 @@ function themeConfig($form){
 		'false' => '不启用'
 	),'false',_t('又拍云图标'),_t('在网站右下角显示又拍云图标'));
 	$form->addInput($config->multiMode());
-	$config=new Typecho_Widget_Helper_Form_Element_Textarea('customjs',NULL,NULL,_t('自定义js代码'),_t('这里可以写入自定义的js代码，如添加统计代码'));
+	$config=new Typecho_Widget_Helper_Form_Element_Textarea('customjs',NULL,NULL,_t('自定义代码'),_t('这里可以写入自定义的js,css等代码，如添加统计代码'));
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Textarea('pjaxreload',NULL,NULL,_t('附加PJAX重载'),_t('这里可以写入自定义的PJAX重载代码'));
 	$form->addInput($config);
@@ -163,7 +168,7 @@ function GravatarURL($mail,$size){
 /* 魔改自Material(https://github.com/idawnlight/typecho-theme-material) */
 function ShowThumbnail($widget){
 	$fields=unserialize($widget->fields);if ($fields['picUrl']) {echo $fields['picUrl'];return;}
-	$rand=rand(1,19);$random=Helper::options()->themeUrl.'/img/random/material-'.$rand.'.png';echo $random;
+	$rand=mt_rand(1,19);$random=Helper::options()->themeUrl.'/img/random/material-'.$rand.'.png';echo $random;
 }
 function CountCateOrTag($id){
 	$db=Typecho_Db::get();$po=$db->select('table.metas.count')->from('table.metas')->where('parent = ?',$id)->orWhere('mid = ? ',$id);
@@ -237,6 +242,7 @@ function AddMDUIPanel($content){
 	return preg_replace('/\[\/panel\]/i','</div></div></div>',$content);
 }
 function RewriteContent($content){
+	$content=ConvertSmilies($content);
 	$content=AddFancybox($content);
 	$content=AddMDUITable($content);
 	$content=AddMDUIPanel($content);

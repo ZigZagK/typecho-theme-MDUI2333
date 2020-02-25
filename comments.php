@@ -1,7 +1,7 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $plugin=Typecho_Plugin::export();
 function threadedComments($comment,$options){ ?>
-<div id="<?php $comment->theId(); ?>" class="mdui-panel" mdui-panel>
+<div class="mdui-panel" id="<?php $comment->theId(); ?>" mdui-panel>
 	<div class="mdui-panel-item mdui-panel-item-open">
 		<div class="mdui-panel-item-header">
 			<div class="mdui-panel-item-title">
@@ -26,36 +26,36 @@ function threadedComments($comment,$options){ ?>
 				<?php } ?>
 			</div>
 			<span class="comment-reply mdui-float-right"><?php $comment->reply('<button class="mdui-btn mdui-color-theme-accent mdui-ripple">回复</button>'); ?></span>
-	<?php if ($comment->levels==0){ ?>
-		<?php if ($comment->children){ ?>
+			<?php if ($comment->levels==0){ ?>
+				<?php if ($comment->children){ ?>
 				<div class="comment-children">
-			<?php $comment->threadedComments($options); ?>
+					<?php $comment->threadedComments($options); ?>
 				</div>
-		<?php } ?>
+				<?php } ?>
 		</div>
 	</div>
-	<?php } else { ?>
+			<?php } else { ?>
 		</div>
 	</div>
-		<?php if ($comment->children){ ?>
+	<?php if ($comment->children){ ?>
 	<div class="comment-children">
-			<?php $comment->threadedComments($options); ?>
+		<?php $comment->threadedComments($options); ?>
 	</div>
-		<?php } ?>
 	<?php } ?>
+			<?php } ?>
 </div>
 <?php } ?>
 <div class="mdui-typo" id="comments" style="padding-left:4%;padding-right:4%;font-size:14px;">
 	<?php $this->comments()->to($comments); ?>
 	<?php if (!$this->allow('comment')){ ?>
-	<center>
-		<div class="mdui-chip mdui-m-t-2">
+	<center class="mdui-m-y-2">
+		<div class="mdui-chip">
 			<span class="mdui-chip-icon"><i class="mdui-icon material-icons">&#xe92a;</i></span>
 			<span class="mdui-chip-title">评论已关闭>_<</span>
 		</div>
 	</center>
 	<?php } else { ?>
-	<div id="<?php $this->respondId(); ?>" class="mdui-m-t-2">
+	<div id="<?php $this->respondId(); ?>" class="mdui-m-y-2">
 		<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
 			<?php if ($this->user->hasLogin()){ ?>
 			<div class="mdui-card">
@@ -103,7 +103,7 @@ function threadedComments($comment,$options){ ?>
 	</div>
 	<?php } ?>
 	<div id="commentcontent">
-		<?php $comments->listComments(); ?>
+		<?php $comments->listComments(array('before'=>'<div class="comment-list">','after'=>'</div>')); ?>
 		<?php if ($comments->have()){ ?>
 		<?php $comments->pageNav('<i class="mdui-icon material-icons">&#xe314;</i>','<i class="mdui-icon material-icons">&#xe315;</i>',2,'···',array('wrapTag' => 'div','wrapClass' => 'page-navigator mdui-text-center mdui-m-b-2','itemTag' => 'div','currentClass' => 'current')); ?>
 		<?php } ?>

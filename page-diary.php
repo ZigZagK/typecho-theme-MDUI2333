@@ -18,7 +18,7 @@ function threadedComments($comment,$options){
 				<div class="mdui-card-header-title">'.$comment->author.'</div>
 				<div class="mdui-card-header-subtitle">'.$comment->date->format(Helper::options()->commentDateFormat).'</div>
 			</div>
-			<div class="mdui-card-content" style="min-height:200px">'.RewriteComment($comment).'</div>
+			<div class="mdui-card-content dairy-content">'.RewriteComment($comment).'</div>
 		</div>
 	</div>';
 	$GLOBALS['total']++;
@@ -29,7 +29,7 @@ function threadedComments($comment,$options){
 	<?php $comments->listComments(array('before'=>'','after'=>'')); ?>
 	<div class="mdui-tab mdui-color-theme" mdui-tab>
 	<?php
-	$last='2333333';
+	$last='19260817';
 	for ($i=0;$i<$total;$i++){
 		if ($diary[$i][0]->format('Y-n')!=$last) echo '<a href="#'.$diary[$i][0]->format('Y-n').'" class="mdui-ripple">'.$diary[$i][0]->format('Y.n').'</a>';
 		$last=$diary[$i][0]->format('Y-n');
@@ -64,10 +64,10 @@ function threadedComments($comment,$options){
 	</div>
 	<?php } ?>
 	<?php
-	$last='2333333';
+	$last='19260817';
 	for ($i=0;$i<$total;$i++){
 		if ($diary[$i][0]->format('Y-n')!=$last){
-			if ($last!='2333333') echo '
+			if ($last!='19260817') echo '
 			</div>
 		</div>
 			';
@@ -79,7 +79,7 @@ function threadedComments($comment,$options){
 		echo $diary[$i][1];
 		$last=$diary[$i][0]->format('Y-n');
 	}
-	if ($last!='2333333') echo '
+	if ($last!='19260817') echo '
 		</div>
 	</div>';
 	?>

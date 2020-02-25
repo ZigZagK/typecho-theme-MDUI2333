@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="renderer" content="webkit">
 	<meta name="theme-color" content="<?php echo ThemePrimary(); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<title><?php $this->archiveTitle(array(
 		'category' => _t('分类 %s 下的文章'),
 		'search' => _t('包含关键字 %s 的文章'),
@@ -14,7 +14,11 @@
 		'author' => _t('%s 发布的文章')
 	),'',' - '); ?><?php $this->options->title(); ?></title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.2/dist/css/mdui.min.css">
+	<?php if ($this->options->highlightmode=='highlightjs'){ ?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/styles/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "default"?>.min.css">
+	<?php } else { ?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "prism"?>.min.css">
+	<?php } ?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
 	<link rel="stylesheet" href="<?php Helper::options()->themeUrl(); ?>img/iconfont/iconfont.css" />
 	<link rel="stylesheet" href="<?php Helper::options()->themeUrl(); ?>css/animate.min.css" />
@@ -37,7 +41,11 @@
 		});
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js"></script>
+	<?php if ($this->options->highlightmode=='highlightjs'){ ?>
 	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/highlight.min.js"></script>
+	<?php } else { ?>
+	<script src="<?php Helper::options()->themeUrl(); ?>js/prism.min.js"></script>
+	<?php } ?>
 	<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
 	<script src="<?php Helper::options()->themeUrl(); ?>js/jquery.headindex.min.js"></script>
