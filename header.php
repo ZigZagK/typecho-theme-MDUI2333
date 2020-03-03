@@ -57,6 +57,7 @@
 		<div class="mdui-toolbar mdui-color-theme">
 			<a class="mdui-btn mdui-btn-icon" id="togglesidebar"><i class="mdui-icon material-icons">&#xe5d2;</i></a>
 			<a href="<?php $this->options->siteUrl(); ?>" class="mdui-typo-title"><?php $this->options->title(); ?></a>
+			<div class="mdui-typo-subheading mdui-hidden-xs-down" id="header-title"></div>
 			<div class="mdui-toolbar-spacer"></div>
 			<?php if ($this->options->ExSearch=='true'){ ?>
 			<button class="mdui-btn mdui-btn-icon search-form-input" mdui-tooltip="{content:'文章搜索'}"><i class="mdui-icon material-icons">&#xe8b6;</i></button>

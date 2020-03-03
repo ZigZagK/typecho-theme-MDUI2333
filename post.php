@@ -64,9 +64,9 @@
 		</div>
 	</div>
 </div>
-<?php if ($this->options->posttoc=='true'){ ?>
+<?php if ($this->options->posttoc=='true'){$content=$this->content;$havetoc=0;for ($i=1;$i<=6;$i++) $havetoc+=preg_match('/<h'.$i.'>(.*?)<\/h'.$i.'>/',$content);if ($havetoc>0){ ?>
 <button class="mdui-hidden-xs-down mdui-fab mdui-fab-mini mdui-color-theme-accent mdui-ripple" id="post-tocbtn" style="position:fixed;top:72px;left:16px;z-index:1;border-radius:4px;" mdui-tooltip="{content:'文章目录',position:'right'}" mdui-menu="{target:'#post-toc',fixed:'true'}"><i class="mdui-icon material-icons">&#xe8de;</i></button>
 <div class="mdui-menu" id="post-toc"></div>
-<?php } ?>
+<?php }} ?>
 <?php $this->need('sidebar.php'); ?>
 <?php $this->need('footer.php'); ?>

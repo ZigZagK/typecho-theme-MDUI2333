@@ -28,6 +28,8 @@
 		}
 		node.addEventListener('animationend',handleAnimationEnd);
 	}
+	var title=$(document).attr("title");var header=title.substring(0,title.indexOf('-')-1);
+	if (header=='') header='首页';$('#header-title').text(header);
 	$(function(){
 		<?php if ($this->options->announcement!=''){ ?>
 		mdui.snackbar({message:"<?php echo $this->options->announcement; ?>",position:'<?php echo $this->options->announcementpos; ?>',closeOnOutsideClick:false});
@@ -55,6 +57,8 @@
 		$('#pjax-progress').css('display','block');
 	});
 	$(document).on('pjax:complete',function(){
+		title=$(document).attr("title");header=title.substring(0,title.indexOf('-')-1);
+		if (header=='') header='首页';$('#header-title').text(header);
 		MathJax.Hub.Typeset(document.getElementById('pjax-container'));
 		<?php if ($this->options->highlightmode=='highlightjs'){ ?>
 		hljs.initHighlighting.called=false;hljs.initHighlighting();

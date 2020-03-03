@@ -8,14 +8,17 @@
 	#pjax-overlay {position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:2000;background:rgb(0,0,0,0.8);}
 	#pjax-progress {top:calc(50% - 33px);display:block;height:66px;width:300px;z-index:9999;}
 	#pjax-container {flex:1;}
-	.pre-numbering {float:left!important;font-size:16px!important;padding:10px!important;margin:0!important;border-right:1px solid #C3CCD0!important;background:#EEE!important;text-align:right!important;color:#666!important;list-style:none!important;line-height:24px!important;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
-	pre {padding:0!important;}
-	pre code {font-size:16px!important;line-height:24px!important;padding:10px!important;display:block;white-space:pre;overflow-x:auto;border-left:none!important;box-shadow:none!important;text-shadow:none!important;}
-	.token.string,.style .token.string,.token.entity,.token.operator,.token.url {background:unset!important;}
+	#header-title {font-weight:500;}
+	.pre-numbering {float:left!important;font-size:14px!important;padding:10px!important;margin:0!important;border-right:1px solid #C3CCD0!important;background:#EEE!important;text-align:right!important;text-shadow:none!important;color:#666!important;list-style:none!important;line-height:1.5!important;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+	pre {padding:0!important;background:#F7F7F7!important;}
+	pre code {background:#F7F7F7!important;font-size:14px!important;line-height:1.5!important;padding:10px!important;display:block;white-space:pre;overflow-x:auto;border-left:none!important;box-shadow:none!important;text-shadow:none!important;}
+	.token.string,.token.string,.token.entity,.token.operator,.token.url,.token.variable {background:unset!important;}
 	.thumbnail {height:300px;background-position:center center!important;background-size:cover!important;}
 	.ins-search.show .ins-search-overlay {z-index:19260817!important;}
 	.ins-search-container {z-index:19260817!important;}
 	.ins-section-wrapper::-webkit-scrollbar {background:#fff!important;}
+	.mdui-checkbox input[type='checkbox']:focus:checked:not(:disabled) + .mdui-checkbox-icon {-webkit-box-shadow:none!important;box-shadow:none!important;}
+	.mdui-checkbox input[type='checkbox']:focus + .mdui-checkbox-icon {-webkit-box-shadow:none!important;box-shadow:none!important;}
 	/*comments.php*/
 	div#comments form {margin-bottom:0;}
 	#commentcontent > .comment-list {margin:16px 0;}

@@ -1,5 +1,5 @@
 <?php
-define('Version','1.4.1');
+define('Version','1.4.2');
 function themeFields($layout){
 	$field=new Typecho_Widget_Helper_Form_Element_Text('picUrl',NULL,NULL,_t('图片地址'),_t('在这里填入一个图片 URL 地址，作为文章的头图，不填则显示随机图片'));
 	$layout->addItem($field);
@@ -204,13 +204,14 @@ function ConvertSmilies($widget){
 				if ($QAQTAB[$key]['content'][$j]['width']!='') $smiliesTrans[$string][1]=$QAQTAB[$key]['content'][$j]['width'];
 				if ($height!='') $smiliesTrans[$string][2]=$height;
 				if ($QAQTAB[$key]['content'][$j]['height']!='') $smiliesTrans[$string][2]=$QAQTAB[$key]['content'][$j]['height'];
+				$smiliesTrans[$string][2]=$QAQTAB[$key]['content'][$j]['tip'];
 			}
 		}
 	}
 	$imgUrl=Typecho_Widget::widget('Widget_Options')->themeUrl.'/img/QAQ/';
 	foreach($smiliesTrans as $smiley => $img){
 		$smiliesTag[]=$smiley;
-		$smiliesReplace[]="<img src=\"$imgUrl$img[0]\" width=\"$img[1]\" height=\"$img[2]\" />";
+		$smiliesReplace[]="<img src=\"$imgUrl$img[0]\" alt=\"$img[2]\" width=\"$img[1]\" height=\"$img[2]\" />";
 	}
 	$output='';$textArr=preg_split("/(<.*>)/U",$widget,-1,PREG_SPLIT_DELIM_CAPTURE);$stop=count($textArr);
 	for ($i=0;$i<$stop;$i++){
@@ -234,11 +235,11 @@ function AddMDUITable($content){
 	return preg_replace('/<table>(.*?)<\/table>/is','<div class="mdui-table-fluid"><table class="mdui-table mdui-table-hoverable">${1}</table></div>',$content);
 }
 function AddFancybox($content){
-	return preg_replace('/<img(.*?)src="(.*?)"(.*?)alt="(.*?)"(.*?)>/is','<a data-fancybox="gallery" href="${2}" data-caption="${4}" class="Fancybox"><img${1}src="${2}"${3}alt="${4}"${5}></a>',$content);
+	return preg_replace('/<img(.*?)src="(.*?)"(.*?)alt="(.*?)"(.*?)>/i','<a data-fancybox="gallery" href="${2}" data-caption="${4}" class="Fancybox"><img${1}src="${2}"${3}alt="${4}"${5}></a>',$content);
 }
 function AddMDUIPanel($content){
 	$content=preg_replace('/\[panel title="(.*?)" summary="(.*?)"\]/i','<div class="mdui-panel" mdui-panel><div class="mdui-panel-item"><div class="mdui-panel-item-header"><div class="mdui-panel-item-title">${1}</div><div class="mdui-panel-item-summary">${2}</div><i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i></div><div class="mdui-panel-item-body">',$content);
-	$content=preg_replace('/\[panel title="(.*?)"\]/i','<div class="mdui-panel" mdui-panel><div class="mdui-panel-item"><div class="mdui-panel-item-header"><div class="mdui-panel-item-title">${1}</div><i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i></div><div class="mdui-panel-item-body">',$content);
+	$content=preg_replace('/\[panel title="(.*?)"\]/i','<div class="mdui-panel" mdui-panel><div class="mdui-panel-item"><div class="mdui-panel-item-header"><div class="mdui-panel-item-title" style="width:100%">${1}</div><i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i></div><div class="mdui-panel-item-body">',$content);
 	return preg_replace('/\[\/panel\]/i','</div></div></div>',$content);
 }
 function RewriteContent($content){

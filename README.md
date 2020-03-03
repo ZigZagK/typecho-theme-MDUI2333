@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款单栏typecho主题。
 
-作者：ZigZagK | 版本：1.4.1
+作者：ZigZagK | 版本：1.4.2
 
 ## 主题特性
 
@@ -16,6 +16,7 @@
 | 图片灯箱             | 使用[Fancybox](https://fancyapps.com/fancybox/3/)添加图片灯箱。 |
 | 文章目录             | 使用[jquery_headindex](https://github.com/mnnyang/jquery_headindex)生成手风琴式的文章目录。 |
 | 主题更新提示         | 有新版本时会在主题外观设置中显示。                           |
+| 只支持现代浏览器     | 这是不可抗力，不支持过气浏览器（如IE）                       |
 | ~~不是很丰富的设置~~ | ~~这哪里是特性了？！~~                                       |
 | ~~并没有多语言~~     | ~~这根本是敷衍吧？！~~                                       |
 | ~~暴力膜👓~~          | ~~亮点自寻，子弹吃到饱，这是坠吼的。~~                       |
@@ -30,14 +31,12 @@
 
 1. 在[Releases](https://github.com/ZigZagK/typecho-theme-MDUI2333/releases)中下载最新版，**改名为MDUI2333**放入主题目录，之后启用主题。
 2. 在设置外观中设置一下主题色强调色，背景图片等。
-3. 添加友情链接页面：先安装插件[Links](https://github.com/ZigZagK/typecho-links-material)并添加友情链接。然后创建一个空页面，将模板改为友情链接页面。
-4. 添加标签云页面：创建一个空页面，将模板改为标签云页面。
-5. 添加日记页面：创建一个空页面，将模板改为日记页面。打开该页面即可以评论的方式发表日记。
-6. 更多帮助详见[MDUI2333Wiki](https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki)。
+3. 更多帮助详见[MDUI2333Wiki](https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki)，也可以在[留言板](https://zigzagk.top/messages#comments)中询问我（注：关于typecho设置的问题和Wiki中有的问题很大概率**得不到解答**）。
+4. 如果你喜欢，**Star本项目**吧QwQ！
 
 ## 推荐的插件
 
-[Links](https://github.com/ZigZagK/typecho-links-material) - 友情链接（魔改版）
+[Links](https://github.com/ZigZagK/typecho-links-material) - 友情链接（魔改配套版）
 
 [Meting](https://github.com/MoePlayer/APlayer-Typecho) - APlayer-Typecho（已经适配，可以添加全站音乐播放器）
 
