@@ -28,7 +28,7 @@
 		}
 		node.addEventListener('animationend',handleAnimationEnd);
 	}
-	var title=$(document).attr("title");var header=title.substring(0,title.indexOf('-')-1);
+	var title=$(document).attr("title");var header=title.substring(0,title.lastIndexOf('-')-1);
 	if (header=='') header='首页';$('#header-title').text(header);
 	$(function(){
 		<?php if ($this->options->announcement!=''){ ?>
