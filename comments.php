@@ -90,8 +90,8 @@ function threadedComments($comment,$options){ ?>
 					</div>
 					<?php if ($this->options->commentpicture=='true') $this->need('php/QAQTAB.php'); ?>
 					<?php if (!$this->user->hasLogin() && array_key_exists('Mailer',$plugin['activated'])){ ?>
-					<span class="mdui-float-left" mdui-tooltip="{content:'接收邮件通知',position:'top'}">
-						<i class="mdui-icon material-icons mdui-text-color-theme-accent">&#xe7f7;</i>
+					<span class="mdui-float-left mdui-valign" mdui-tooltip="{content:'接收邮件通知',position:'top'}">
+						<i class="mdui-icon material-icons mdui-text-color-theme-accent mdui-m-r-1">&#xe7f7;</i>
 						<label class="mdui-switch"><input type="checkbox" name="receiveMail" value="yes" checked /><i class="mdui-switch-icon"></i></label>
 					</span>
 					<?php } ?>
