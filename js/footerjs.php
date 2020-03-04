@@ -28,8 +28,8 @@
 		}
 		node.addEventListener('animationend',handleAnimationEnd);
 	}
-	var title=$(document).attr("title");var header=title.substring(0,title.lastIndexOf('-')-1);
-	if (header=='') header='首页';$('#header-title').text(header);
+	var title=$(document).attr("title");var pos=title.lastIndexOf(' - ');
+	var header=(pos>=0?title.substring(0,pos):'首页');$('#header-title').text(header);
 	$(function(){
 		<?php if ($this->options->announcement!=''){ ?>
 		mdui.snackbar({message:"<?php echo $this->options->announcement; ?>",position:'<?php echo $this->options->announcementpos; ?>',closeOnOutsideClick:false});
@@ -49,7 +49,7 @@
 		<?php } ?>
 		mdui.mutation();
 	});
-	$(document).pjax('a:not(a[target="_blank"],a[no-pjax])',{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
+	$(document).pjax('a:not(a[target="_blank"],a[no-pjax],.page-navigator a)',{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
 	$(document).on('submit','#search',function(event){$.pjax.submit(event,{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});});
 	$(document).on('pjax:send',function(){
 		sidebar.close();
@@ -57,8 +57,8 @@
 		$('#pjax-progress').css('display','block');
 	});
 	$(document).on('pjax:complete',function(){
-		title=$(document).attr("title");header=title.substring(0,title.indexOf('-')-1);
-		if (header=='') header='首页';$('#header-title').text(header);
+		title=$(document).attr("title");pos=title.lastIndexOf(' - ');
+		header=(pos>=0?title.substring(0,pos):'首页');$('#header-title').text(header);
 		MathJax.Hub.Typeset(document.getElementById('pjax-container'));
 		<?php if ($this->options->highlightmode=='highlightjs'){ ?>
 		hljs.initHighlighting.called=false;hljs.initHighlighting();

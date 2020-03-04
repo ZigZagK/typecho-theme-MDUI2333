@@ -89,14 +89,17 @@ function threadedComments($comment,$options){ ?>
 						<div class="mdui-textfield-helper"><?php echo $this->options->commenthelper; ?></div>
 					</div>
 					<?php if ($this->options->commentpicture=='true') $this->need('php/QAQTAB.php'); ?>
+					<?php if (!$this->user->hasLogin() && array_key_exists('Mailer',$plugin['activated'])){ ?>
+					<span class="mdui-float-left" mdui-tooltip="{content:'接收邮件通知',position:'top'}">
+						<i class="mdui-icon material-icons mdui-text-color-theme-accent">&#xe7f7;</i>
+						<label class="mdui-switch"><input type="checkbox" name="receiveMail" value="yes" checked /><i class="mdui-switch-icon"></i></label>
+					</span>
+					<?php } ?>
 					<button id="commentsumbit" type="submit" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" style="margin:0 8px;" mdui-tooltip="{content:'提交评论(Ctrl+Enter)',position:'top'}"><i class="mdui-icon material-icons">&#xe5ca;</i></button>
 					<div class="mdui-spinner mdui-spinner-colorful mdui-float-right" id="commenting" style="margin:0 8px;width:36px;height:36px;display:none;"></div>
 					<div class="cancel-comment-reply mdui-float-right mdui-m-l-1" style="display:inline">
 						<?php $comments->cancelReply('<button class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple" mdui-tooltip=\'{content:"取消回复",position:"top"}\'><i class="mdui-icon material-icons">&#xe5cd;</i></button>'); ?>
 					</div>
-					<?php if (!$this->user->hasLogin() && array_key_exists('Mailer',$plugin['activated'])){ ?>
-					<label class="mdui-checkbox mdui-float-right"><input type="checkbox" name="receiveMail" value="yes" checked /><i class="mdui-checkbox-icon"></i><span style="margin-left:-10px;"><strong>接收</strong>邮件通知</span></label>
-					<?php } ?>
 				</div>
 			</div>
 		</form>

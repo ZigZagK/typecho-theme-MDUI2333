@@ -10,7 +10,7 @@
 | -------------------- | ------------------------------------------------------------ |
 | 自适应               | 可以适配各种屏幕尺寸（MDUI自带的嘛）。                       |
 | 全站PJAX & AJAX评论  | 切换页面、评论时音乐均不会停止，可以愉快地听歌。             |
-| 全站APlayer播放器    | 已对[Meting](https://github.com/MoePlayer/APlayer-Typecho)插件进行适配，可以添加全站音乐播放器。 |
+| 全站APlayer播放器    | 已对[Meting](https://github.com/ZigZagK/APlayer-Typecho)插件进行适配，可以添加全站音乐播放器。 |
 | 代码高亮             | 使用[highlight.js](https://highlightjs.org/)和[Prismjs](https://prismjs.com/)进行代码高亮，并且有行号显示。 |
 | 数学公式             | 使用[MathJax](https://www.mathjax.org/)渲染数学公式。        |
 | 图片灯箱             | 使用[Fancybox](https://fancyapps.com/fancybox/3/)添加图片灯箱。 |
@@ -38,11 +38,17 @@
 
 [Links](https://github.com/ZigZagK/typecho-links-material) - 友情链接（魔改配套版）
 
-[Meting](https://github.com/MoePlayer/APlayer-Typecho) - APlayer-Typecho（已经适配，可以添加全站音乐播放器）
+[Meting](https://github.com/ZigZagK/APlayer-Typecho) - APlayer-Typecho（魔改配套版，已经适配，可以添加全站音乐播放器）
 
 [ExSearch](https://github.com/AlanDecode/Typecho-Plugin-ExSearch) - 即时搜索（已经适配，启动插件并关闭`jquery`后即可使用）
 
 [Mailer](https://github.com/AlanDecode/Typecho-Plugin-Mailer) - 评论邮件提醒（已经适配，无需手动添加`<input>`）
+
+## 鸣谢
+
+[MDUI](https://mdui.org) | [jQuery](https://github.com/jquery/jquery) | [jquery-pjax](https://github.com/defunkt/jquery-pjax) | [highlight.js](https://highlightjs.org/) | [Prism](https://prismjs.com/) | [MathJax](https://www.mathjax.org/) | [Fancybox](https://fancyapps.com/fancybox/3/) | [jquery_headindex](https://github.com/mnnyang/jquery_headindex) | [Meting](https://github.com/MoePlayer/APlayer-Typecho) | [ExSearch](https://github.com/AlanDecode/Typecho-Plugin-ExSearch) | [Mailer](https://github.com/AlanDecode/Typecho-Plugin-Mailer)
+
+最初灵感和随机图片来自[Material](https://github.com/idawnlight/typecho-theme-material) | 评论表情框魔改自[Castle](https://github.com/ohmyga233/castle-Typecho-Theme) | 全站音乐播放器的支持来自[AlanDecode](https://github.com/MoePlayer/APlayer-Typecho/pull/60)
 
 ## LICENSE
 

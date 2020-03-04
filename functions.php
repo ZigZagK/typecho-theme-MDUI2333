@@ -62,7 +62,7 @@ function themeConfig($form){
 		'prismjs' => 'Prismjs'
 	),'prismjs',_t('代码片渲染方案'),_t(''));
 	$form->addInput($config->multiMode());
-	$config=new Typecho_Widget_Helper_Form_Element_Text('highlightstyle',NULL,NULL,_t('代码片渲染样式'),_t('如果采用<code>highlightjs</code>：参考 <a target="_blank" href="https://github.com/highlightjs/highlight.js/tree/master/src/styles">highlightjs</a> 样式，如<code>tomorrow.css</code>则填写<code>tomorrow</code>，如果不填则使用<code>default</code><br>如果采用<code>Prismjs</code>：参考<a href="https://www.jsdelivr.com/package/npm/prismjs?path=themes" target="_blank">Prism</a>中的theme填写，如<code>prism-coy.css</code>则填写<code>prism-coy</code>，如果不填则使用<code>prism</code>'));
+	$config=new Typecho_Widget_Helper_Form_Element_Text('highlightstyle',NULL,NULL,_t('代码片渲染样式'),_t('如果采用 <a href="https://highlightjs.org/static/demo/" target="_blank">highlightjs</a> ：参考 <a target="_blank" href="https://www.jsdelivr.com/package/npm/highlight.js?path=styles">highlightjs</a> 样式，如<code>tomorrow.css</code>则填写<code>tomorrow</code>，如果不填则使用<code>default</code><br>如果采用 <a href="https://prismjs.com/download.html" target="_blank">Prismjs</a> ：参考 <a href="https://www.jsdelivr.com/package/npm/prismjs?path=themes" target="_blank">Prism</a> 中的theme填写，如<code>prism-coy.css</code>则填写<code>prism-coy</code>，如果不填则使用<code>prism</code>'));
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Select('posttoc',array(
 		'true' => '启用',

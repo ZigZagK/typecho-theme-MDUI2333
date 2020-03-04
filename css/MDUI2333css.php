@@ -19,6 +19,8 @@
 	.ins-section-wrapper::-webkit-scrollbar {background:#fff!important;}
 	.mdui-checkbox input[type='checkbox']:focus:checked:not(:disabled) + .mdui-checkbox-icon {-webkit-box-shadow:none!important;box-shadow:none!important;}
 	.mdui-checkbox input[type='checkbox']:focus + .mdui-checkbox-icon {-webkit-box-shadow:none!important;box-shadow:none!important;}
+	.mdui-switch input[type='checkbox']:focus:checked:not(:disabled) + .mdui-switch-icon:before {-webkit-box-shadow:0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12)!important;box-shadow:0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12)!important;}
+	.mdui-switch input[type='checkbox']:focus + .mdui-switch-icon:before {-webkit-box-shadow:0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12)!important;box-shadow:0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12)!important;}
 	/*comments.php*/
 	div#comments form {margin-bottom:0;}
 	#commentcontent > .comment-list {margin:16px 0;}
