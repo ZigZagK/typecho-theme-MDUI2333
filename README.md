@@ -2,7 +2,7 @@
 
 基于[MDUI](https://mdui.org)的一款单栏typecho主题。
 
-作者：ZigZagK | 版本：1.4.2
+作者：ZigZagK | 版本：1.4.3
 
 ## 主题特性
 
@@ -16,6 +16,7 @@
 | 图片灯箱             | 使用[Fancybox](https://fancyapps.com/fancybox/3/)添加图片灯箱。 |
 | 文章目录             | 使用[jquery_headindex](https://github.com/mnnyang/jquery_headindex)生成手风琴式的文章目录。 |
 | 主题更新提示         | 有新版本时会在主题外观设置中显示。                           |
+| 主题设置备份         | 再也不用担心手贱切换主题导致设置清空啦。                     |
 | 只支持现代浏览器     | 这是不可抗力，不支持过气浏览器（如IE）                       |
 | ~~不是很丰富的设置~~ | ~~这哪里是特性了？！~~                                       |
 | ~~并没有多语言~~     | ~~这根本是敷衍吧？！~~                                       |
@@ -46,7 +47,11 @@
 
 ## 鸣谢
 
-[MDUI](https://mdui.org) | [jQuery](https://github.com/jquery/jquery) | [jquery-pjax](https://github.com/defunkt/jquery-pjax) | [highlight.js](https://highlightjs.org/) | [Prism](https://prismjs.com/) | [MathJax](https://www.mathjax.org/) | [Fancybox](https://fancyapps.com/fancybox/3/) | [jquery_headindex](https://github.com/mnnyang/jquery_headindex) | [Meting](https://github.com/MoePlayer/APlayer-Typecho) | [ExSearch](https://github.com/AlanDecode/Typecho-Plugin-ExSearch) | [Mailer](https://github.com/AlanDecode/Typecho-Plugin-Mailer)
+[MDUI](https://mdui.org) | [jQuery](https://github.com/jquery/jquery) | [jquery-pjax](https://github.com/defunkt/jquery-pjax)
+
+[highlight.js](https://highlightjs.org/) | [Prism](https://prismjs.com/) | [MathJax](https://www.mathjax.org/) | [Fancybox](https://fancyapps.com/fancybox/3/) | [jquery_headindex](https://github.com/mnnyang/jquery_headindex) | [twemoji-colr](https://github.com/mozilla/twemoji-colr)
+
+[Meting](https://github.com/MoePlayer/APlayer-Typecho) | [ExSearch](https://github.com/AlanDecode/Typecho-Plugin-ExSearch) | [Mailer](https://github.com/AlanDecode/Typecho-Plugin-Mailer)
 
 最初灵感和随机图片来自[Material](https://github.com/idawnlight/typecho-theme-material) | 评论表情框魔改自[Castle](https://github.com/ohmyga233/castle-Typecho-Theme) | 全站音乐播放器的支持来自[AlanDecode](https://github.com/MoePlayer/APlayer-Typecho/pull/60)
 

@@ -4,7 +4,7 @@
  * 
  * @package MDUI2333
  * @author ZigZagK
- * @version 1.4.2
+ * @version 1.4.3
  * @link https://zigzagk.top
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -95,7 +95,7 @@ $plugin=Typecho_Plugin::export();
 						<p>在百度、Google、雅虎等主流搜索引擎愈发发展成熟以外，各类不同的搜索大全也在今日的互联网逐渐兴起。搜索大全即为集各种不同类型搜索引擎，涵盖多语言于一身的搜索集合。该类搜索引擎大全的兴起，让搜索变得更加简单。几乎所有的内容都能在“一页之间”完成。比如风靡一时的百google度，谷姐，比如新近出来的sou1sou等，就是将其它的搜索引擎的结果集合在一块。</p>
 						<footer>百度百科 —— 搜索（互联网技术）</footer>
 					</blockquote>
-					<del>在搜索页面划水也是不错的体验呢。</del>
+					<del>然而这个彩蛋没有什么作用。</del>
 				</div>
 				<div class="mdui-card-actions">
 					<a href="/" class="mdui-btn mdui-ripple mdui-color-theme-accent">返回首页</a>

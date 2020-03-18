@@ -68,5 +68,8 @@
 <button class="mdui-hidden-xs-down mdui-fab mdui-fab-mini mdui-color-theme-accent mdui-ripple" id="post-tocbtn" style="position:fixed;top:72px;left:16px;z-index:1;border-radius:4px;" mdui-tooltip="{content:'文章目录',position:'right'}" mdui-menu="{target:'#post-toc',fixed:'true'}"><i class="mdui-icon material-icons">&#xe8de;</i></button>
 <div class="mdui-menu" id="post-toc"></div>
 <?php }} ?>
+<?php if (!empty($this->options->posttimeouttext) && ($days=Countdays(date('Y-m-d',$this->modified),date('Y-m-d')))>=(empty($this->options->posttimeout)?180:$this->options->posttimeout)){ ?>
+<script>mdui.snackbar({message:"本文写于 <?php echo Countdays($this->date->format('Y-m-d'),date('Y-m-d')); ?> 天前，最后更新于 <?php echo $days; ?> 天前。<br><?php echo $this->options->posttimeouttext; ?>",position:'right-bottom',timeout:0,buttonText:'OK'});</script>
+<?php } ?>
 <?php $this->need('sidebar.php'); ?>
 <?php $this->need('footer.php'); ?>

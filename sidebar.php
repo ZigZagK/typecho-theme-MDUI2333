@@ -91,9 +91,9 @@
 		<div class="mdui-divider"></div>
 		<?php $this->widget('Widget_Contents_Page_List')->to($pages); ?>
 		<?php while ($pages->next()){ ?>
-			<?php if ($pages->template!='page-tags.php'){ ?>
+			<?php if ($pages->template!='page-tags.php'){$fields=unserialize($pages->fields); ?>
 		<a href="<?php $pages->permalink(); ?>" class="mdui-list-item mdui-ripple">
-			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">&#xe24d;</i>
+			<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green"><?php echo empty($fields['description'])?'&#xe24d;':$fields['description']; ?></i>
 			<div class="mdui-list-item-content"><?php $pages->title(); ?></div>
 		</a>
 			<?php } ?>

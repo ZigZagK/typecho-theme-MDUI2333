@@ -54,7 +54,7 @@ function threadedComments($comment,$options){
 						<div class="mdui-textfield-helper"><?php echo $this->options->commenthelper; ?></div>
 					</div>
 					<?php if ($this->options->commentpicture=='true') $this->need('php/QAQTAB.php'); ?>
-					<button id="commentsumbit" type="submit" class="submit mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" style="margin:0 8px;" mdui-tooltip="{content:'发布(Ctrl+Enter)',position:'top'}"><i class="mdui-icon material-icons">&#xe5ca;</i></button>
+					<button id="commentsumbit" type="submit" class="submit mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" style="margin:0 8px;" mdui-tooltip="{content:'发表(Ctrl+Enter)',position:'top'}"><i class="mdui-icon material-icons">&#xe5ca;</i></button>
 				</form>
 			</div>
 			<?php } else { ?>

@@ -9,6 +9,8 @@
 	$('#togglesidebar').on('click',function(){sidebar.toggle();});
 	var QAQTab=new mdui.Tab('#QAQTab');
 	$('#QAQ').on('open.mdui.dialog',function(){QAQTab.handleUpdate();});
+	var announcement;var title=$(document).attr("title");var pos=title.lastIndexOf(' - ');
+	var header=(pos>=0?title.substring(0,pos):'首页');$('#header-title').text(header);
 	<?php if ($this->options->ExSearch=='true'){ ?>
 	function ExSearchCall(item){
 		if (item&&item.length){
@@ -28,11 +30,9 @@
 		}
 		node.addEventListener('animationend',handleAnimationEnd);
 	}
-	var title=$(document).attr("title");var pos=title.lastIndexOf(' - ');
-	var header=(pos>=0?title.substring(0,pos):'首页');$('#header-title').text(header);
 	$(function(){
 		<?php if ($this->options->announcement!=''){ ?>
-		mdui.snackbar({message:"<?php echo $this->options->announcement; ?>",position:'<?php echo $this->options->announcementpos; ?>',closeOnOutsideClick:false});
+		announcement=mdui.snackbar({message:"<?php echo $this->options->announcement; ?>",position:'<?php echo $this->options->announcementpos; ?>',closeOnOutsideClick:false,buttonText:'OK',timeout:0});
 		<?php } ?>
 		<?php if ($this->options->highlightmode=='highlightjs'){ ?>hljs.initHighlightingOnLoad();<?php } ?>
 		$('pre code').each(function(){
@@ -49,10 +49,10 @@
 		<?php } ?>
 		mdui.mutation();
 	});
-	$(document).pjax('a:not(a[target="_blank"],a[no-pjax],.page-navigator a)',{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
-	$(document).on('submit','#search',function(event){$.pjax.submit(event,{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});});
+	$(document).pjax('a:not(a[target="_blank"],a[no-pjax])',{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
+	$(document).on('submit','form[role="search"]',function(event){$.pjax.submit(event,{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});});
 	$(document).on('pjax:send',function(){
-		sidebar.close();
+		if (announcement!=null) announcement.close();sidebar.close();
 		$('#pjax-overlay').css('display','block');
 		$('#pjax-progress').css('display','block');
 	});

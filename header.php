@@ -13,6 +13,9 @@
 		'tag' => _t('标签 %s 下的文章'),
 		'author' => _t('%s 发布的文章')
 	),'',' - '); ?><?php $this->options->title(); ?></title>
+	<?php if ($this->options->twemoji=='true'){ ?>
+	<link rel="preload" href="<?php Helper::options()->themeUrl(); ?>fonts/twemoji/TwemojiMozilla.ttf" as="font" type='font/ttf' crossorigin />
+	<?php } ?>
 	<link rel="stylesheet" href="<?php Helper::options()->themeUrl(); ?>css/mdui.min.css">
 	<?php if ($this->options->highlightmode=='highlightjs'){ ?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/styles/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "default"?>.min.css">

@@ -60,9 +60,9 @@ function threadedComments($comment,$options){ ?>
 			<?php if ($this->user->hasLogin()){ ?>
 			<div class="mdui-card">
 				<div class="mdui-card-content mdui-row">
-					<div class="mdui-chip">
+					<div class="mdui-chip mdui-m-l-1">
 						<img class="mdui-chip-icon mdui-color-grey-200" src="<?php echo GravatarURL($this->user->mail,100); ?>" />
-						<span class="mdui-chip-title"><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a></span>
+						<span class="mdui-chip-title"><a href="<?php $this->options->profileUrl(); ?>" target="_blank"><?php $this->user->screenName(); ?></a></span>
 					</div>
 					<a href="<?php $this->options->logoutUrl(); ?>" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple" mdui-tooltip="{content:'退出登录', position:'top'}" no-pjax><i class="mdui-icon material-icons">&#xe879;</i></a>
 			<?php } else { ?>
@@ -90,8 +90,8 @@ function threadedComments($comment,$options){ ?>
 					</div>
 					<?php if ($this->options->commentpicture=='true') $this->need('php/QAQTAB.php'); ?>
 					<?php if (!$this->user->hasLogin() && array_key_exists('Mailer',$plugin['activated'])){ ?>
-					<span class="mdui-float-left mdui-valign" mdui-tooltip="{content:'接收邮件通知',position:'top'}">
-						<i class="mdui-icon material-icons mdui-text-color-theme-accent mdui-m-r-1">&#xe7f7;</i>
+					<span class="mdui-float-left mdui-valign" mdui-tooltip="{content:'邮件提醒',position:'top'}">
+						<i class="mdui-icon material-icons mdui-text-color-theme-accent mdui-m-r-1" id="receiveMailicon">&#xe7f7;</i>
 						<label class="mdui-switch"><input type="checkbox" name="receiveMail" value="yes" checked /><i class="mdui-switch-icon"></i></label>
 					</span>
 					<?php } ?>

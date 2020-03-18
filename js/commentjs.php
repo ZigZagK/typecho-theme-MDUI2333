@@ -60,7 +60,12 @@
 	}
 	<?php if (!$this->user->hasLogin()){ ?>
 	$('#emailavatar').attr('src','<?php echo $this->options->gravatarurl; ?>'+md5($("input#mail").val())+'?s=100&d=mystery');
-	$("input#mail").blur(function(){$('#emailavatar').attr('src','<?php echo $this->options->gravatarurl; ?>'+md5($("input#mail").val())+'?s=100&d=mystery');});
+	$('input#mail').blur(function(){$('#emailavatar').attr('src','<?php echo $this->options->gravatarurl; ?>'+md5($("input#mail").val())+'?s=100&d=mystery');});
+	$('input[name="receiveMail"]').change(function(){
+		var status=$('input[name="receiveMail"]').is(':checked');
+		if (!status) {$('#receiveMailicon').html('&#xe7f6;');$('#receiveMailicon').addClass('mdui-text-color-grey');$('#receiveMailicon').removeClass('mdui-text-color-theme-accent');}
+		else {$('#receiveMailicon').html('&#xe7f7;');$('#receiveMailicon').addClass('mdui-text-color-theme-accent');$('#receiveMailicon').addClass('mdui-text-color-grey');}
+	});
 	<?php } ?>
 	$('#comment-form').submit(function(event){
 		var commentdata=$(this).serializeArray();
@@ -93,7 +98,7 @@
 					$('#commentsnumber').html($('#commentsnumber',data).html());
 					$('#commentcontent').html($('#commentcontent',data).html());
 					MathJax.Hub.Typeset(document.getElementById('commentcontent'));
-				document.querySelectorAll('#commentcontent pre code').forEach((block) => {<?php if ($this->options->highlightmode=='highlightjs'){ ?>hljs.highlightBlock(block);<?php } else { ?>Prism.highlightElement(block);<?php } ?>});
+					document.querySelectorAll('#commentcontent pre code').forEach((block) => {<?php if ($this->options->highlightmode=='highlightjs'){ ?>hljs.highlightBlock(block);<?php } else { ?>Prism.highlightElement(block);<?php } ?>});
 					$('#commentcontent pre code').each(function(){
 						var lines=$(this).text().split('\n').length;
 						var numbering=$('<ul/>').addClass('pre-numbering');

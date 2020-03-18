@@ -7,8 +7,7 @@
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('header.php');
 function randomcolor(){
-    $color[0]='blue';$color[1]='teal';$color[2]='green';$color[3]='cyan';
-    $color[4]='purple';$color[5]='orange';$color[6]='indigo';
+    $color[0]='blue';$color[1]='orange';$color[2]='green';$color[3]='pink';$color[4]='red';
 	return $color[mt_rand(0,count($color)-1)];
 }
 function getinfo($str){
