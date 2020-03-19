@@ -1,10 +1,10 @@
 <?php
 /**
- * 基于 <a target="_blank" href="https://www.mdui.org/">MDUI</a> 的Typecho主题 <del>名字是乱取的</del>
+ * 基于 <a target="_blank" href="https://www.mdui.org/">MDUI</a> 的Typecho主题 <del>名字是乱取的，logo是乱画的</del>
  * 
  * @package MDUI2333
  * @author ZigZagK
- * @version 1.4.3
+ * @version 1.4.4
  * @link https://zigzagk.top
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;

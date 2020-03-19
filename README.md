@@ -1,8 +1,18 @@
+![](screenshot.png)
+
+<p align="center">
+	<a href="https://github.com/ZigZagK/typecho-theme-MDUI2333/releases/latest"><img src="https://img.shields.io/github/v/release/ZigZagK/typecho-theme-MDUI2333?color=448AFF&style=for-the-badge" /></a>
+	<img src="https://img.shields.io/github/license/ZigZagK/typecho-theme-MDUI2333.svg?color=8BC34A&style=for-the-badge" />
+	<img src="https://img.shields.io/github/last-commit/ZigZagK/typecho-theme-MDUI2333.svg?color=FF9800&style=for-the-badge" />
+</p>
+
+---
+
 # MDUI2333
 
 基于[MDUI](https://mdui.org)的一款单栏typecho主题。
 
-作者：ZigZagK | 版本：1.4.3
+作者：ZigZagK | 版本：1.4.4
 
 ## 主题特性
 
@@ -34,6 +44,16 @@
 2. 在设置外观中设置一下主题色强调色，背景图片等。
 3. 更多帮助详见[MDUI2333Wiki](https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki)，也可以在[留言板](https://zigzagk.top/messages#comments)中询问我（注：关于typecho设置的问题和Wiki中有的问题很大概率**得不到解答**）。
 4. 如果你喜欢，**Star本项目**吧QwQ！
+
+<details>
+<summary>github下载很慢？</summary><br>
+
+
+这可能是由于“众所周知的原因”导致的，您可以过段时间再下载，或者使用[备用下载地址](http://api.zigzagk.top/MDUI2333/MDUI2333.zip)。
+
+**注：该下载地址是自动抓取最新Release的，可能会存在抓取失败等情况，不推荐使用。**
+
+</details>
 
 ## 推荐的插件
 

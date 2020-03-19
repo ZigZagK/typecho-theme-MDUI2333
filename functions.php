@@ -1,5 +1,5 @@
 <?php
-define('Version','1.4.3');
+define('Version','1.4.4');
 function themeFields($layout){
 	$field=new Typecho_Widget_Helper_Form_Element_Text('picUrl',NULL,NULL,_t('头图地址'),_t('在这里填入一个图片 URL 地址，作为文章/页面的头图，不填则显示随机图片'));
 	$layout->addItem($field);
@@ -153,6 +153,35 @@ function themeInit(){
 			$data=$db->fetchRow($db->select()->from('table.options')->where('name=?','theme:SettingBackup'));
 			if (empty($data)) printarray(array('msg'=>'Error'));
 			else printarray(array('msg'=>'Success','data'=>$data['value']));
+		}
+		errorexit('HTTP/1.1 403 Forbidden');
+	}
+	/* 魔改自typecho_bangumi_bili(https://gitee.com/stsiao/typecho_bangumi_bili) */
+	if ($type=='bilibili'){
+		$opt=$gets['opt'];
+		if ($opt=='list' && $_SERVER['REQUEST_METHOD']=='GET'){
+			$uid=$gets['uid'];if (empty($uid)) errorexit('HTTP/1.1 403 Forbidden');
+			if ($gets['auth']!=md5($uid.$salt.$uid)) errorexit('HTTP/1.1 403 Forbidden');
+			if (!empty($json=file_get_contents(Helper::options()->themeFile(ThemeName(),"cache/bangumi/bangumidata.json")))){
+				$bangumi=json_decode($json,true);
+				if (strtotime(date('Y-m-d H:i:s'))-strtotime($bangumi['time'])<86400)
+					printarray(array('msg'=>'Success','data'=>$bangumi['data']));
+			} else mkdir(Helper::options()->themeFile(ThemeName(),"cache/bangumi"),0777,true);
+			$json=getbangumi($uid,1);if (empty($json)) printarray(array('msg'=>'Error'));
+			$bangumi=json_decode($json,true);$data=$bangumi['data']['list'];
+			$total=$bangumi['data']['total'];$pn=1;
+			while (true){
+				$total-=100;if ($total<=0) break;$pn++;
+				$json=getbangumi($uid,$pn);$bangumi=json_decode($json,true);
+				$data=array_merge($data,$bangumi['data']['list']);
+			}
+			$json=json_encode(array('time'=>date('Y-m-d H:i:s'),'data'=>$data));
+			$file=fopen(Helper::options()->themeFile(ThemeName(),"cache/bangumi/bangumidata.json"),"w");
+			fwrite($file,$json);fclose($file);printarray(array('msg'=>'Success','data'=>$data));
+		}
+		if ($opt=='cover' && $_SERVER['REQUEST_METHOD']=='GET'){
+			$url=$gets['url'];if (empty($url)) errorexit('HTTP/1.1 403 Forbidden');
+			if ($gets['auth']!=md5($url.$salt.$url)) errorexit('HTTP/1.1 403 Forbidden');
 		}
 		errorexit('HTTP/1.1 403 Forbidden');
 	}
