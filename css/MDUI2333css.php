@@ -1,7 +1,8 @@
 <style>
 	/*index.php*/
 	<?php if ($this->options->twemoji=='true'){ ?>
-	@font-face {font-family:twemoji;font-display:swap;src:url('<?php Helper::options()->themeUrl(); ?>fonts/twemoji/TwemojiMozilla.ttf');}
+	@font-face {font-family:twemoji;font-weight:normal;font-display:swap;src:url('<?php Helper::options()->themeUrl(); ?>fonts/twemoji/TwemojiMozilla.ttf');}
+	@font-face {font-family:twemoji;font-weight:bold;font-display:swap;src:url('<?php Helper::options()->themeUrl(); ?>fonts/twemoji/TwemojiMozilla.ttf');}
 	<?php } ?>
 	::selection {background:#b3d4fc;text-shadow:none;}
 	a {color:unset;text-decoration:unset;}
