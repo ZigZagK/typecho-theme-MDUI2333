@@ -73,7 +73,7 @@ function threadedComments($comment,$options){
 			';
 			echo '
 		<div class="mdui-typo" id="'.$diary[$i][0]->format('Y-n').'">
-			<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4">
+			<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-row-xl-4">
 			';
 		}
 		echo $diary[$i][1];

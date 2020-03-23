@@ -95,6 +95,8 @@ function themeConfig($form){
 		'rand' => '随机顺序'
 	),'default',_t('友链显示顺序'),_t('默认顺序即友情链接管理中的顺序，请注意 <a target="_blank" href="https://github.com/ZigZagK/typecho-links-material">Links插件</a> 需要使用MDUI2333的配套魔改版'));
 	$form->addInput($config->multiMode());
+	$config=new Typecho_Widget_Helper_Form_Element_Text('bangumicachetimeout',NULL,NULL,_t('追番数据缓存时间(秒)'),_t('填0表示不缓存<strong>(不推荐)</strong>，不填则默认半天(43200)'));
+	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Text('commentplaceholder',NULL,'Dalao们快来评论啊QAQ',_t('评论框提示信息'),_t('未输入时显示在评论框的文字'));
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Text('commenthelper',NULL,'支持Markdown和LaTeX数学公式',_t('评论框帮助信息'),_t('显示在评论框下部的帮助信息'));
@@ -123,13 +125,12 @@ function themeConfig($form){
 function errorexit($status) {header($status);die();}
 function printjson($json) {header('Content-type:application/json;charset=utf-8');die($json);}
 function printarray($data) {printjson(json_encode($data));}
-function getbangumi($uid,$pn){
+function geturl($url){
 	$ch=curl_init();
-	curl_setopt($ch,CURLOPT_URL,"https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=0&pn=".$pn."&ps=100&vmid=".$uid."&ts=998244353");
-	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+	curl_setopt($ch,CURLOPT_URL,$url);
+	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE); 
+	curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE); 
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-	curl_setopt($ch,CURLOPT_REFERER,'https://space.bilibili.com/'.$uid.'/bangumi');
-	curl_setopt($ch,CURLOPT_HTTPHEADER,array("Origin:https://space.bilibili.com","Referer:https://space.bilibili.com/".$uid."/bangumi"));
 	$output=curl_exec($ch);curl_close($ch);return $output;
 }
 function themeInit(){
@@ -156,34 +157,16 @@ function themeInit(){
 		}
 		errorexit('HTTP/1.1 403 Forbidden');
 	}
-	/* 魔改自typecho_bangumi_bili(https://gitee.com/stsiao/typecho_bangumi_bili) */
-	if ($type=='bilibili'){
-		$opt=$gets['opt'];
-		if ($opt=='list' && $_SERVER['REQUEST_METHOD']=='GET'){
-			$uid=$gets['uid'];if (empty($uid)) errorexit('HTTP/1.1 403 Forbidden');
-			if ($gets['auth']!=md5($uid.$salt.$uid)) errorexit('HTTP/1.1 403 Forbidden');
-			if (!empty($json=file_get_contents(Helper::options()->themeFile(ThemeName(),"cache/bangumi/bangumidata.json")))){
-				$bangumi=json_decode($json,true);
-				if (strtotime(date('Y-m-d H:i:s'))-strtotime($bangumi['time'])<86400)
-					printarray(array('msg'=>'Success','data'=>$bangumi['data']));
-			} else mkdir(Helper::options()->themeFile(ThemeName(),"cache/bangumi"),0777,true);
-			$json=getbangumi($uid,1);if (empty($json)) printarray(array('msg'=>'Error'));
-			$bangumi=json_decode($json,true);$data=$bangumi['data']['list'];
-			$total=$bangumi['data']['total'];$pn=1;
-			while (true){
-				$total-=100;if ($total<=0) break;$pn++;
-				$json=getbangumi($uid,$pn);$bangumi=json_decode($json,true);
-				$data=array_merge($data,$bangumi['data']['list']);
-			}
-			$json=json_encode(array('time'=>date('Y-m-d H:i:s'),'data'=>$data));
-			$file=fopen(Helper::options()->themeFile(ThemeName(),"cache/bangumi/bangumidata.json"),"w");
-			fwrite($file,$json);fclose($file);printarray(array('msg'=>'Success','data'=>$data));
+	if ($type=='bangumicache' && $_SERVER['REQUEST_METHOD']=='GET'){
+		$url=$gets['url'];$ssid=$gets['ssid'];if (empty($url) || empty($ssid)) errorexit('HTTP/1.1 403 Forbidden');
+		if ($gets['auth']!=md5($url.$salt.$ssid)) errorexit('HTTP/1.1 403 Forbidden');
+		mkdir(Helper::options()->themeFile(ThemeName(),"cache/bangumi/cover"),0777,true);
+		if (!file_exists(Helper::options()->themeFile(ThemeName(),"cache/bangumi/cover/".$ssid.'.jpg'))){
+			$img=geturl($url);if (empty($img)) errorexit('HTTP/1.1 403 Forbidden');
+			$file=fopen(Helper::options()->themeFile(ThemeName(),"cache/bangumi/cover/".$ssid.'.jpg'),"w");
+			fwrite($file,$img);fclose($file);
 		}
-		if ($opt=='cover' && $_SERVER['REQUEST_METHOD']=='GET'){
-			$url=$gets['url'];if (empty($url)) errorexit('HTTP/1.1 403 Forbidden');
-			if ($gets['auth']!=md5($url.$salt.$url)) errorexit('HTTP/1.1 403 Forbidden');
-		}
-		errorexit('HTTP/1.1 403 Forbidden');
+		header('Location:'.Helper::options()->themeUrl.'/cache/bangumi/cover/'.$ssid.'.jpg');
 	}
 }
 function ThemeName(){
@@ -317,10 +300,72 @@ function AddMDUIPanel($content){
 	$content=preg_replace('/\[panel title="(.*?)"\]/i','<div class="mdui-panel" mdui-panel><div class="mdui-panel-item"><div class="mdui-panel-item-header"><div class="mdui-panel-item-title" style="width:100%">${1}</div><i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i></div><div class="mdui-panel-item-body">',$content);
 	return preg_replace('/\[\/panel\]/i','</div></div></div>',$content);
 }
+function getbangumi($uid,$pn){
+	$ch=curl_init();
+	curl_setopt($ch,CURLOPT_URL,"https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=0&pn=".$pn."&ps=100&vmid=".$uid."&ts=998244353");
+	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+	curl_setopt($ch,CURLOPT_REFERER,'https://space.bilibili.com/'.$uid.'/bangumi');
+	curl_setopt($ch,CURLOPT_HTTPHEADER,array("Origin:https://space.bilibili.com","Referer:https://space.bilibili.com/".$uid."/bangumi"));
+	$output=curl_exec($ch);curl_close($ch);return $output;
+}
+function BangumiList($uid){
+	if (empty($uid)) return '';
+	if (!empty($json=file_get_contents(Helper::options()->themeFile(ThemeName(),"cache/bangumi/bangumidata.json")))){
+		$bangumi=json_decode($json,true);$timeout=Helper::options()->bangumicachetimeout;if ($timeout=='') $timeout=43200;
+		if ($bangumi['uid']==$uid && strtotime(date('Y-m-d H:i:s'))-strtotime($bangumi['time'])<$timeout) return $bangumi['data'];
+	} else mkdir(Helper::options()->themeFile(ThemeName(),"cache/bangumi"),0777,true);
+	$json=getbangumi($uid,1);if (empty($json)) return '';
+	$bangumi=json_decode($json,true);$data=$bangumi['data']['list'];
+	$total=$bangumi['data']['total'];$pn=1;
+	while (true){
+		$total-=100;if ($total<=0) break;$pn++;
+		$json=getbangumi($uid,$pn);$bangumi=json_decode($json,true);
+		$data=array_merge($data,$bangumi['data']['list']);
+	}
+	$json=json_encode(array('time'=>date('Y-m-d H:i:s'),'uid'=>$uid,'data'=>$data));
+	$file=fopen(Helper::options()->themeFile(ThemeName(),"cache/bangumi/bangumidata.json"),"w");
+	fwrite($file,$json);fclose($file);return $data;
+}
+function BangumiCover($url,$ssid){
+	if (file_exists(Helper::options()->themeFile(ThemeName(),"cache/bangumi/cover/".$ssid.'.jpg'))) return Helper::options()->themeUrl.'/cache/bangumi/cover/'.$ssid.'.jpg';
+	return Helper::options()->siteUrl."?".http_build_query(array('type'=>'bangumicache','url'=>$url,'ssid'=>$ssid,'auth'=>md5($url.Helper::options()->apisalt.$ssid)));
+}
+function BangumiStar($rating){
+	$score=$rating['score'];$count=$rating['count'];if ($count==0) return '<span class="mdui-text-color-orange">暂无评分</span>';
+	$str='';$star=floor($score/2);for ($i=1;$i<=$star;$i++) $str.='<i class="mdui-icon material-icons">&#xe838;</i>';
+	if ($score-$star*2>=1.5) {$star++;$str.='<i class="mdui-icon material-icons">&#xe838;</i>';}
+	else if ($score-$star*2>=0.5) {$star++;$str.='<i class="mdui-icon material-icons">&#xe839;</i>';}
+	for ($i=$star+1;$i<=5;$i++) $str.='<i class="mdui-icon material-icons">&#xe83a;</i>';
+	return '<span class="mdui-text-color-orange">'.$str.' '.$score.'</span>';
+}
+function BangumiPanel($uid){
+	$list=BangumiList($uid);if (empty($list)) return '';$n=count($list);$str='';
+	$temp='<div class="mdui-col mdui-m-y-1" mdui-tooltip="{content:\'{title}\',position:\'top\'}"><a href="{url}" target="_blank" class="mdui-card mdui-hoverable">
+		<div class="mdui-card-media"><div class="bangumi-cover" style="background-image:url({cover})"></div></div>
+		<div class="mdui-card-content"><div class="bangumi-title mdui-typo-subheading mdui-text-truncate">{title}</div><div class="bangumi-star">{star}</div></div>	
+	</a></div>';
+	$str.='<div id="bangumi">';$str.='<h1>在看</h1>';
+	$str.='<div class="mdui-row-xs-2 mdui-row-sm-4 mdui-row-md-5 mdui-row-lg-5 mdui-row-xl-5">';
+	for ($i=0;$i<$n;$i++)
+		if ($list[$i]['follow_status']==2)
+			$str.=str_replace(array('{url}','{title}','{cover}','{star}'),array($list[$i]['url'],$list[$i]['title'],BangumiCover($list[$i]['cover'],$list[$i]['season_id']),BangumiStar($list[$i]['rating'])),$temp);
+	$str.='</div><h1>看过</h1>';
+	$str.='<div class="mdui-row-xs-2 mdui-row-sm-4 mdui-row-md-5 mdui-row-lg-5 mdui-row-xl-5">';
+	for ($i=0;$i<$n;$i++)
+		if ($list[$i]['follow_status']==3)
+			$str.=str_replace(array('{url}','{title}','{cover}','{star}'),array($list[$i]['url'],$list[$i]['title'],BangumiCover($list[$i]['cover'],$list[$i]['season_id']),BangumiStar($list[$i]['rating'])),$temp);
+	$str.='</div></div>';return $str;
+}
+function AddBangumi($content){
+	preg_match('/\[bangumi uid="(.*?)"\]/i',$content,$match);
+	return preg_replace('/\[bangumi uid="'.$match[1].'"\]/i',BangumiPanel($match[1]),$content);
+}
 function RewriteContent($content){
 	$content=ConvertSmilies($content);
 	$content=AddFancybox($content);
 	$content=AddMDUITable($content);
 	$content=AddMDUIPanel($content);
+	$content=AddBangumi($content);
 	return $content;
 }

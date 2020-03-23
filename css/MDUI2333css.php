@@ -6,7 +6,7 @@
 	<?php } ?>
 	::selection {background:#b3d4fc;text-shadow:none;}
 	a {color:unset;text-decoration:unset;}
-	body {background:<?php if ($this->options->backgroundPic) echo 'url('.$this->options->backgroundPic.')'; else echo '#b3d4fc'; ?>;background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;display:flex;flex-flow:column;min-height:calc(100vh - 56px);<?php if ($this->options->twemoji=='true') echo 'font-family:Roboto,Noto,Helvetica,Arial,sans-serif,twemoji;'; ?>}
+	body {background:<?php if ($this->options->backgroundPic) echo 'url('.$this->options->backgroundPic.')'; else echo '#b3d4fc'; ?>;background-position:center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;display:flex;flex-flow:column;min-height:calc(100vh - 56px);<?php if ($this->options->twemoji=='true') echo 'font-family:Roboto,Noto,Helvetica,Arial,sans-serif,twemoji;'; ?>}
 	@media (min-width:600px) {body {min-height:calc(100vh - 64px);}}
 	@media (orientation:landscape) and (max-width:959px) {body {min-height:calc(100vh - 48px);}}
 	#pjax-overlay {position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:2000;background:rgb(0,0,0,0.8);}
@@ -59,6 +59,12 @@
 	#post-toc .index-subItem-box .index-item {padding-left:1em;}
 	#tag-container a {display:inline-block;}
 	.dairy-content {height:200px;overflow-y:auto;}
+	#bangumi .bangumi-cover {padding-top:133%;background-position:center;background-size:cover;background-repeat:no-repeat;}
+	#bangumi .bangumi-title {font-weight:500;text-align:center;}
+	#bangumi .bangumi-star {margin:0 -16px;text-align:center;font-size:14px;height:24px;}
+	#bangumi .bangumi-star .mdui-icon {font-size:16px;vertical-align:text-bottom;}
+	#bangumi a {width:100%;color:unset;}
+	#bangumi a:hover:before,#bangumi a:focus:before {display:none!important;}
 	/*footer.php*/
 	.footerlink {font-size:24px!important;}
 </style>

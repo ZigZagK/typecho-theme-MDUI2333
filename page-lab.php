@@ -21,7 +21,7 @@ if (class_exists("Links_Plugin")) {$labs=Links_Plugin::output('{name}[zIgZaGk%]{
 	.mdui-card-media-covered .mdui-card-primary-subtitle {opacity:1!important;}
 </style>
 <div class="mdui-container">
-	<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-m-y-2">
+	<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-row-xl-4 mdui-m-y-2">
 		<?php for ($i=0;$i<$tot;$i++){$lab=getinfo($labs[$i]);$color=randomcolor();$noimg=strpos($lab['image'],'nopic.jpg'); ?>
 		<div class="mdui-col mdui-m-y-2">
 			<div class="mdui-card">
@@ -35,7 +35,7 @@ if (class_exists("Links_Plugin")) {$labs=Links_Plugin::output('{name}[zIgZaGk%]{
 					</div>
 					<div class="mdui-card-actions">
 						<div class="mdui-chip mdui-float-left">
-							<span class="mdui-chip-icon mdui-color-<?php echo $color; ?>"><i class="mdui-icon material-icons">&#xe916;</i></span>
+							<span class="mdui-chip-icon mdui-color-<?php echo $color; ?>"><i class="mdui-icon material-icons">&#xe8df;</i></span>
 							<span class="mdui-chip-title"><?php echo $lab['user']; ?></span>
 						</div>
 						<a href="<?php echo $lab['url']; ?>" target="_blank" rel="external nofollow" class="mdui-color-<?php echo $color; ?> mdui-text-color-white mdui-btn mdui-ripple mdui-float-right">传送门</a>

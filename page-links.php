@@ -16,7 +16,7 @@ if (class_exists("Links_Plugin")){
 }
 ?>
 <div class="mdui-container">
-	<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-m-y-2">
+	<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-row-xl-4 mdui-m-y-2">
 		<?php for ($i=0;$i<$tot;$i++){$link=getinfo($Links[$i]);if ($link['sort']!='page-lab'){ ?>
 		<div class="mdui-col">
 			<div class="mdui-card mdui-m-y-1 mdui-hoverable">
