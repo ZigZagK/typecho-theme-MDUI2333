@@ -62,7 +62,7 @@
 	#bangumi .bangumi-cover {padding-top:133%;background-position:center;background-size:cover;background-repeat:no-repeat;}
 	#bangumi .bangumi-title {font-weight:500;text-align:center;}
 	#bangumi .bangumi-star {margin:0 -16px;text-align:center;font-size:14px;height:24px;}
-	#bangumi .bangumi-star .mdui-icon {font-size:16px;vertical-align:text-bottom;}
+	#bangumi .bangumi-star .mdui-icon {font-size:16px;vertical-align:text-top;}
 	#bangumi a {width:100%;color:unset;}
 	#bangumi a:hover:before,#bangumi a:focus:before {display:none!important;}
 	/*footer.php*/
