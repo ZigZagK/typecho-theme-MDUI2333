@@ -29,7 +29,7 @@
 	div#comments form {margin-bottom:0;}
 	#commentcontent > .comment-list {margin:16px 0;}
 	#commentcontent > .comment-list > .mdui-panel > .mdui-panel-item > .mdui-panel-item-body > .comment-children {margin-top:16px;}
-	#commentcontent .mdui-panel-item p img {max-height:400px;}
+	#commentcontent .mdui-panel-item p img {max-height:400px;vertical-align:middle;}
 	div.cancel-comment-reply a:hover:before,div.cancel-comment-reply a:focus:before {display:none!important;}
 	#QAQ {height:75%!important;max-height:400px!important;}
 	#QAQ .mdui-dialog-content {height:calc(100% - 100px)!important;}

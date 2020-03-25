@@ -41,9 +41,10 @@
 			return false;
 		}
 	};
+	$('.haveat a').click(function(){if (location.hostname==this.hostname && location.pathname==this.pathname){var target=$(this.hash);if (target.length) {$('html,body').animate({scrollTop:target.offset().top},'fast');return false;}}});
 	var QAQTab=new mdui.Tab('#QAQTab');
 	$('#QAQ').on('open.mdui.dialog',function(){QAQTab.handleUpdate();});
-	Smilies={
+	var Smilies={
 		dom:function(id) {return document.getElementById(id);},
 		grin:function(tag){
 			tag=' '+tag+' ';myField=this.dom('commenttextarea');
@@ -107,6 +108,7 @@
 					});
 					mdui.mutation();$('html,body').animate({scrollTop:$(target).offset().top},'fast');
 					mdui.snackbar({message:'<?php echo $this->options->commentsuccess; ?>',position:'right-bottom'});
+					$('.haveat a').click(function(){if (location.hostname==this.hostname && location.pathname==this.pathname){var target=$(this.hash);if (target.length) {$('html,body').animate({scrollTop:target.offset().top},'fast');return false;}}});
 				}
 			}
 		});
