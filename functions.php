@@ -1,5 +1,5 @@
 <?php
-define('Version','1.4.4');
+define('Version','1.4.5');
 function themeFields($layout){
 	$field=new Typecho_Widget_Helper_Form_Element_Text('picUrl',NULL,NULL,_t('头图地址'),_t('在这里填入一个图片 URL 地址，作为文章/页面的头图，不填则显示随机图片'));
 	$layout->addItem($field);

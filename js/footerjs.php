@@ -84,10 +84,10 @@
 		mdui.mutation();<?php if (array_key_exists('Meting',$plugin['activated'])){ ?>loadMeting();<?php } ?>		
 		<?php echo $this->options->pjaxreload; ?>
 	});
-	$(document).on('pjax:error',function(){
+	$(document).on('pjax:error',function(e){
 		animatecss('#pjax-overlay','fadeOut','0.5s',function(){$('#pjax-overlay').css('display','none');});
 		animatecss('#pjax-progress','fadeOut','0.5s',function(){$('#pjax-progress').css('display','none');});
-		mdui.alert('PJAX加载超时，请检查网络','加载失败');this.preventDefault();
+		mdui.alert('PJAX加载超时，请检查网络','加载失败');e.preventDefault();
 	});
 </script>
 <?php if ($this->options->customjs) echo $this->options->customjs; ?>

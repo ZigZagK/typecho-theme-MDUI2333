@@ -4,15 +4,13 @@
 	<a href="https://github.com/ZigZagK/typecho-theme-MDUI2333/releases/latest"><img src="https://img.shields.io/github/v/release/ZigZagK/typecho-theme-MDUI2333?color=448AFF&style=for-the-badge" /></a>
 	<img src="https://img.shields.io/github/license/ZigZagK/typecho-theme-MDUI2333.svg?color=8BC34A&style=for-the-badge" />
 	<img src="https://img.shields.io/github/last-commit/ZigZagK/typecho-theme-MDUI2333.svg?color=FF9800&style=for-the-badge" />
-</p>
-
----
+</p><hr>
 
 # MDUI2333
 
 基于[MDUI](https://mdui.org)的一款单栏typecho主题。
 
-作者：ZigZagK | 版本：1.4.4
+作者：ZigZagK | 版本：1.4.5
 
 ## 主题特性
 

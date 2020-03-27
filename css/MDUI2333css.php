@@ -45,8 +45,10 @@
 	div.page-navigator div.current {background:<?php echo ThemePrimary(); ?>;}
 	/*post.php & page.php*/
 	.mdui-typo hr {margin:0 0 1.2em 0;height:4px;border:0;background:<?php echo ThemeAccent(); ?>;}
+	a.Fancybox {margin-bottom:-8px!important;}
 	a.Fancybox:hover:before,a.Fancybox:focus:before {display:none!important;}
 	.post-container h1,.post-container h2,.post-container h3,.post-container h4,.post-container h5,.post-container h6 {color:<?php echo ThemePrimary(); ?>;}
+	.post-container p .Fancybox {vertical-align:middle;}
 	@media (min-width:600px) {#post-tocbtn {top:80px!important;}}
 	@media (orientation:landscape) and (max-width:959px) {#post-tocbtn {top:64px!important;}}
 	#post-toc {width:unset!important;min-width:160px!important;}
