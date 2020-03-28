@@ -4,7 +4,7 @@
 	$QAQTAB=json_decode($QAQjson,true);$TABName=array_keys($QAQTAB);$length=count($TABName);
 ?>
 <div class="mdui-text-color-theme-accent mdui-btn mdui-btn-icon mdui-float-left" style="margin:0 8px;" mdui-tooltip="{content:'使用表情',position:'top'}" mdui-dialog="{target:'#QAQ'}"><i class="mdui-icon material-icons">&#xe24e;</i></div>
-<div class="mdui-dialog" id="QAQ">
+<div class="mdui-dialog a-no-bottom" id="QAQ">
 	<div class="mdui-tab mdui-tab-full-width" id="QAQTab">
 	<?php for ($i=0;$i<$length;$i++){ ?>
 		<?php $key=$TABName[$i]; ?>

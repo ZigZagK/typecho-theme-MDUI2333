@@ -46,8 +46,7 @@
 <details>
 <summary>github下载很慢？</summary><br>
 
-
-这可能是由于“众所周知的原因”导致的，您可以过段时间再下载，或者使用[备用下载地址](http://api.zigzagk.top/MDUI2333/MDUI2333.zip)。
+这可能是由于“众所周知的原因”导致的，您可以过段时间再下载，或者使用[备用下载地址](https://api.zigzagk.top/MDUI2333/MDUI2333.zip)。
 
 **注：该下载地址是自动抓取最新Release的，可能会存在抓取失败等情况，不推荐使用。**
 

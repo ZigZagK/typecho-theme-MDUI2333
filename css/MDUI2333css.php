@@ -6,6 +6,8 @@
 	<?php } ?>
 	::selection {background:#b3d4fc;text-shadow:none;}
 	a {color:unset;text-decoration:unset;}
+	a.a-no-bottom:hover:before,a.a-no-bottom:focus:before {display:none!important;}
+	.a-no-bottom a:hover:before,.a-no-bottom a:focus:before {display:none!important;}
 	body {background:<?php if ($this->options->backgroundPic) echo 'url('.$this->options->backgroundPic.')'; else echo '#b3d4fc'; ?>;background-position:center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;display:flex;flex-flow:column;min-height:calc(100vh - 56px);<?php if ($this->options->twemoji=='true') echo 'font-family:Roboto,Noto,Helvetica,Arial,sans-serif,twemoji;'; ?>}
 	@media (min-width:600px) {body {min-height:calc(100vh - 64px);}}
 	@media (orientation:landscape) and (max-width:959px) {body {min-height:calc(100vh - 48px);}}
@@ -30,23 +32,19 @@
 	#commentcontent > .comment-list {margin:16px 0;}
 	#commentcontent > .comment-list > .mdui-panel > .mdui-panel-item > .mdui-panel-item-body > .comment-children {margin-top:16px;}
 	#commentcontent .mdui-panel-item p img {max-height:400px;vertical-align:middle;}
-	div.cancel-comment-reply a:hover:before,div.cancel-comment-reply a:focus:before {display:none!important;}
 	#QAQ {height:75%!important;max-height:400px!important;}
 	#QAQ .mdui-dialog-content {height:calc(100% - 100px)!important;}
 	#QAQ a {color:unset!important;text-transform:unset!important;}
-	#QAQ a:hover:before,#QAQ a:focus:before {display:none!important;}
 	#QAQ .mdui-dialog-content .mdui-btn {text-transform:unset!important;}
 	#QAQ .mdui-dialog-content .QAQPicture .mdui-btn {min-width:unset;padding:5px;height:unset;margin-bottom:-13px;}
 	#QAQ .mdui-dialog-content .QAQTextclose .mdui-btn {min-width:unset;}
 	div.page-navigator div {display:inline-block;margin:2px 1%;border-radius:4px;width:30px;height:30px;line-height:30px;background:<?php echo ThemeAccent(); ?>;}
 	div.page-navigator div a,div.page-navigator div span{color:#fff!important;}
-	div.page-navigator div a:hover:before,div.page-navigator div a:focus:before {display:none!important;}
 	div.page-navigator div.next a,div.page-navigator div.prev a {line-height:28px!important;}
 	div.page-navigator div.current {background:<?php echo ThemePrimary(); ?>;}
 	/*post.php & page.php*/
 	.mdui-typo hr {margin:0 0 1.2em 0;height:4px;border:0;background:<?php echo ThemeAccent(); ?>;}
 	a.Fancybox {margin-bottom:-8px!important;}
-	a.Fancybox:hover:before,a.Fancybox:focus:before {display:none!important;}
 	.post-container h1,.post-container h2,.post-container h3,.post-container h4,.post-container h5,.post-container h6 {color:<?php echo ThemePrimary(); ?>;}
 	.post-container p .Fancybox {vertical-align:middle;}
 	@media (min-width:600px) {#post-tocbtn {top:80px!important;}}
@@ -66,7 +64,6 @@
 	#bangumi .bangumi-star {margin:0 -16px;text-align:center;font-size:14px;height:24px;}
 	#bangumi .bangumi-star .mdui-icon {font-size:16px;vertical-align:text-top;}
 	#bangumi a {width:100%;color:unset;}
-	#bangumi a:hover:before,#bangumi a:focus:before {display:none!important;}
 	/*footer.php*/
 	.footerlink {font-size:24px!important;}
 </style>

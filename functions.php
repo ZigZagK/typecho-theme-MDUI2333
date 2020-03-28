@@ -226,7 +226,9 @@ function GravatarURL($mail,$size) {return Helper::options()->gravatarurl.MailHas
 /* 魔改自Material(https://github.com/idawnlight/typecho-theme-material) */
 function ShowThumbnail($widget){
 	$fields=unserialize($widget->fields);if ($fields['picUrl']) {echo $fields['picUrl'];return;}
-	$rand=mt_rand(1,19);$random=Helper::options()->themeUrl.'/img/random/material-'.$rand.'.png';echo $random;
+	$dir=scandir(Helper::options()->themeFile(ThemeName(),"img/random"));$n=count($dir);$m=0;
+	for ($i=0;$i<$n;$i++) if ($dir[$i]!='.' && $dir[$i]!='..') $ID[$m++]=$i;
+	echo Helper::options()->themeUrl.'/img/random/'.$dir[$ID[mt_rand(0,$m-1)]];
 }
 function CountCateOrTag($id){
 	$db=Typecho_Db::get();$po=$db->select('table.metas.count')->from('table.metas')->where('parent = ?',$id)->orWhere('mid = ? ',$id);
@@ -293,7 +295,7 @@ function AddMDUITable($content){
 	return preg_replace('/<table>(.*?)<\/table>/is','<div class="mdui-table-fluid"><table class="mdui-table mdui-table-hoverable">${1}</table></div>',$content);
 }
 function AddFancybox($content){
-	return preg_replace('/<img(.*?)src="(.*?)"(.*?)alt="(.*?)"(.*?)>/i','<a data-fancybox="gallery" href="${2}" data-caption="${4}" class="Fancybox"><img${1}src="${2}"${3}alt="${4}"${5}></a>',$content);
+	return preg_replace('/<img(.*?)src="(.*?)"(.*?)alt="(.*?)"(.*?)>/i','<a data-fancybox="gallery" href="${2}" data-caption="${4}" class="Fancybox a-no-bottom"><img${1}src="${2}"${3}alt="${4}"${5}></a>',$content);
 }
 function AddMDUIPanel($content){
 	$content=preg_replace('/\[panel title="(.*?)" summary="(.*?)"\]/i','<div class="mdui-panel" mdui-panel><div class="mdui-panel-item"><div class="mdui-panel-item-header"><div class="mdui-panel-item-title">${1}</div><div class="mdui-panel-item-summary">${2}</div><i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i></div><div class="mdui-panel-item-body">',$content);
@@ -345,7 +347,7 @@ function BangumiPanel($uid){
 		<div class="mdui-card-media"><div class="bangumi-cover" style="background-image:url({cover})"></div></div>
 		<div class="mdui-card-content"><div class="bangumi-title mdui-typo-subheading mdui-text-truncate">{title}</div><div class="bangumi-star">{star}</div></div>	
 	</a></div>';
-	$str.='<div id="bangumi">';$str.='<h1>在看</h1>';
+	$str.='<div class="a-no-bottom" id="bangumi">';$str.='<h1>在看</h1>';
 	$str.='<div class="mdui-row-xs-2 mdui-row-sm-4 mdui-row-md-5 mdui-row-lg-5 mdui-row-xl-5">';
 	for ($i=0;$i<$n;$i++)
 		if ($list[$i]['follow_status']==2)

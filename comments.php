@@ -97,7 +97,7 @@ function threadedComments($comment,$options){ ?>
 					<?php } ?>
 					<button id="commentsumbit" type="submit" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple mdui-float-right" style="margin:0 8px;" mdui-tooltip="{content:'提交评论(Ctrl+Enter)',position:'top'}"><i class="mdui-icon material-icons">&#xe5ca;</i></button>
 					<div class="mdui-spinner mdui-spinner-colorful mdui-float-right" id="commenting" style="margin:0 8px;width:36px;height:36px;display:none;"></div>
-					<div class="cancel-comment-reply mdui-float-right mdui-m-l-1" style="display:inline">
+					<div class="cancel-comment-reply mdui-float-right mdui-m-l-1 a-no-bottom" style="display:inline">
 						<?php $comments->cancelReply('<button class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple" mdui-tooltip=\'{content:"取消回复",position:"top"}\'><i class="mdui-icon material-icons">&#xe5cd;</i></button>'); ?>
 					</div>
 				</div>
@@ -108,7 +108,7 @@ function threadedComments($comment,$options){ ?>
 	<div id="commentcontent">
 		<?php $comments->listComments(array('before'=>'<div class="comment-list">','after'=>'</div>')); ?>
 		<?php if ($comments->have()){ ?>
-		<?php $comments->pageNav('<i class="mdui-icon material-icons">&#xe314;</i>','<i class="mdui-icon material-icons">&#xe315;</i>',2,'···',array('wrapTag' => 'div','wrapClass' => 'page-navigator mdui-text-center mdui-m-b-2','itemTag' => 'div','currentClass' => 'current')); ?>
+		<?php $comments->pageNav('<i class="mdui-icon material-icons">&#xe314;</i>','<i class="mdui-icon material-icons">&#xe315;</i>',2,'···',array('wrapTag' => 'div','wrapClass' => 'page-navigator mdui-text-center mdui-m-b-2 a-no-bottom','itemTag' => 'div','currentClass' => 'current')); ?>
 		<?php } ?>
 	</div>
 </div>
