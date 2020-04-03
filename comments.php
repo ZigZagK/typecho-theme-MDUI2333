@@ -112,4 +112,8 @@ function threadedComments($comment,$options){ ?>
 		<?php } ?>
 	</div>
 </div>
-<?php $this->need('js/commentjs.php'); ?>
+<script>
+	typechocomment('<?php $this->respondId(); ?>');smoothscroll('.haveat a');QAQTABreload();smiliesreload();
+	visitorfunction(<?php echo ($this->user->hasLogin()?'true':'false'); ?>,'<?php echo $this->options->gravatarurl; ?>');
+	ajaxcomment({highlightmode:'<?php echo $this->options->highlightmode; ?>',commentsuccess:'<?php echo $this->options->commentsuccess; ?>'});
+</script>

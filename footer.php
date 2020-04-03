@@ -1,4 +1,5 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<?php $plugin=Typecho_Plugin::export(); ?>
 <?php if ($this->options->AplayerCode) echo APlayerSalt($this->options->AplayerCode); ?>
 <a class="mdui-fab mdui-fab-fixed mdui-fab-mini mdui-color-theme-accent mdui-ripple mdui-fab-hide" id="gototop" style="z-index:1"><i class="mdui-icon material-icons">&#xe316;</i></a>
 <footer>
@@ -16,7 +17,7 @@
 					<div class="mdui-text-center">
 						<div>Copyright &copy; <?php echo date("Y"); ?> <a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a></div>
 						<?php if ($this->options->filing){ ?><div><a href="http://www.beian.miit.gov.cn" target="_blank" rel="nofollow"><?php echo $this->options->filing; ?></a></div><?php } ?>
-						<?php if ($this->options->gafiling){ ?><div><img src="<?php Helper::options()->themeUrl(); ?>/img/gaba.png" /><?php echo $this->options->gafiling; ?></div><?php } ?>
+						<?php if ($this->options->gafiling){ ?><div><img src="<?php echo asseturl('img/gaba.png'); ?>" /><?php echo $this->options->gafiling; ?></div><?php } ?>
 					</div>
 				</div>
 				<!-- 如果您能保留下面的主题信息，会使我更有动力哒QwQ -->
@@ -24,14 +25,35 @@
 					<div class="mdui-float-right">
 						<div>Powered by <a href="http://typecho.org" target="_blank">Typecho</a></div>
 						<div>Theme by <a href="https://github.com/ZigZagK/typecho-theme-MDUI2333" target="_blank">MDUI2333</a></div>
-						<?php if ($this->options->upyuncdn=='true'){ ?><div><span style="line-height:28px;">CDN by </span><a href="https://www.upyun.com" target="_blank"><img src="<?php Helper::options()->themeUrl(); ?>/img/upyun.png" height=28 /></a></div><?php } ?>
+						<?php if ($this->options->upyuncdn=='true'){ ?><div><span style="line-height:28px;">CDN by </span><a href="https://www.upyun.com" target="_blank"><img src="<?php echo asseturl('img/upyun.png'); ?>" height=28 /></a></div><?php } ?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </footer>
-<?php $this->need('js/footerjs.php'); ?>
+<script>
+	globallistener();changetitle();
+	$(function(){
+		showannouncement('<?php echo $this->options->announcement; ?>','<?php echo $this->options->announcementpos; ?>');
+		highlightinit('<?php echo $this->options->highlightmode; ?>');codelinenumber('#pjax-container');
+		showposttoc(<?php echo $this->options->posttoc=='true'; ?>);mdui.mutation();
+	});
+	$(document).pjax('a:not(a[target="_blank"],a[no-pjax])',{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
+	$(document).on('submit','form[role="search"]',function(event){$.pjax.submit(event,{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});});
+	$(document).on('pjax:send',function(){if (announcement!=null) announcement.close();sidebar.close();showoverlay();});
+	$(document).on('pjax:complete',function(){
+		changetitle();mathjaxreload('pjax-container');codelinenumber('#pjax-container');
+		highlightreload('<?php echo $this->options->highlightmode; ?>','#pjax-container');
+		showposttoc(<?php echo $this->options->posttoc=='true'; ?>);closeoverlay();
+	});
+	$(document).on('pjax:end',function(){
+		mdui.mutation();<?php if (array_key_exists('Meting',$plugin['activated'])){ ?>loadMeting();<?php } ?>		
+		<?php echo $this->options->pjaxreload; ?>
+	});
+	$(document).on('pjax:error',function(e){closeoverlay();mdui.alert('PJAX加载超时，请检查网络','加载失败');e.preventDefault();});
+</script>
+<?php if ($this->options->customjs) echo $this->options->customjs; ?>
 <?php $this->footer(); ?>
 </body>
 </html>

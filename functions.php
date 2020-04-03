@@ -1,5 +1,11 @@
 <?php
 define('Version','1.4.5');
+function asseturl($url,$type=false){
+	$debug=false;if ($debug) return Helper::options()->themeUrl.'/'.$url;
+	$pos=strpos($url,'.');$name=substr($url,$pos);if ($name=='.js' || $name=='.css') $url=str_replace($name,'.min'.$name,$url);
+	$origin=false;if ($type && !$origin) return Helper::options()->themeUrl.'/'.$url;
+	return 'https://cdn.jsdelivr.net/gh/ZigZagK/typecho-theme-MDUI2333@'.Version.'/'.$url;
+}
 function themeFields($layout){
 	$field=new Typecho_Widget_Helper_Form_Element_Text('picUrl',NULL,NULL,_t('头图地址'),_t('在这里填入一个图片 URL 地址，作为文章/页面的头图，不填则显示随机图片'));
 	$layout->addItem($field);
@@ -7,10 +13,10 @@ function themeFields($layout){
 	$layout->addItem($field);
 }
 function themeConfig($form){
-	echo '<link rel="stylesheet" href="'.Helper::options()->themeUrl.'/css/settingbackup.min.css">';
-	echo '<script src="'.Helper::options()->themeUrl.'/js/jquery.min.js"></script>';
-	echo '<script src="'.Helper::options()->themeUrl.'/js/mdui.min.js"></script>';
-	echo '<script src="'.Helper::options()->themeUrl.'/js/settingbackup.min.js"></script>';
+	echo '<link rel="stylesheet" href="'.asseturl('css/settingbackup.min.css').'">';
+	echo '<script src="'.asseturl('js/jquery.min.js').'"></script>';
+	echo '<script src="'.asseturl('js/mdui.min.js').'"></script>';
+	echo '<script src="'.asseturl('js/settingbackup.js').'"></script>';
 	echo '<div id="info"><center>您现在的版本是<strong>'.Version.'</strong>，最新的版本是<strong><a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/releases"><span id="infolatest"> Loading... </span></a></strong></center>';
 	echo '<center><span id="infotext"> Loading... </span></center>';
 	echo '<center><button id="settingbackup" class="btn primary">备份外观设置</button><button id="restorebackup" class="btn primary">恢复备份数据</button></center></div>';
@@ -88,7 +94,7 @@ function themeConfig($form){
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Text('posttimeout',NULL,NULL,_t('文章时效天数'),_t('显示文章时效提醒的最低天数，不填则默认180天'));
 	$form->addInput($config);
-	$config=new Typecho_Widget_Helper_Form_Element_Text('AplayerCode',NULL,NULL,_t('全站音乐播放器APlayer代码'),_t('需要下载METO大佬的 <a target="_blank" href="https://github.com/MoePlayer/APlayer-Typecho">Meting</a> 插件。若APlayer不为吸底模式则显示在页面最下方，更多问题详见 <a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki/Meting%E6%8F%92%E4%BB%B6%E5%85%A8%E7%AB%99APlayer">MDUI2333Wiki</a>'));
+	$config=new Typecho_Widget_Helper_Form_Element_Text('AplayerCode',NULL,NULL,_t('全站音乐播放器APlayer代码'),_t('需要下载METO大佬的 <a target="_blank" href="https://github.com/MoePlayer/APlayer-Typecho">Meting</a> 插件。若APlayer不为吸底模式则显示在页面最下方，更多问题详见 <a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki/4.Meting%E6%8F%92%E4%BB%B6%E5%85%A8%E7%AB%99APlayer">MDUI2333Wiki</a>'));
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Select('linksmode',array(
 		'default' => '默认顺序',
@@ -228,7 +234,7 @@ function ShowThumbnail($widget){
 	$fields=unserialize($widget->fields);if ($fields['picUrl']) {echo $fields['picUrl'];return;}
 	$dir=scandir(Helper::options()->themeFile(ThemeName(),"img/random"));$n=count($dir);$m=0;
 	for ($i=0;$i<$n;$i++) if ($dir[$i]!='.' && $dir[$i]!='..') $ID[$m++]=$i;
-	echo Helper::options()->themeUrl.'/img/random/'.$dir[$ID[mt_rand(0,$m-1)]];
+	echo asseturl('img/random/'.$dir[$ID[mt_rand(0,$m-1)]],true);
 }
 function CountCateOrTag($id){
 	$db=Typecho_Db::get();$po=$db->select('table.metas.count')->from('table.metas')->where('parent = ?',$id)->orWhere('mid = ? ',$id);
@@ -259,19 +265,18 @@ function ConvertSmilies($widget){
 			$width=$QAQTAB[$key]['width'];$height=$QAQTAB[$key]['height'];
 			for ($j=0;$j<$tot;$j++){
 				$string=':'.$key.$QAQTAB[$key]['content'][$j]['id'].':';
-				$smiliesTrans[$string][0]='/'.$key.'/'.$QAQTAB[$key]['content'][$j]['path'];
+				$smiliesTrans[$string][0]=$key.'/'.$QAQTAB[$key]['content'][$j]['path'];
 				if ($width!='') $smiliesTrans[$string][1]=$width;
 				if ($QAQTAB[$key]['content'][$j]['width']!='') $smiliesTrans[$string][1]=$QAQTAB[$key]['content'][$j]['width'];
 				if ($height!='') $smiliesTrans[$string][2]=$height;
 				if ($QAQTAB[$key]['content'][$j]['height']!='') $smiliesTrans[$string][2]=$QAQTAB[$key]['content'][$j]['height'];
-				$smiliesTrans[$string][2]=$QAQTAB[$key]['content'][$j]['tip'];
+				$smiliesTrans[$string][3]=$QAQTAB[$key]['content'][$j]['tip'];
 			}
 		}
 	}
-	$imgUrl=Typecho_Widget::widget('Widget_Options')->themeUrl.'/img/QAQ/';
 	foreach($smiliesTrans as $smiley => $img){
 		$smiliesTag[]=$smiley;
-		$smiliesReplace[]="<img src=\"$imgUrl$img[0]\" alt=\"$img[2]\" width=\"$img[1]\" height=\"$img[2]\" />";
+		$smiliesReplace[]='<img src="'.asseturl('img/QAQ/'.$img[0],true).'" alt="'.$img[3].'" width="'.$img[1].'" height="'.$img[2].'" />';
 	}
 	$output='';$textArr=preg_split("/(<.*>)/U",$widget,-1,PREG_SPLIT_DELIM_CAPTURE);$stop=count($textArr);
 	for ($i=0;$i<$stop;$i++){

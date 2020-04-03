@@ -14,20 +14,29 @@
 		'author' => _t('%s 发布的文章')
 	),'',' - '); ?><?php $this->options->title(); ?></title>
 	<?php if ($this->options->twemoji=='true'){ ?>
-	<link rel="preload" href="<?php Helper::options()->themeUrl(); ?>fonts/twemoji/TwemojiMozilla.ttf" as="font" type='font/ttf' crossorigin />
+	<link rel="preload" href="<?php echo asseturl('fonts/twemoji/TwemojiMozilla.ttf'); ?>" as="font" type='font/ttf' crossorigin />
 	<?php } ?>
-	<link rel="stylesheet" href="<?php Helper::options()->themeUrl(); ?>css/mdui.min.css">
+	<link rel="stylesheet" href="<?php echo asseturl('css/mdui.min.css'); ?>">
 	<?php if ($this->options->highlightmode=='highlightjs'){ ?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/styles/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "default"?>.min.css">
 	<?php } else { ?>
-	<link rel="stylesheet" href="<?php Helper::options()->themeUrl(); ?>css/prism/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "prism"?>.min.css">
+	<link rel="stylesheet" href="<?php echo asseturl('css/prism/'.($this->options->highlightstyle?$this->options->highlightstyle:"prism").'.min.css'); ?>">
 	<?php } ?>
-	<link rel="stylesheet" href="<?php Helper::options()->themeUrl(); ?>css/jquery.fancybox.min.css" />
-	<link rel="stylesheet" href="<?php Helper::options()->themeUrl(); ?>fonts/iconfont/iconfont.css" />
-	<link rel="stylesheet" href="<?php Helper::options()->themeUrl(); ?>css/animate.min.css" />
-	<script src="<?php Helper::options()->themeUrl(); ?>js/jquery.min.js"></script>
-	<script src="<?php Helper::options()->themeUrl(); ?>js/mdui.min.js"></script>
-	<script src="<?php Helper::options()->themeUrl(); ?>js/jquery.pjax.min.js"></script>
+	<link rel="stylesheet" href="<?php echo asseturl('css/jquery.fancybox.min.css'); ?>" />
+	<link rel="stylesheet" href="<?php echo asseturl('fonts/iconfont/iconfont.css'); ?>" />
+	<link rel="stylesheet" href="<?php echo asseturl('css/animate.min.css'); ?>" />
+	<link rel="stylesheet" href="<?php echo asseturl('css/MDUI2333.css'); ?>" />
+	<style>
+		:root {--backgroundpic:<?php echo ($this->options->backgroundPic?'url('.$this->options->backgroundPic.')':'#b3d4fc'); ?>;--themeaccent:<?php echo ThemeAccent(); ?>;--themeprimary:<?php echo ThemePrimary(); ?>;}
+		<?php if ($this->options->twemoji=='true'){ ?>
+		@font-face {font-family:twemoji;font-weight:normal;font-display:swap;src:url('<?php echo asseturl('fonts/twemoji/TwemojiMozilla.ttf'); ?>');}
+		@font-face {font-family:twemoji;font-weight:bold;font-display:swap;src:url('<?php echo asseturl('fonts/twemoji/TwemojiMozilla.ttf'); ?>');}
+		body {font-family:Roboto,Noto,Helvetica,Arial,sans-serif,twemoji;}
+		<?php } ?>
+	</style>
+	<script src="<?php echo asseturl('js/jquery.min.js'); ?>"></script>
+	<script src="<?php echo asseturl('js/mdui.min.js'); ?>"></script>
+	<script src="<?php echo asseturl('js/jquery.pjax.min.js'); ?>"></script>
 	<script type="text/x-mathjax-config">
 		MathJax.Hub.Config({
 			elements:["pjax-container"],
@@ -45,14 +54,14 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js"></script>
 	<?php if ($this->options->highlightmode=='highlightjs'){ ?>
-	<script src="<?php Helper::options()->themeUrl(); ?>js/highlight.min.js"></script>
+	<script src="<?php echo asseturl('js/highlight.min.js'); ?>"></script>
 	<?php } else { ?>
-	<script src="<?php Helper::options()->themeUrl(); ?>js/prism.min.js"></script>
+	<script src="<?php echo asseturl('js/prism.min.js'); ?>"></script>
 	<?php } ?>
-	<script src="<?php Helper::options()->themeUrl(); ?>js/md5.min.js"></script>
-	<script src="<?php Helper::options()->themeUrl(); ?>js/jquery.fancybox.min.js"></script>
-	<script src="<?php Helper::options()->themeUrl(); ?>js/jquery.headindex.min.js"></script>
-	<?php $this->need('css/MDUI2333css.php'); ?>
+	<script src="<?php echo asseturl('js/md5.min.js'); ?>"></script>
+	<script src="<?php echo asseturl('js/jquery.fancybox.min.js'); ?>"></script>
+	<script src="<?php echo asseturl('js/jquery.headindex.min.js'); ?>"></script>
+	<script src="<?php echo asseturl('js/MDUI2333.js'); ?>"></script>
 	<?php $this->header(); ?>
 </head>
 <body class="mdui-theme-primary-<?php if ($this->options->themeprimary) echo $this->options->themeprimary; else echo "indigo"; ?> mdui-theme-accent-<?php if ($this->options->themeaccent) echo $this->options->themeaccent; else echo "blue" ?> mdui-appbar-with-toolbar">

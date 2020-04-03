@@ -23,7 +23,7 @@
 		<?php } else if ($QAQTAB[$key]['type']=='picture'){ ?>
 		<div class="QAQPicture" id="<?php echo $key; ?>">
 			<?php for ($j=0;$j<$tot;$j++){ ?>
-			<a href="javascript:Smilies.grin(':<?php echo $key.$QAQTAB[$key]['content'][$j]['id']; ?>:');" <?php if ($QAQTAB[$key]['content'][$j]['tip']!='') echo 'mdui-tooltip="{content:\''.$QAQTAB[$key]['content'][$j]['tip'].'\',position:\'top\'}" '; ?>mdui-dialog-close><div class="mdui-btn"><img src="<?php echo Typecho_Widget::widget('Widget_Options')->themeUrl.'/img/QAQ/'.$key.'/'.$QAQTAB[$key]['content'][$j]['path']; ?>" width="<?php if ($QAQTAB[$key]['content'][$j]['width']!='') echo $QAQTAB[$key]['content'][$j]['width']; else echo $QAQTAB[$key]['width']; ?>" height="<?php if ($QAQTAB[$key]['content'][$j]['height']!='') echo $QAQTAB[$key]['content'][$j]['height']; else echo $QAQTAB[$key]['height']; ?>" /></div></a>
+			<a href="javascript:Smilies.grin(':<?php echo $key.$QAQTAB[$key]['content'][$j]['id']; ?>:');" <?php if ($QAQTAB[$key]['content'][$j]['tip']!='') echo 'mdui-tooltip="{content:\''.$QAQTAB[$key]['content'][$j]['tip'].'\',position:\'top\'}" '; ?>mdui-dialog-close><div class="mdui-btn"><img src="<?php echo asseturl('img/QAQ/'.$key.'/'.$QAQTAB[$key]['content'][$j]['path'],true); ?>" width="<?php if ($QAQTAB[$key]['content'][$j]['width']!='') echo $QAQTAB[$key]['content'][$j]['width']; else echo $QAQTAB[$key]['width']; ?>" height="<?php if ($QAQTAB[$key]['content'][$j]['height']!='') echo $QAQTAB[$key]['content'][$j]['height']; else echo $QAQTAB[$key]['height']; ?>" /></div></a>
 			<?php } ?>
 		</div>
 		<?php } else { ?>

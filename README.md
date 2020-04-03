@@ -38,6 +38,8 @@
 
 ## 如何使用
 
+请使用 PHP 7+，typecho开发版(版本`>=17.11.15`) 获得最佳体验。
+
 1. 在[Releases](https://github.com/ZigZagK/typecho-theme-MDUI2333/releases)中下载最新版，**改名为MDUI2333**放入主题目录，之后启用主题。
 2. 在设置外观中设置一下主题色强调色，背景图片等。
 3. 更多帮助详见[MDUI2333Wiki](https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki)，也可以在[留言板](https://zigzagk.top/messages#comments)中询问我（注：关于typecho设置的问题和Wiki中有的问题很大概率**得不到解答**）。
@@ -66,7 +68,7 @@
 
 [MDUI](https://mdui.org) | [jQuery](https://github.com/jquery/jquery) | [jquery-pjax](https://github.com/defunkt/jquery-pjax)
 
-[highlight.js](https://highlightjs.org/) | [Prism](https://prismjs.com/) | [MathJax](https://www.mathjax.org/) | [Fancybox](https://fancyapps.com/fancybox/3/) | [jquery_headindex](https://github.com/mnnyang/jquery_headindex) | [twemoji-colr](https://github.com/mozilla/twemoji-colr)
+[highlight.js](https://highlightjs.org/) | [Prism](https://prismjs.com/) | [MathJax](https://www.mathjax.org/) | [Fancybox](https://fancyapps.com/fancybox/3/) | [jquery_headindex](https://github.com/mnnyang/jquery_headindex) | [Animate.css](https://github.com/daneden/animate.css) | [twemoji-colr](https://github.com/mozilla/twemoji-colr)
 
 [Meting](https://github.com/MoePlayer/APlayer-Typecho) | [ExSearch](https://github.com/AlanDecode/Typecho-Plugin-ExSearch) | [Mailer](https://github.com/AlanDecode/Typecho-Plugin-Mailer)
 
