@@ -4,7 +4,7 @@
  * 
  * @package MDUI2333
  * @author ZigZagK
- * @version 1.4.5
+ * @version 1.4.6
  * @link https://zigzagk.top
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;

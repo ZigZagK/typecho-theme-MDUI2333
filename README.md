@@ -10,7 +10,7 @@
 
 基于[MDUI](https://mdui.org)的一款单栏typecho主题。
 
-作者：ZigZagK | 版本：1.4.5
+作者：ZigZagK | 版本：1.4.6
 
 ## 主题特性
 

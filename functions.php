@@ -1,7 +1,7 @@
 <?php
-define('Version','1.4.5');
+define('Version','1.4.6');
 function asseturl($url,$type=false){
-	$debug=false;if ($debug) return Helper::options()->themeUrl.'/'.$url;
+	$debug=true;if ($debug) return Helper::options()->themeUrl.'/'.$url;
 	$pos=strpos($url,'.');$name=substr($url,$pos);if ($name=='.js' || $name=='.css') $url=str_replace($name,'.min'.$name,$url);
 	$origin=false;if ($type && !$origin) return Helper::options()->themeUrl.'/'.$url;
 	return 'https://cdn.jsdelivr.net/gh/ZigZagK/typecho-theme-MDUI2333@'.Version.'/'.$url;
@@ -94,6 +94,11 @@ function themeConfig($form){
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Text('posttimeout',NULL,NULL,_t('文章时效天数'),_t('显示文章时效提醒的最低天数，不填则默认180天'));
 	$form->addInput($config);
+	$config=new Typecho_Widget_Helper_Form_Element_Select('linktarget',array(
+		'absolute' => '非本站域名视为外链',
+		'relative' => '非相对路径视为外链'
+	),'absolute',_t('外链判断模式'),_t('为外链加上<code>target="_blank"</code>，两种模式详细介绍详见 <a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki/6.%E5%A4%96%E9%93%BE%E5%88%A4%E6%96%AD%E6%A8%A1%E5%BC%8F">MDUI2333Wiki</a>'));
+	$form->addInput($config->multiMode());
 	$config=new Typecho_Widget_Helper_Form_Element_Text('AplayerCode',NULL,NULL,_t('全站音乐播放器APlayer代码'),_t('需要下载METO大佬的 <a target="_blank" href="https://github.com/MoePlayer/APlayer-Typecho">Meting</a> 插件。若APlayer不为吸底模式则显示在页面最下方，更多问题详见 <a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki/4.Meting%E6%8F%92%E4%BB%B6%E5%85%A8%E7%AB%99APlayer">MDUI2333Wiki</a>'));
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Select('linksmode',array(
@@ -121,6 +126,8 @@ function themeConfig($form){
 		'false' => '不启用'
 	),'false',_t('又拍云图标'),_t('在网站右下角显示又拍云图标'));
 	$form->addInput($config->multiMode());
+	$config=new Typecho_Widget_Helper_Form_Element_Text('cdnby',NULL,NULL,_t('自定义CDN信息'),_t('在网站右下角显示<code>CDN by [输入内容]</code>。<strong>注意该项与又拍云图标冲突，需要关闭又拍云图标</strong>'));
+	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Text('apisalt',NULL,Typecho_Common::randString(32),_t('API接口保护'),_t('保护API不被滥用，在启用主题时自动生成，无需手动设置。若没有生成，可重启主题（<strong>注意备份</strong>）'));
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Textarea('customjs',NULL,NULL,_t('自定义代码'),_t('这里可以写入自定义的js,css等代码，如添加统计代码'));
@@ -134,8 +141,8 @@ function printarray($data) {printjson(json_encode($data));}
 function geturl($url){
 	$ch=curl_init();
 	curl_setopt($ch,CURLOPT_URL,$url);
-	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE); 
-	curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE); 
+	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false); 
+	curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false); 
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 	$output=curl_exec($ch);curl_close($ch);return $output;
 }
@@ -293,7 +300,26 @@ function GetCommentAt($coid){
 }
 function RewriteComment($comment){
 	$content=ConvertSmilies($comment->content);
+	$content=AddTarget($content,Helper::options()->linktarget);
 	if ($comment->parent) $content=GetCommentAt($comment->parent).$content;
+	return $content;
+}
+function AddTarget($content,$type){
+	$siteurl=rtrim(Helper::options()->siteUrl,'/');
+	preg_match_all('/<a (.*?)href="(.*?)"(.*?)>/i',$content,$match);
+	foreach ($match[2] as $key => $url){
+		if (stripos($match[0][$key],'target="_blank"')!==false || stripos($match[0][$key],"target='_blank'")!==false) continue;
+		$pos=stripos($url,'http://');if ($pos===false) $pos=stripos($url,'https://');
+		if ($pos!==false){
+			if ($type=='relative') $content=str_replace($match[0][$key],'<a '.$match[1][$key].'href="'.$url.'" target="_blank" '.$match[3][$key].'>',$content);
+			else {
+				$len=strlen($url);$pos=stripos($url,'://')+3;
+				for ($i=$pos;$i<$len;$i++) if ($url[$i]=='/') break;
+				if (substr($url,$pos,$i-$pos)!=substr($siteurl,stripos($siteurl,'://')+3))
+					$content=str_replace($match[0][$key],'<a '.$match[1][$key].'href="'.$url.'" target="_blank" '.$match[3][$key].'>',$content);
+			}
+		}
+	}
 	return $content;
 }
 function AddMDUITable($content){
@@ -370,6 +396,7 @@ function AddBangumi($content){
 }
 function RewriteContent($content){
 	$content=ConvertSmilies($content);
+	$content=AddTarget($content,Helper::options()->linktarget);
 	$content=AddFancybox($content);
 	$content=AddMDUITable($content);
 	$content=AddMDUIPanel($content);

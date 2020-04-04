@@ -35,7 +35,7 @@ function ExSearchCall(item){ //ExSearch插件PJAX跳转
 	}
 }
 function showannouncement(msg,pos){ //显示公告
-	if (msg!=null && pos!=null) announcement=mdui.snackbar({message:msg,position:pos,closeOnOutsideClick:false,buttonText:'OK',timeout:0});
+	if (msg!=null && pos!=null) announcement=mdui.snackbar({message:msg,position:pos,closeOnOutsideClick:false,buttonText:'OK',buttonColor:'#fff',timeout:0,onOpen:function(){$('.mdui-snackbar').addClass('mdui-color-theme')}});
 }
 function highlightinit(mode){ //代码高亮初始化
 	if (mode=='highlightjs') hljs.initHighlightingOnLoad();
