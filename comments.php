@@ -56,6 +56,14 @@ function threadedComments($comment,$options){ ?>
 	</center>
 	<?php } else { ?>
 	<div id="<?php $this->respondId(); ?>" class="mdui-m-y-2">
+		<?php if ($this->options->commentrule!=''){ ?>
+		<div class="mdui-card mdui-color-theme-accent mdui-m-b-1">
+			<div class="mdui-card-content mdui-valign">
+				<div class="mdui-m-r-2"><i class="mdui-icon material-icons">&#xe002;</i></div>
+				<div><?php echo $this->options->commentrule; ?></div>
+			</div>
+		</div>
+		<?php } ?>
 		<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
 			<?php if ($this->user->hasLogin()){ ?>
 			<div class="mdui-card">

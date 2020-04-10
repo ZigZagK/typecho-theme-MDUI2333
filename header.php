@@ -7,12 +7,14 @@
 	<meta name="renderer" content="webkit">
 	<meta name="theme-color" content="<?php echo ThemePrimary(); ?>">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta http-equiv="x-dns-prefetch-control" content="on">
 	<title><?php $this->archiveTitle(array(
 		'category' => _t('分类 %s 下的文章'),
 		'search' => _t('包含关键字 %s 的文章'),
 		'tag' => _t('标签 %s 下的文章'),
 		'author' => _t('%s 发布的文章')
 	),'',' - '); ?><?php $this->options->title(); ?></title>
+	<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
 	<?php if ($this->options->twemoji=='true'){ ?>
 	<link rel="preload" href="<?php echo asseturl('fonts/twemoji/TwemojiMozilla.ttf'); ?>" as="font" type='font/ttf' crossorigin />
 	<?php } ?>

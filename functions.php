@@ -108,6 +108,8 @@ function themeConfig($form){
 	$form->addInput($config->multiMode());
 	$config=new Typecho_Widget_Helper_Form_Element_Text('bangumicachetimeout',NULL,NULL,_t('追番数据缓存时间(秒)'),_t('填0表示不缓存<strong>(不推荐)</strong>，不填则默认半天(43200)'));
 	$form->addInput($config);
+	$config=new Typecho_Widget_Helper_Form_Element_Text('commentrule',NULL,'请不要发毫无意义或内容不文明的评论',_t('评论政策'),_t('对评论者显示的评论要求和注意事项等'));
+	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Text('commentplaceholder',NULL,'Dalao们快来评论啊QAQ',_t('评论框提示信息'),_t('未输入时显示在评论框的文字'));
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Text('commenthelper',NULL,'支持Markdown和LaTeX数学公式',_t('评论框帮助信息'),_t('显示在评论框下部的帮助信息'));
