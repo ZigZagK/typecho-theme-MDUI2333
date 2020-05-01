@@ -97,9 +97,9 @@ function themeConfig($form){
 	$config=new Typecho_Widget_Helper_Form_Element_Select('linktarget',array(
 		'absolute' => '非本站域名视为外链',
 		'relative' => '非相对路径视为外链'
-	),'absolute',_t('外链判断模式'),_t('为外链加上<code>target="_blank"</code>，两种模式详细介绍详见 <a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki/6.%E5%A4%96%E9%93%BE%E5%88%A4%E6%96%AD%E6%A8%A1%E5%BC%8F">MDUI2333Wiki</a>'));
+	),'absolute',_t('外链判断模式'),_t('为外链加上<code>target="_blank"</code>，两种模式详细介绍详见 <a target="_blank" href="https://mdui2333.zigzagk.top/#/externallink">MDUI2333Wiki</a>'));
 	$form->addInput($config->multiMode());
-	$config=new Typecho_Widget_Helper_Form_Element_Text('AplayerCode',NULL,NULL,_t('全站音乐播放器APlayer代码'),_t('需要下载METO大佬的 <a target="_blank" href="https://github.com/MoePlayer/APlayer-Typecho">Meting</a> 插件。若APlayer不为吸底模式则显示在页面最下方，更多问题详见 <a target="_blank" href="https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki/4.Meting%E6%8F%92%E4%BB%B6%E5%85%A8%E7%AB%99APlayer">MDUI2333Wiki</a>'));
+	$config=new Typecho_Widget_Helper_Form_Element_Text('AplayerCode',NULL,NULL,_t('全站音乐播放器APlayer代码'),_t('需要下载METO大佬的 <a target="_blank" href="https://github.com/MoePlayer/APlayer-Typecho">Meting</a> 插件。若APlayer不为吸底模式则显示在页面最下方，更多问题详见 <a target="_blank" href="https://mdui2333.zigzagk.top/#/sitemusic">MDUI2333Wiki</a>'));
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Select('linksmode',array(
 		'default' => '默认顺序',

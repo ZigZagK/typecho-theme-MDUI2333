@@ -42,7 +42,7 @@
 
 1. 在[Releases](https://github.com/ZigZagK/typecho-theme-MDUI2333/releases)中下载最新版，**改名为MDUI2333**放入主题目录，之后启用主题。
 2. 在设置外观中设置一下主题色强调色，背景图片等。
-3. 更多帮助详见[MDUI2333Wiki](https://github.com/ZigZagK/typecho-theme-MDUI2333/wiki)，也可以在[留言板](https://zigzagk.top/messages#comments)中询问我（注：关于typecho设置的问题和Wiki中有的问题很大概率**得不到解答**）。
+3. 更多帮助详见[MDUI2333Wiki](https://mdui2333.zigzagk.top/)，也可以在[留言板](https://zigzagk.top/messages#comments)中询问我（注：关于typecho设置的问题和Wiki中有的问题很大概率**得不到解答**）。
 4. 如果你喜欢，**Star本项目**吧QwQ！
 
 <details>
