@@ -19,7 +19,7 @@
 					</div>
 					<div class="mdui-chip">
 						<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">&#xe8df;</i></span>
-						<span class="mdui-chip-title"><a href="<?php $this->permalink(); ?>"><?php $this->date(); ?></a></span>
+						<span class="mdui-chip-title"><?php $this->date(); ?></span>
 					</div>
 					<div class="mdui-chip">
 						<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">&#xe5c3;</i></span>
@@ -47,7 +47,42 @@
 				<div class="mdui-divider"></div>
 				<div class="mdui-card-content post-container" style="padding-left:4%;padding-right:4%;">
 					<div class="mdui-typo">
-		  				<?php echo RewriteContent($this->content); ?>
+						<?php if ($this->hidden){ ?>
+						<form id="password-form">
+							<div class="mdui-textfield">
+								<input class="mdui-textfield-input" type="text" name="protectPassword" placeholder="请输入密码访问" />
+								<?php if ($this->fields->passwordhint){ ?><div class="mdui-textfield-helper">提示：<?php echo $this->fields->passwordhint; ?></div><?php } ?>
+							</div>
+							<input type="hidden" name="protectCID" value="<?php $this->cid(); ?>" />
+						</form>
+						<script>
+							$('#password-form').submit(function(){
+								var passworddata=$(this).serializeArray();var password=passworddata[0].value;
+								$.ajax({
+									type:'POST',url:window.location.href,data:{'type':'getTokenUrl'},
+									success:function(tokenurl){
+										$.ajax({
+											type:'POST',url:tokenurl,data:passworddata,
+											success:function(data){
+												$.ajax({
+													type:'POST',url:window.location.href,
+													data:{'type':'checkpassword','password':password},
+													success:function(data){
+														if (data.success) $.pjax({url:window.location.href,container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
+														else mdui.alert('对不起,您输入的密码错误');
+													},
+													error:function() {mdui.alert('发生了未知错误，请刷新页面');}
+												});
+											},
+											error:function() {mdui.alert('发生了未知错误，请刷新页面');}
+										});
+									},
+									error:function() {mdui.alert('发生了未知错误，请刷新页面');}
+								})
+								return false;
+							});
+						</script>
+						<?php } else echo RewriteContent($this->content); ?>
 		  				<?php if ($this->options->copyright){ ?>
 		  				<div class="mdui-card">
 		  					<div class="mdui-card-content mdui-color-grey-50">

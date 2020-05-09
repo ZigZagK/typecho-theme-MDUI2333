@@ -54,6 +54,13 @@ function threadedComments($comment,$options){ ?>
 			<span class="mdui-chip-title">评论已关闭>_<</span>
 		</div>
 	</center>
+	<?php } else if ($this->hidden){ ?>
+	<center class="mdui-m-y-2">
+		<div class="mdui-chip">
+			<span class="mdui-chip-icon"><i class="mdui-icon material-icons">&#xe92a;</i></span>
+			<span class="mdui-chip-title">加密文章无法评论>_<</span>
+		</div>
+	</center>
 	<?php } else { ?>
 	<div id="<?php $this->respondId(); ?>" class="mdui-m-y-2">
 		<?php if ($this->options->commentrule!=''){ ?>

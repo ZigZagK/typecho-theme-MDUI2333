@@ -19,7 +19,7 @@
 					</div>
 					<div class="mdui-chip">
 						<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">&#xe8df;</i></span>
-						<span class="mdui-chip-title"><a href="<?php $this->permalink(); ?>"><?php $this->date(); ?></a></span>
+						<span class="mdui-chip-title"><?php $this->date(); ?></span>
 					</div>
 					<div class="mdui-chip" id="commentsnumber">
 						<span class="mdui-chip-icon mdui-color-theme-accent"><i class="mdui-icon material-icons">&#xe0b9;</i></span>

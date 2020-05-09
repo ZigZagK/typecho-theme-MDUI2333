@@ -11,6 +11,8 @@ function themeFields($layout){
 	$layout->addItem($field);
 	$field=new Typecho_Widget_Helper_Form_Element_Text('description',NULL,NULL,_t('文章描述/页面图标'),_t('文章描述：显示在首页等页面中文章的描述，不填则自动截取文章开头作为描述<br>页面图标：显示在侧边栏的页面的图标，参照<a href="https://www.mdui.org/docs/material_icon" target="_blank">Material图标填写</a>，比如<code>link</code>或者<code>&amp;#xe157;</code>'));
 	$layout->addItem($field);
+	$field=new Typecho_Widget_Helper_Form_Element_Text('passwordhint',NULL,NULL,_t('密码提示'),_t('文章开启密码保护后显示的密码提示'));
+	$layout->addItem($field);
 }
 function themeConfig($form){
 	echo '<link rel="stylesheet" href="'.asseturl('css/settingbackup.min.css').'">';
@@ -148,15 +150,16 @@ function geturl($url){
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 	$output=curl_exec($ch);curl_close($ch);return $output;
 }
-function themeInit(){
+function themeInit($archive){
 	Helper::options()->commentsMaxNestingLevels=19260817;
 	Helper::options()->commentsMarkdown=true;
 	Helper::options()->commentsAntiSpam=false;
 	Helper::options()->commentsCheckReferer=false;
+	if ($archive->hidden) header('HTTP/1.1 200 OK');
 	$gets=$_GET;$posts=$_POST;$salt=Helper::options()->apisalt;$type=$gets['type'];
 	if ($type=='settingbackup'){
 		$opt=$gets['opt'];$db=Typecho_Db::get();
-		if ($opt=='backup' && $_SERVER['REQUEST_METHOD']=='POST'){
+		if ($_SERVER['REQUEST_METHOD']=='POST' && $opt=='backup'){
 			if ($gets['salt']!=$salt) errorexit('HTTP/1.1 403 Forbidden');
 			$data=$posts['data'];if (empty($data)) errorexit('HTTP/1.1 403 Forbidden');
 			if (!empty($db->fetchRow($db->select()->from('table.options')->where('name=?','theme:SettingBackup'))))
@@ -164,7 +167,7 @@ function themeInit(){
 				else $db->query($db->insert('table.options')->rows(array('name'=>'theme:SettingBackup','user'=>'0','value'=>$data)));
 			printarray(array('msg'=>'Success'));
 		}
-		if ($opt=='restore' && $_SERVER['REQUEST_METHOD']=='GET'){
+		if ($_SERVER['REQUEST_METHOD']=='GET' && $opt=='restore'){
 			if ($gets['salt']!=$salt) errorexit('HTTP/1.1 403 Forbidden');
 			$data=$db->fetchRow($db->select()->from('table.options')->where('name=?','theme:SettingBackup'));
 			if (empty($data)) printarray(array('msg'=>'Error'));
@@ -172,7 +175,7 @@ function themeInit(){
 		}
 		errorexit('HTTP/1.1 403 Forbidden');
 	}
-	if ($type=='bangumicache' && $_SERVER['REQUEST_METHOD']=='GET'){
+	if ($_SERVER['REQUEST_METHOD']=='GET' && $type=='bangumicache'){
 		$url=$gets['url'];$ssid=$gets['ssid'];if (empty($url) || empty($ssid)) errorexit('HTTP/1.1 403 Forbidden');
 		if ($gets['auth']!=md5($url.$salt.$ssid)) errorexit('HTTP/1.1 403 Forbidden');
 		mkdir(Helper::options()->themeFile(ThemeName(),"cache/bangumi/cover"),0777,true);
@@ -182,6 +185,12 @@ function themeInit(){
 			fwrite($file,$img);fclose($file);
 		}
 		header('Location:'.Helper::options()->themeUrl.'/cache/bangumi/cover/'.$ssid.'.jpg');
+	}
+	if ($archive->is('post') && $_SERVER['REQUEST_METHOD']=='POST' && $posts['type']=='getTokenUrl')
+		die(Typecho_Widget::widget('Widget_Security')->getTokenUrl($archive->permalink));
+	if ($archive->is('post') && $_SERVER['REQUEST_METHOD']=='POST' && $posts['type']=='checkpassword'){
+		$pswd=$posts['password'];if (empty($pswd)) errorexit('HTTP/1.1 403 Forbidden');
+		printarray(array('success'=>($archive->password==$pswd)));
 	}
 }
 function ThemeName(){
