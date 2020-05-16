@@ -188,10 +188,8 @@ function themeInit($archive){
 	}
 	if ($archive->is('post') && $_SERVER['REQUEST_METHOD']=='POST' && $posts['type']=='getTokenUrl')
 		die(Typecho_Widget::widget('Widget_Security')->getTokenUrl($archive->permalink));
-	if ($archive->is('post') && $_SERVER['REQUEST_METHOD']=='POST' && $posts['type']=='checkpassword'){
-		$pswd=$posts['password'];if (empty($pswd)) errorexit('HTTP/1.1 403 Forbidden');
-		printarray(array('success'=>($archive->password==$pswd)));
-	}
+	if ($archive->is('post') && $_SERVER['REQUEST_METHOD']=='POST' && $posts['type']=='ishidden')
+		printarray(array('hidden'=>$archive->hidden));
 }
 function ThemeName(){
 	$db=Typecho_Db::get();$query=$db->select('value')->from('table.options')->where('name = ?','theme');

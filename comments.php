@@ -58,7 +58,7 @@ function threadedComments($comment,$options){ ?>
 	<center class="mdui-m-y-2">
 		<div class="mdui-chip">
 			<span class="mdui-chip-icon"><i class="mdui-icon material-icons">&#xe92a;</i></span>
-			<span class="mdui-chip-title">加密文章无法评论>_<</span>
+			<span class="mdui-chip-title">密码保护无法评论>_<</span>
 		</div>
 	</center>
 	<?php } else { ?>

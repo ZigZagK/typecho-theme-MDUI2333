@@ -48,16 +48,19 @@
 				<div class="mdui-card-content post-container" style="padding-left:4%;padding-right:4%;">
 					<div class="mdui-typo">
 						<?php if ($this->hidden){ ?>
-						<form id="password-form">
-							<div class="mdui-textfield">
-								<input class="mdui-textfield-input" type="text" name="protectPassword" placeholder="请输入密码访问" />
-								<?php if ($this->fields->passwordhint){ ?><div class="mdui-textfield-helper">提示：<?php echo $this->fields->passwordhint; ?></div><?php } ?>
+						<form class="mdui-center" id="password-form">
+							<div class="mdui-valign mdui-center" style="width:100%;max-width:500px;">
+								<div class="mdui-textfield" style="display:inline-block;width:100%;margin-right:8px;">
+									<input class="mdui-textfield-input" type="text" name="protectPassword" placeholder="请输入密码访问" />
+									<?php if ($this->fields->passwordhint){ ?><div class="mdui-textfield-helper">提示：<?php echo $this->fields->passwordhint; ?></div><?php } ?>
+								</div>
+								<input type="hidden" name="protectCID" value="<?php $this->cid(); ?>" />
+								<button class="mdui-btn mdui-btn-icon mdui-color-theme-accent" type="submit" mdui-tooltip="{content:'提交密码',position:'top'}"><i class="mdui-icon material-icons">&#xe5ca;</i></button>
 							</div>
-							<input type="hidden" name="protectCID" value="<?php $this->cid(); ?>" />
 						</form>
 						<script>
 							$('#password-form').submit(function(){
-								var passworddata=$(this).serializeArray();var password=passworddata[0].value;
+								var passworddata=$(this).serializeArray();
 								$.ajax({
 									type:'POST',url:window.location.href,data:{'type':'getTokenUrl'},
 									success:function(tokenurl){
@@ -65,11 +68,10 @@
 											type:'POST',url:tokenurl,data:passworddata,
 											success:function(data){
 												$.ajax({
-													type:'POST',url:window.location.href,
-													data:{'type':'checkpassword','password':password},
+													type:'POST',url:window.location.href,data:{'type':'ishidden'},
 													success:function(data){
-														if (data.success) $.pjax({url:window.location.href,container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
-														else mdui.alert('对不起,您输入的密码错误');
+														if (data.hidden) mdui.alert('对不起,您输入的密码错误');
+														else $.pjax({url:window.location.href,container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
 													},
 													error:function() {mdui.alert('发生了未知错误，请刷新页面');}
 												});
