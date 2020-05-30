@@ -80,7 +80,7 @@
 										});
 									},
 									error:function() {mdui.alert('发生了未知错误，请刷新页面');}
-								})
+								});
 								return false;
 							});
 						</script>

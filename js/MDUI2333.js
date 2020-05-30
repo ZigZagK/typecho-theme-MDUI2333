@@ -3,17 +3,19 @@ var sidebar; //侧边栏
 var announcement; //公告
 var Smilies; //表情框函数
 var QAQTab; //表情框
-function animatecss(element,animationName,speed,callback){ //Animate.css动画
-	const node=document.querySelector(element);
-	node.classList.add('animated',animationName);
-	$(element).css('animation-duration',speed);
-	function handleAnimationEnd(){
-		node.classList.remove('animated',animationName);
-		node.removeEventListener('animationend',handleAnimationEnd);
-		if (typeof callback==='function') callback();
-	}
-	node.addEventListener('animationend',handleAnimationEnd);
-}
+const animatecss=(element,animation,speed,prefix='animate__') => //Animate.css动画
+	new Promise((resolve,reject) => {
+		const animationName=`${prefix}${animation}`;
+		const node=document.querySelector(element);
+		node.classList.add(`${prefix}animated`,animationName);
+		node.style.setProperty('--animate-duration',speed);
+		function handleAnimationEnd() {
+			node.classList.remove(`${prefix}animated`,animationName);
+			node.removeEventListener('animationend',handleAnimationEnd);
+			resolve('Animation ended');
+		}
+		node.addEventListener('animationend',handleAnimationEnd);
+	});
 function mduisnackbar(data){ //MDUI-Snackbar（覆盖公告）
 	if (announcement!=null) announcement.close();mdui.snackbar(data);
 }
@@ -47,8 +49,8 @@ function showoverlay(){ //显示PJAX加载遮罩
 	$('#pjax-progress').css('display','block');
 }
 function closeoverlay(){ //隐藏PJAX加载遮罩
-	animatecss('#pjax-overlay','fadeOut','0.5s',function(){$('#pjax-overlay').css('display','none');});
-	animatecss('#pjax-progress','fadeOut','0.5s',function(){$('#pjax-progress').css('display','none');});
+	animatecss('#pjax-overlay','fadeOut','0.5s').then(function(){$('#pjax-overlay').css('display','none');});
+	animatecss('#pjax-progress','fadeOut','0.5s').then(function(){$('#pjax-progress').css('display','none');});
 }
 function changetitle(){ //更新副标题
 	var title=$(document).attr("title");var pos=title.lastIndexOf(' - ');
@@ -195,6 +197,7 @@ function ajaxcomment(options){ //AJAX评论
 					mathjaxreload('commentcontent');codelinenumber('#commentcontent');
 					highlightreload(highlightmode,'#commentcontent');smoothscroll('.haveat a');mdui.mutation();
 					$('html,body').animate({scrollTop:$(target).offset().top},'fast');
+					animatecss(target,'fadeInRight','0.5s');
 					mduisnackbar({message:commentsuccess,position:'right-bottom'});
 				}
 			}
