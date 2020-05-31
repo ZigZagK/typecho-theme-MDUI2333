@@ -37,7 +37,7 @@ function ExSearchCall(item){ //ExSearch插件PJAX跳转
 	}
 }
 function showannouncement(msg,pos){ //显示公告
-	if (msg!=null && pos!=null) announcement=mdui.snackbar({message:msg,position:pos,closeOnOutsideClick:false,buttonText:'OK',buttonColor:'#fff',timeout:0,onOpen:function(){$('.mdui-snackbar').addClass('mdui-color-theme')}});
+	if (msg!=null && pos!=null) announcement=mdui.snackbar({message:msg,position:pos,buttonText:'OK'});
 }
 function highlightinit(mode){ //代码高亮初始化
 	if (mode=='highlightjs') hljs.initHighlightingOnLoad();
@@ -198,7 +198,7 @@ function ajaxcomment(options){ //AJAX评论
 					highlightreload(highlightmode,'#commentcontent');smoothscroll('.haveat a');mdui.mutation();
 					$('html,body').animate({scrollTop:$(target).offset().top},'fast');
 					animatecss(target,'fadeInRight','0.5s');
-					mduisnackbar({message:commentsuccess,position:'right-bottom'});
+					mduisnackbar({message:commentsuccess,position:'right-bottom',timeout:2000});
 				}
 			}
 		});

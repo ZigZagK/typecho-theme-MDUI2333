@@ -51,7 +51,7 @@
 						<form class="mdui-center" id="password-form">
 							<div class="mdui-valign mdui-center" style="width:100%;max-width:500px;">
 								<div class="mdui-textfield" style="display:inline-block;width:100%;margin-right:8px;">
-									<input class="mdui-textfield-input" type="text" name="protectPassword" placeholder="请输入密码访问" />
+									<input class="mdui-textfield-input" type="password" name="protectPassword" placeholder="请输入密码访问" />
 									<?php if ($this->fields->passwordhint){ ?><div class="mdui-textfield-helper">提示：<?php echo $this->fields->passwordhint; ?></div><?php } ?>
 								</div>
 								<input type="hidden" name="protectCID" value="<?php $this->cid(); ?>" />

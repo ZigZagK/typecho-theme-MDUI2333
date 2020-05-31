@@ -155,7 +155,7 @@ function themeInit($archive){
 	Helper::options()->commentsMarkdown=true;
 	Helper::options()->commentsAntiSpam=false;
 	Helper::options()->commentsCheckReferer=false;
-	if ($archive->hidden) header('HTTP/1.1 200 OK');
+	if ($archive->hidden && ($_SERVER['REQUEST_METHOD']=='POST' || $_SERVER['HTTP_X_PJAX']=='true')) header('HTTP/1.1 200 OK');
 	$gets=$_GET;$posts=$_POST;$salt=Helper::options()->apisalt;$type=$gets['type'];
 	if ($type=='settingbackup'){
 		$opt=$gets['opt'];$db=Typecho_Db::get();
