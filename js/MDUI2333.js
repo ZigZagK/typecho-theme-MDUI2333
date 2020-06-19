@@ -16,9 +16,6 @@ const animatecss=(element,animation,speed,prefix='animate__') => //Animate.css�
 		}
 		node.addEventListener('animationend',handleAnimationEnd);
 	});
-function mduisnackbar(data){ //MDUI-Snackbar（覆盖公告）
-	if (announcement!=null) announcement.close();mdui.snackbar(data);
-}
 
 /*---------- 初始化 ----------*/
 function globallistener(){ //全局监听
@@ -198,7 +195,7 @@ function ajaxcomment(options){ //AJAX评论
 					highlightreload(highlightmode,'#commentcontent');smoothscroll('.haveat a');mdui.mutation();
 					$('html,body').animate({scrollTop:$(target).offset().top},'fast');
 					animatecss(target,'fadeInRight','0.5s');
-					mduisnackbar({message:commentsuccess,position:'right-bottom',timeout:2000});
+					mdui.snackbar({message:commentsuccess,position:'right-bottom',timeout:2000});
 				}
 			}
 		});
