@@ -44,11 +44,11 @@
 	$(document).on('submit','form[role="search"]',function(event){$.pjax.submit(event,{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});});
 	$(document).on('pjax:send',function(){if (announcement!=null) announcement.close();sidebar.close();showoverlay();});
 	$(document).on('pjax:complete',function(){
-		changetitle();mathjaxreload('pjax-container');codelinenumber('#pjax-container');
-		highlightreload('<?php echo $this->options->highlightmode; ?>','#pjax-container');
-		showposttoc(<?php echo $this->options->posttoc=='true'; ?>);closeoverlay();
+		mathjaxreload('pjax-container');codelinenumber('#pjax-container');
+		highlightreload('<?php echo $this->options->highlightmode; ?>','#pjax-container');closeoverlay();
 	});
 	$(document).on('pjax:end',function(){
+		changetitle();showposttoc(<?php echo $this->options->posttoc=='true'; ?>);
 		mdui.mutation();<?php if (array_key_exists('Meting',$plugin['activated'])){ ?>loadMeting();<?php } ?>		
 		<?php echo $this->options->pjaxreload; ?>
 	});
