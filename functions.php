@@ -1,7 +1,7 @@
 <?php
-define('Version','1.4.6');
+define('Version','1.4.7');
 function asseturl($url,$type=false){
-	$debug=false;if ($debug) return Helper::options()->themeUrl.'/'.$url;
+	$debug=true;if ($debug) return Helper::options()->themeUrl.'/'.$url;
 	$pos=strpos($url,'.');$name=substr($url,$pos);if ($name=='.js' || $name=='.css') $url=str_replace($name,'.min'.$name,$url);
 	$origin=false;if ($type && !$origin) return Helper::options()->themeUrl.'/'.$url;
 	return 'https://cdn.jsdelivr.net/gh/ZigZagK/typecho-theme-MDUI2333@'.Version.'/'.$url;
@@ -125,6 +125,11 @@ function themeConfig($form){
 	$form->addInput($config->multiMode());
 	$config=new Typecho_Widget_Helper_Form_Element_Text('commenttextlimit',NULL,NULL,_t('评论字数限制'),_t('限制评论的最大字数，不填则没有限制（注：<strong>作用有限</strong>）'));
 	$form->addInput($config);
+	$config=new Typecho_Widget_Helper_Form_Element_Select('travelling',array(
+		'true' => '启用',
+		'false' => '不启用'
+	),'false',_t('友链接力'),_t('在网站左下角显示友链接力图标，详见<a href="https://github.com/volfclub/travellings" target="_blank">开往-友链接力</a>'));
+	$form->addInput($config->multiMode());
 	$config=new Typecho_Widget_Helper_Form_Element_Select('upyuncdn',array(
 		'true' => '启用',
 		'false' => '不启用'
