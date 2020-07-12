@@ -128,7 +128,7 @@ function themeConfig($form){
 	$config=new Typecho_Widget_Helper_Form_Element_Select('travelling',array(
 		'true' => '启用',
 		'false' => '不启用'
-	),'false',_t('友链接力'),_t('在网站左下角显示友链接力图标，详见<a href="https://github.com/volfclub/travellings" target="_blank">开往-友链接力</a>'));
+	),'false',_t('友链接力'),_t('在网站右上角和左下角显示友链接力图标，详见<a href="https://github.com/volfclub/travellings" target="_blank">开往-友链接力</a>'));
 	$form->addInput($config->multiMode());
 	$config=new Typecho_Widget_Helper_Form_Element_Select('upyuncdn',array(
 		'true' => '启用',
