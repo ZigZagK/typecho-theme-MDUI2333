@@ -1,7 +1,7 @@
 <?php
 define('Version','1.4.7');
 function asseturl($url,$type=false){
-	$debug=true;if ($debug) return Helper::options()->themeUrl.'/'.$url;
+	$debug=false;if ($debug) return Helper::options()->themeUrl.'/'.$url;
 	$pos=strpos($url,'.');$name=substr($url,$pos);if ($name=='.js' || $name=='.css') $url=str_replace($name,'.min'.$name,$url);
 	$origin=false;if ($type && !$origin) return Helper::options()->themeUrl.'/'.$url;
 	return 'https://cdn.jsdelivr.net/gh/ZigZagK/typecho-theme-MDUI2333@'.Version.'/'.$url;
@@ -349,11 +349,13 @@ function AddMDUIPanel($content){
 }
 function getbangumi($uid,$pn){
 	$ch=curl_init();
-	curl_setopt($ch,CURLOPT_URL,"https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=0&pn=".$pn."&ps=100&vmid=".$uid."&ts=998244353");
-	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+	curl_setopt($ch,CURLOPT_URL,"https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=0&pn=".$pn."&ps=10&vmid=".$uid);
+	curl_setopt($ch,CURLOPT_HEADER,0);
+	curl_setopt($ch,CURLOPT_CUSTOMREQUEST,"GET");
+	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);
+	curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-	curl_setopt($ch,CURLOPT_REFERER,'https://space.bilibili.com/'.$uid.'/bangumi');
-	curl_setopt($ch,CURLOPT_HTTPHEADER,array("Origin:https://space.bilibili.com","Referer:https://space.bilibili.com/".$uid."/bangumi"));
+	curl_setopt($ch,CURLOPT_HTTPHEADER,array("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36","Referer:https://space.bilibili.com/".$uid."/bangumi"));
 	$output=curl_exec($ch);curl_close($ch);return $output;
 }
 function BangumiList($uid){
@@ -366,7 +368,7 @@ function BangumiList($uid){
 	$bangumi=json_decode($json,true);$data=$bangumi['data']['list'];
 	$total=$bangumi['data']['total'];$pn=1;
 	while (true){
-		$total-=100;if ($total<=0) break;$pn++;
+		$total-=10;if ($total<=0) break;$pn++;
 		$json=getbangumi($uid,$pn);$bangumi=json_decode($json,true);
 		$data=array_merge($data,$bangumi['data']['list']);
 	}
