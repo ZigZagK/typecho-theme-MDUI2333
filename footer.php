@@ -11,7 +11,7 @@
 						<?php if ($this->options->githublink){ ?><a href="<?php echo $this->options->githublink; ?>" target="_blank" class="mdui-p-x-1"><i class="mdui-icon mdui-text-color-theme-accent iconfont footerlink" mdui-tooltip="{content:'github',position:'top'}">&#xe60e;</i></a><?php } ?>
 						<?php if ($this->options->bilibililink){ ?><a href="<?php echo $this->options->bilibililink; ?>" target="_blank" class="mdui-p-x-1"><i class="mdui-icon mdui-text-color-theme-accent iconfont footerlink" mdui-tooltip="{content:'bilibili',position:'top'}">&#xe60f;</i></a><?php } ?>
 						<?php if ($this->options->zhihulink){ ?><a href="<?php echo $this->options->zhihulink; ?>" target="_blank" class="mdui-p-x-1"><i class="mdui-icon mdui-text-color-theme-accent iconfont footerlink" mdui-tooltip="{content:'知乎',position:'top'}">&#xe60d;</i></a><?php } ?>
-						<?php if ($this->options->travelling=='true'){ ?><div class="mdui-p-l-1 mdui-p-t-1"><a href="https://travellings.now.sh/" target="blank" class="a-no-bottom"><img src="<?php echo asseturl('img/travelling.gif'); ?>" alt="开往-友链接力" height=24 mdui-tooltip="{content:'开往-友链接力',position:'right'}" /></a></div><?php } ?>
+						<?php if ($this->options->travelling=='true'){ ?><div class="mdui-p-l-1 mdui-p-t-1"><a href="https://travellings.link/" target="blank" class="a-no-bottom"><img src="<?php echo asseturl('img/travelling.gif'); ?>" alt="开往-友链接力" height=24 mdui-tooltip="{content:'开往-友链接力',position:'right'}" /></a></div><?php } ?>
 					</div>
 				</div>
 				<div class="mdui-typo mdui-col-xs-4 mdui-col-md-4">

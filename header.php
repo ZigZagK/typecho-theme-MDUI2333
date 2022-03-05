@@ -87,7 +87,7 @@
 			</div>
 			<?php } ?>
 			<?php if ($this->options->travelling=='true'){ ?>
-				<a href="https://travellings.now.sh/" target="_blank" class="mdui-btn mdui-btn-icon mdui-hidden-xs-down" mdui-tooltip="{content:'开往-友链接力'}"><i class="mdui-icon material-icons">&#xe163;</i></a>
+				<a href="https://travellings.link/" target="_blank" class="mdui-btn mdui-btn-icon mdui-hidden-xs-down" mdui-tooltip="{content:'开往-友链接力'}"><i class="mdui-icon material-icons">&#xe163;</i></a>
 			<?php } ?>
 			<?php if ($this->user->hasLogin()){ ?>
 				<a href="<?php $this->options->adminUrl(); ?>" target="_blank" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content:'控制台'}"><i class="mdui-icon material-icons">&#xe8b8;</i></a>
