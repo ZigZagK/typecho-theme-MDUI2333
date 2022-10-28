@@ -11,7 +11,7 @@
 						<?php if ($this->options->githublink){ ?><a href="<?php echo $this->options->githublink; ?>" target="_blank" class="mdui-p-x-1"><i class="mdui-icon mdui-text-color-theme-accent iconfont footerlink" mdui-tooltip="{content:'github',position:'top'}">&#xe60e;</i></a><?php } ?>
 						<?php if ($this->options->bilibililink){ ?><a href="<?php echo $this->options->bilibililink; ?>" target="_blank" class="mdui-p-x-1"><i class="mdui-icon mdui-text-color-theme-accent iconfont footerlink" mdui-tooltip="{content:'bilibili',position:'top'}">&#xe60f;</i></a><?php } ?>
 						<?php if ($this->options->zhihulink){ ?><a href="<?php echo $this->options->zhihulink; ?>" target="_blank" class="mdui-p-x-1"><i class="mdui-icon mdui-text-color-theme-accent iconfont footerlink" mdui-tooltip="{content:'知乎',position:'top'}">&#xe60d;</i></a><?php } ?>
-						<?php if ($this->options->travelling=='true'){ ?><div class="mdui-p-l-1 mdui-p-t-1"><a href="https://travellings.now.sh/" target="blank" class="a-no-bottom"><img src="<?php echo asseturl('img/travelling.gif'); ?>" alt="开往-友链接力" height=24 mdui-tooltip="{content:'开往-友链接力',position:'right'}" /></a></div><?php } ?>
+						<?php if ($this->options->travelling=='true'){ ?><div class="mdui-p-l-1 mdui-p-t-1"><a href="https://travellings.link/" target="blank" class="a-no-bottom"><img src="https://fastly.jsdelivr.net/gh/volfclub/travellings@12.0/assets/logo.gif" alt="开往-友链接力" height=24 mdui-tooltip="{content:'开往-友链接力',position:'right'}" /></a></div><?php } ?>
 					</div>
 				</div>
 				<div class="mdui-typo mdui-col-xs-4 mdui-col-md-4">
@@ -35,10 +35,14 @@
 	</div>
 </footer>
 <script>
+	getoptions({
+		highlightmode:'<?php echo $this->options->highlightmode; ?>',
+		latexmode:'<?php echo $this->options->latexmode; ?>'
+	});
 	globallistener();changetitle();
 	$(function(){
 		showannouncement('<?php echo $this->options->announcement; ?>','<?php echo $this->options->announcementpos; ?>');
-		highlightinit('<?php echo $this->options->highlightmode; ?>');codelinenumber('#pjax-container');
+		highlightinit();codelinenumber('#pjax-container');
 		showposttoc(<?php echo $this->options->posttoc=='true'; ?>);mdui.mutation();
 	});
 	$(document).pjax('a:not(a[target="_blank"],a[no-pjax])',{container:'#pjax-container',fragment:'#pjax-container',timeout:8000});
@@ -46,14 +50,14 @@
 	$(document).on('pjax:send',function(){if (announcement!=null) announcement.close();sidebar.close();showoverlay();});
 	$(document).on('pjax:complete',function(){
 		mathjaxreload('pjax-container');codelinenumber('#pjax-container');
-		highlightreload('<?php echo $this->options->highlightmode; ?>','#pjax-container');closeoverlay();
+		highlightreload('#pjax-container');closeoverlay();
 	});
 	$(document).on('pjax:end',function(){
 		changetitle();showposttoc(<?php echo $this->options->posttoc=='true'; ?>);
 		mdui.mutation();<?php if (array_key_exists('Meting',$plugin['activated'])){ ?>loadMeting();<?php } ?>		
 		<?php echo $this->options->pjaxreload; ?>
 	});
-	$(document).on('pjax:error',function(e){closeoverlay();mdui.alert('PJAX加载超时，请检查网络','加载失败');e.preventDefault();});
+	$(document).on('pjax:error',function(e,s){if (s=='timeout') closeoverlay(),mdui.alert('PJAX加载超时，请检查网络','加载失败'),e.preventDefault();});
 </script>
 <?php if ($this->options->customjs) echo $this->options->customjs; ?>
 <?php $this->footer(); ?>

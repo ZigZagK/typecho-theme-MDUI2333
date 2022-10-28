@@ -3,6 +3,7 @@ var sidebar; //侧边栏
 var announcement; //公告
 var Smilies; //表情框函数
 var QAQTab; //表情框
+var options; //参数表
 const animatecss=(element,animation,speed,prefix='animate__') => //Animate.css动画
 	new Promise((resolve,reject) => {
 		const animationName=`${prefix}${animation}`;
@@ -18,6 +19,7 @@ const animatecss=(element,animation,speed,prefix='animate__') => //Animate.css�
 	});
 
 /*---------- 初始化 ----------*/
+function getoptions(opts) {options=opts;}
 function globallistener(){ //全局监听
 	$('#gototop').click(function(){$('html,body').animate({scrollTop:'0px'},'normal');});
 	$(window).scroll(function(){
@@ -36,8 +38,8 @@ function ExSearchCall(item){ //ExSearch插件PJAX跳转
 function showannouncement(msg,pos){ //显示公告
 	if (msg!=null && pos!=null) announcement=mdui.snackbar({message:msg,position:pos,buttonText:'OK'});
 }
-function highlightinit(mode){ //代码高亮初始化
-	if (mode=='highlightjs') hljs.initHighlightingOnLoad();
+function highlightinit(){ //代码高亮初始化
+	if (options.highlightmode=='highlightjs') hljs.initHighlightingOnLoad();
 }
 
 /*---------- 重载 ----------*/
@@ -69,11 +71,20 @@ function codelinenumber(element){ //代码行号
 		$(this).addClass('has-numbering').parent().prepend(numbering);
 	});
 }
-function mathjaxreload(element){ //MathJax重载
-	MathJax.Hub.Typeset(document.getElementById(element));
+function mathjaxreload(element){ //数学公式重载
+	if (options.latexmode=='MathJax'){
+		MathJax.Hub.Typeset(document.getElementById(element));
+	} else {
+		renderMathInElement(document.getElementById(element),{
+			delimiters: [
+				{left:"$$",right:"$$",display:true},
+				{left:"$",right:"$",display:false}
+			]
+		});
+	}
 }
-function highlightreload(mode,element){ //代码高亮重载
-	if (mode=='highlightjs'){
+function highlightreload(element){ //代码高亮重载
+	if (options.highlightmode=='highlightjs'){
 		document.querySelectorAll(element+' pre code').forEach((block) => {hljs.highlightBlock(block);});
 	} else {
 		document.querySelectorAll(element+' pre code').forEach((block) => {Prism.highlightElement(block);});
@@ -160,8 +171,7 @@ function visitorfunction(opt,gravatarurl){ //评论者为访客时的函数
 		});
 	}
 }
-function ajaxcomment(options){ //AJAX评论
-	var highlightmode=options.highlightmode;var commentsuccess=options.commentsuccess;
+function ajaxcomment(commentsuccess){ //AJAX评论
 	$('#comment-form').submit(function(){
 		var commentdata=$(this).serializeArray();
 		$.ajax({
@@ -192,7 +202,7 @@ function ajaxcomment(options){ //AJAX评论
 					$('#commentsnumber').html($('#commentsnumber',data).html());
 					$('#commentcontent').html($('#commentcontent',data).html());
 					mathjaxreload('commentcontent');codelinenumber('#commentcontent');
-					highlightreload(highlightmode,'#commentcontent');smoothscroll('.haveat a');mdui.mutation();
+					highlightreload('#commentcontent');smoothscroll('.haveat a');mdui.mutation();
 					$('html,body').animate({scrollTop:$(target).offset().top},'fast');
 					animatecss(target,'fadeInRight','0.5s');
 					mdui.snackbar({message:commentsuccess,position:'right-bottom',timeout:2000});

@@ -27,7 +27,7 @@ $plugin=Typecho_Plugin::export();
 						</div>
 					</div>
 				</a>
-				<div class="mdui-card-content"><?php if ($this->fields->description) echo $this->fields->description; else $this->excerpt(100,'...'); ?></div>
+				<div class="mdui-card-content"><?php if (!$this->hidden && $this->fields->description) echo $this->fields->description; else $this->excerpt(100,'...'); ?></div>
 				<div class="mdui-divider"></div>
 				<div class="mdui-card-actions">
 					<div class="mdui-chip mdui-hidden-xs-down">

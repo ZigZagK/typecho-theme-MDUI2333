@@ -1,10 +1,10 @@
 <?php
 define('Version','1.4.7');
 function asseturl($url,$type=false){
-	$debug=false;if ($debug) return Helper::options()->themeUrl.'/'.$url;
+	$debug=true;if ($debug) return Helper::options()->themeUrl.'/'.$url;
 	$pos=strpos($url,'.');$name=substr($url,$pos);if ($name=='.js' || $name=='.css') $url=str_replace($name,'.min'.$name,$url);
 	$origin=false;if ($type && !$origin) return Helper::options()->themeUrl.'/'.$url;
-	return 'https://cdn.jsdelivr.net/gh/ZigZagK/typecho-theme-MDUI2333@'.Version.'/'.$url;
+	return 'https://fastly.jsdelivr.net/gh/ZigZagK/typecho-theme-MDUI2333@'.Version.'/'.$url;
 }
 function themeFields($layout){
 	$field=new Typecho_Widget_Helper_Form_Element_Text('picUrl',NULL,NULL,_t('头图地址'),_t('在这里填入一个图片 URL 地址，作为文章/页面的头图，不填则显示随机图片'));
@@ -69,6 +69,11 @@ function themeConfig($form){
 		'https://secure.gravatar.com/avatar/' => 'Gravatar secure源',
 		'https://cn.gravatar.com/avatar/' => 'Gravatar cn源'
 	),'https://gravatar.loli.net/avatar/',_t('Gravatar头像源'),_t(''));
+	$form->addInput($config->multiMode());
+	$config=new Typecho_Widget_Helper_Form_Element_Select('latexmode',array(
+		'katex' => 'KaTeX',
+		'MathJax' => 'MathJax'
+	),'katex',_t('数学公式解析方式'),_t(''));
 	$form->addInput($config->multiMode());
 	$config=new Typecho_Widget_Helper_Form_Element_Select('twemoji',array(
 		'true' => '启用',
@@ -341,6 +346,9 @@ function AddMDUITable($content){
 }
 function AddFancybox($content){
 	return preg_replace('/<img(.*?)src="(.*?)"(.*?)alt="(.*?)"(.*?)>/i','<a data-fancybox="gallery" href="${2}" data-caption="${4}" class="Fancybox a-no-bottom"><img${1}src="${2}"${3}alt="${4}"${5}></a>',$content);
+}
+function AddFancyboxSingle($content){
+	return preg_replace('/<img(.*?)src="(.*?)"(.*?)alt="(.*?)"(.*?)>/i','<a data-fancybox href="${2}" data-caption="${4}" class="Fancybox a-no-bottom"><img${1}src="${2}"${3}alt="${4}"${5}></a>',$content);
 }
 function AddMDUIPanel($content){
 	$content=preg_replace('/\[panel title="(.*?)" summary="(.*?)"\]/i','<div class="mdui-panel" mdui-panel><div class="mdui-panel-item"><div class="mdui-panel-item-header"><div class="mdui-panel-item-title">${1}</div><div class="mdui-panel-item-summary">${2}</div><i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i></div><div class="mdui-panel-item-body">',$content);
