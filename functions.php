@@ -277,10 +277,6 @@ function APlayerSalt($string){
 	$auth=md5($salt.$server[1].$type[1].$id[1].$salt);
 	return preg_replace('/<div(.*?)>(.*?)<\/div>/i','<div${1} data-auth='.$auth.'>${2}</div>',$string);
 }
-function comment_author($comment){
-	if ($comment->url) echo '<a target="_blank" href="'.$comment->url.'" rel="external nofollow">'.$comment->author.'</a>';
-	else echo $comment->author;
-}
 /* 魔改自Smilies(https://github.com/jzwalk/Smilies) */
 function ConvertSmilies($widget){
 	$getJson=file_get_contents(Helper::options()->themeFile(ThemeName(),"img/QAQ/QAQ.json"));
@@ -312,16 +308,6 @@ function ConvertSmilies($widget){
 		$output.=$content;
 	}
 	return $output;
-}
-function GetCommentAt($coid){
-	$db=Typecho_Db::get();$fa=$db->fetchRow($db->select('coid,author')->from('table.comments')->where('coid = ?',$coid));
-	return '<strong class="haveat"><a href="#comment-'.$fa['coid'].'">@'.$fa['author'].'&nbsp;</a></strong>';
-}
-function RewriteComment($comment){
-	$content=ConvertSmilies($comment->content);
-	$content=AddTarget($content,Helper::options()->linktarget);
-	if ($comment->parent) $content=GetCommentAt($comment->parent).$content;
-	return $content;
 }
 function AddTarget($content,$type){
 	$siteurl=rtrim(Helper::options()->siteUrl,'/');
@@ -419,11 +405,27 @@ function AddBangumi($content){
 	return preg_replace('/\[bangumi uid="'.$match[1].'"\]/i',BangumiPanel($match[1]),$content);
 }
 function RewriteContent($content){
-	$content=ConvertSmilies($content);
-	$content=AddTarget($content,Helper::options()->linktarget);
 	$content=AddFancybox($content);
+	$content=AddTarget($content,Helper::options()->linktarget);
 	$content=AddMDUITable($content);
 	$content=AddMDUIPanel($content);
 	$content=AddBangumi($content);
+	$content=ConvertSmilies($content);
+	return $content;
+}
+function comment_author($comment){
+	if ($comment->url) echo '<a target="_blank" href="'.$comment->url.'" rel="external nofollow">'.$comment->author.'</a>';
+	else echo $comment->author;
+}
+function GetCommentAt($coid){
+	$db=Typecho_Db::get();$fa=$db->fetchRow($db->select('coid,author')->from('table.comments')->where('coid = ?',$coid));
+	return '<strong class="haveat"><a href="#comment-'.$fa['coid'].'">@'.$fa['author'].'&nbsp;</a></strong>';
+}
+function RewriteComment($comment){
+	$content=$comment->content;
+	$content=AddTarget($content,Helper::options()->linktarget);
+	if ($comment->parent) $content=GetCommentAt($comment->parent).$content;
+	$content=AddFancyboxSingle($content);
+	$content=ConvertSmilies($content);
 	return $content;
 }

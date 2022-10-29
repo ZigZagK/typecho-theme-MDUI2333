@@ -27,6 +27,7 @@ div#comments form {margin-bottom:0;}
 #commentcontent > .comment-list {margin:16px 0;}
 #commentcontent > .comment-list > .mdui-panel > .mdui-panel-item > .mdui-panel-item-body > .comment-children {margin-top:16px;}
 #commentcontent .mdui-panel-item p img,.dairy-content p img {max-height:400px;vertical-align:middle;}
+#commentcontent .mdui-panel-item p a,.dairy-content p a {vertical-align:middle;}
 #QAQ {height:75%!important;max-height:400px!important;}
 #QAQ .mdui-dialog-content {height:calc(100% - 100px)!important;}
 #QAQ a {color:unset!important;text-transform:unset!important;}
@@ -40,9 +41,8 @@ div.page-navigator div.next a,div.page-navigator div.prev a {line-height:28px!im
 div.page-navigator div.current {background:var(--themeprimary);}
 /*post.php & page.php*/
 .mdui-typo hr {margin:0 0 1.2em 0;height:4px;border:0;background:var(--themeaccent);}
-a.Fancybox {margin-bottom:-8px!important;}
 .post-container h1,.post-container h2,.post-container h3,.post-container h4,.post-container h5,.post-container h6 {color:var(--themeprimary);}
-.post-container p .Fancybox {vertical-align:middle;}
+.post-container img,.post-container a {vertical-align:middle!important;}
 @media (min-width:600px) {#post-tocbtn {top:80px!important;}}
 @media (orientation:landscape) and (max-width:959px) {#post-tocbtn {top:64px!important;}}
 #post-toc {width:unset!important;min-width:160px!important;}

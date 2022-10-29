@@ -18,7 +18,7 @@ function threadedComments($comment,$options){
 				<div class="mdui-card-header-title">'.$comment->author.'</div>
 				<div class="mdui-card-header-subtitle">'.$comment->date->format(Helper::options()->commentDateFormat).'</div>
 			</div>
-			<div class="mdui-card-content dairy-content">'.AddFancyboxSingle(RewriteComment($comment)).'</div>
+			<div class="mdui-card-content dairy-content">'.RewriteComment($comment).'</div>
 		</div>
 	</div>';
 	$GLOBALS['total']++;
