@@ -43,6 +43,7 @@ div.page-navigator div.current {background:var(--themeprimary);}
 .mdui-typo hr {margin:0 0 1.2em 0;height:4px;border:0;background:var(--themeaccent);}
 .post-container h1,.post-container h2,.post-container h3,.post-container h4,.post-container h5,.post-container h6 {color:var(--themeprimary);}
 .post-container img,.post-container a {vertical-align:middle!important;}
+@media (max-width:599px) {.katex-display {overflow-x:auto;overflow-y:hidden;}}
 @media (min-width:600px) {#post-tocbtn {top:80px!important;}}
 @media (orientation:landscape) and (max-width:959px) {#post-tocbtn {top:64px!important;}}
 #post-toc {width:unset!important;min-width:160px!important;}
