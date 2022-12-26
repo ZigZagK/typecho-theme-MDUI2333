@@ -55,11 +55,11 @@
 			"HTML-CSS":{availableFonts:["TeX"]}
 		});
 	</script>
-	<script src="https://fastly.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js"></script>
+	<script src="https://fastly.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js"></script>
 	<?php } else { ?>
-	<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" />
-	<script defer src="https://fastly.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js"></script>
-	<script defer src="https://fastly.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js"></script>
+	<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" />
+	<script defer src="https://fastly.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+	<script defer src="https://fastly.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded",function(){
 			renderMathInElement(document.getElementById("pjax-container"),{

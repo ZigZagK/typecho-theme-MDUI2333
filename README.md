@@ -10,7 +10,7 @@
 
 基于[MDUI](https://mdui.org)的一款单栏typecho主题。
 
-作者：ZigZagK | 版本：1.4.7
+作者：ZigZagK | 版本：1.4.8
 
 ## 主题特性
 
@@ -20,7 +20,7 @@
 | 全站PJAX & AJAX评论  | 切换页面、评论时音乐均不会停止，可以愉快地听歌。             |
 | 全站APlayer播放器    | 已对[Meting](https://github.com/ZigZagK/APlayer-Typecho)插件进行适配，可以添加全站音乐播放器。 |
 | 代码高亮             | 使用[highlight.js](https://highlightjs.org/)和[Prismjs](https://prismjs.com/)进行代码高亮，并且有行号显示。 |
-| 数学公式             | 使用[MathJax](https://www.mathjax.org/)渲染数学公式。        |
+| 数学公式             | 使用[MathJax](https://www.mathjax.org/)和[KaTeX](https://katex.org/)渲染数学公式。        |
 | 图片灯箱             | 使用[Fancybox](https://fancyapps.com/fancybox/3/)添加图片灯箱。 |
 | 文章目录             | 使用[jquery_headindex](https://github.com/mnnyang/jquery_headindex)生成手风琴式的文章目录。 |
 | 主题更新提示         | 有新版本时会在主题外观设置中显示。                           |
@@ -38,7 +38,7 @@
 
 ## 如何使用
 
-请使用 PHP 7+，typecho开发版(版本`>=17.11.15`) 获得最佳体验。
+请使用 PHP 7+，typecho正式稳定版`v1.2.0`获得最佳体验。
 
 1. 在[Releases](https://github.com/ZigZagK/typecho-theme-MDUI2333/releases)中下载最新版，**改名为MDUI2333**放入主题目录，之后启用主题。
 2. 在设置外观中设置一下主题色强调色，背景图片等。
@@ -56,19 +56,13 @@
 
 ## 推荐的插件
 
-[Links](https://github.com/ZigZagK/typecho-links-material) - 友情链接（魔改配套版）
-
-[Meting](https://github.com/ZigZagK/APlayer-Typecho) - APlayer-Typecho（魔改配套版，已经适配，可以添加全站音乐播放器）
-
-[ExSearch](https://github.com/AlanDecode/Typecho-Plugin-ExSearch) - 即时搜索（已经适配，启动插件并关闭`jquery`后即可使用）
-
-[Mailer](https://github.com/AlanDecode/Typecho-Plugin-Mailer) - 评论邮件提醒（已经适配，无需手动添加`<input>`）
+请前往[MDUI2333-Plugins](https://github.com/ZigZagK/MDUI2333-Plugins)下载配套插件。
 
 ## 鸣谢
 
 [MDUI](https://mdui.org) | [jQuery](https://github.com/jquery/jquery) | [jquery-pjax](https://github.com/defunkt/jquery-pjax)
 
-[highlight.js](https://highlightjs.org/) | [Prism](https://prismjs.com/) | [MathJax](https://www.mathjax.org/) | [Fancybox](https://fancyapps.com/fancybox/3/) | [jquery_headindex](https://github.com/mnnyang/jquery_headindex) | [Animate.css](https://github.com/daneden/animate.css) | [twemoji-colr](https://github.com/mozilla/twemoji-colr)
+[highlight.js](https://highlightjs.org/) | [Prism](https://prismjs.com/) | [MathJax](https://www.mathjax.org/) | [KaTeX](https://katex.org/) | [Fancybox](https://fancyapps.com/fancybox/3/) | [jquery_headindex](https://github.com/mnnyang/jquery_headindex) | [Animate.css](https://github.com/daneden/animate.css) | [twemoji-colr](https://github.com/mozilla/twemoji-colr)
 
 [Meting](https://github.com/MoePlayer/APlayer-Typecho) | [ExSearch](https://github.com/AlanDecode/Typecho-Plugin-ExSearch) | [Mailer](https://github.com/AlanDecode/Typecho-Plugin-Mailer)
 
