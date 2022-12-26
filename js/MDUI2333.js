@@ -179,34 +179,33 @@ function ajaxcomment(commentsuccess){ //AJAX评论
 			type:$(this).attr('method'),
 			data:commentdata,
 			beforeSend:function() {$('#commentsumbit').css('display','none');$('#commenting').css('display','block');},
-			error:function() {mdui.alert('发生了未知错误','评论失败');$('#commenting').css('display','none');$('#commentsumbit').css('display','block');},
+			error:function(xhr){
+				var data=xhr.responseText;
+				$('#commenting').css('display','none');$('#commentsumbit').css('display','block');
+				var text=data.match(/<div(.*?)>(.*?)<\/div>/is);
+				var str='发生了未知错误';if (text!=null) str=text[2];
+				mdui.alert(str,'评论失败');
+			},
 			success:function(data){
 				$('#commenting').css('display','none');$('#commentsumbit').css('display','block');
-				var error=/<title>Error<\/title>/;
-				if (error.test(data)){
-					var text=data.match(/<div(.*?)>(.*?)<\/div>/is);
-					var str='发生了未知错误';if (text!=null) str=text[2];
-					mdui.alert(str,'评论失败');
-				} else {
-					$('#commenttextarea').val('');$('#commenttextarea').css('height','');
-					if ($('#cancel-comment-reply-link').css('display')!='none') $('#cancel-comment-reply-link').click();
-					var target='#comments',parent=true,latest=-19260817;
-					$.each(commentdata,function(i,field) {if (field.name=='parent') parent=false;});
-					if (!parent || !$('div.page-navigator .prev').length){
-						$('#comments .mdui-panel',data).each(function(){
-							var id=$(this).attr('id'),coid=parseInt(id.substring(8));
-							if (coid>latest) {latest=coid;target='#'+id;}
-						});
-					}
-					$('#recentcomment').html($('#recentcomment',data).html());
-					$('#commentsnumber').html($('#commentsnumber',data).html());
-					$('#commentcontent').html($('#commentcontent',data).html());
-					mathjaxreload('commentcontent');codelinenumber('#commentcontent');
-					highlightreload('#commentcontent');smoothscroll('.haveat a');mdui.mutation();
-					$('html,body').animate({scrollTop:$(target).offset().top},'fast');
-					animatecss(target,'fadeInRight','0.5s');
-					mdui.snackbar({message:commentsuccess,position:'right-bottom',timeout:2000});
+				$('#commenttextarea').val('');$('#commenttextarea').css('height','');
+				if ($('#cancel-comment-reply-link').css('display')!='none') $('#cancel-comment-reply-link').click();
+				var target='#comments',parent=true,latest=-19260817;
+				$.each(commentdata,function(i,field) {if (field.name=='parent') parent=false;});
+				if (!parent || !$('div.page-navigator .prev').length){
+					$('#comments .mdui-panel',data).each(function(){
+						var id=$(this).attr('id'),coid=parseInt(id.substring(8));
+						if (coid>latest) {latest=coid;target='#'+id;}
+					});
 				}
+				$('#recentcomment').html($('#recentcomment',data).html());
+				$('#commentsnumber').html($('#commentsnumber',data).html());
+				$('#commentcontent').html($('#commentcontent',data).html());
+				mathjaxreload('commentcontent');codelinenumber('#commentcontent');
+				highlightreload('#commentcontent');smoothscroll('.haveat a');mdui.mutation();
+				$('html,body').animate({scrollTop:$(target).offset().top},'fast');
+				animatecss(target,'fadeInRight','0.5s');
+				mdui.snackbar({message:commentsuccess,position:'right-bottom',timeout:2000});
 			}
 		});
 		return false;
