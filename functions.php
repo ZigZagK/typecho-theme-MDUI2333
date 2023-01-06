@@ -64,6 +64,7 @@ function themeConfig($form){
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Select('gravatarurl',array(
 		'https://gravatar.loli.net/avatar/' => 'loli源',
+		'https://cravatar.cn/avatar/' => 'Cravatar源',
 		'https://cdn.v2ex.com/gravatar/' => 'V2EX源',
 		'https://www.gravatar.com/avatar/' => 'Gravatar www源',
 		'https://secure.gravatar.com/avatar/' => 'Gravatar secure源',
