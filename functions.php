@@ -402,11 +402,21 @@ function BangumiPanel($uid){
 	$str.='</div></div>';return $str;
 }
 function AddBangumi($content){
-	preg_match('/\[bangumi uid="(.*?)"\]/i',$content,$match);
-	return preg_replace('/\[bangumi uid="'.$match[1].'"\]/i',BangumiPanel($match[1]),$content);
+	if (preg_match('/\[bangumi uid="(.*?)"\]/i',$content,$match)>0)
+		$content=preg_replace('/\[bangumi uid="'.$match[1].'"\]/i',BangumiPanel($match[1]),$content);
+	return $content;
+}
+function AddGallery($content){
+	while (preg_match('/<p>\s*\[gallery\](.*?)\[\/gallery\]\s*<\/p>/is',$content,$match)>0){
+		$gallery=preg_replace('/<br.*?>/i','',$match[1]);
+		$gallery='<section class="post-gallery">'.$gallery.'</section>';
+		$content=preg_replace('/'.preg_quote($match[0],'/').'/',$gallery,$content);
+	}
+	return $content;
 }
 function RewriteContent($content){
 	$content=AddFancybox($content);
+	$content=AddGallery($content);
 	$content=AddTarget($content,Helper::options()->linktarget);
 	$content=AddMDUITable($content);
 	$content=AddMDUIPanel($content);
