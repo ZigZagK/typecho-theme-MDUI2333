@@ -61,5 +61,8 @@ div.page-navigator div.current {background:var(--themeprimary);}
 #bangumi .bangumi-star {margin:0 -16px;text-align:center;font-size:14px;height:24px;}
 #bangumi .bangumi-star .mdui-icon {font-size:16px;vertical-align:text-top;}
 #bangumi a {width:100%;color:unset;}
+.post-gallery {-webkit-column-count:3;-webkit-column-gap:1.2em;-moz-column-count:3;-moz-column-gap:1.2em;column-count:3;column-gap:1.2em;}
+@media (max-width:599px) {.post-gallery {-webkit-column-count:2;-moz-column-count:2;column-count:2;}}
+.post-gallery img {width:100%!important;height:auto!important;margin:1.2em 0;}
 /*footer.php*/
 .footerlink {font-size:24px!important;}
