@@ -14,13 +14,13 @@
 		'tag' => _t('标签 %s 下的文章'),
 		'author' => _t('%s 发布的文章')
 	),'',' - '); ?><?php $this->options->title(); ?></title>
-	<link rel="dns-prefetch" href="https://fastly.jsdelivr.net" />
+	<link rel="dns-prefetch" href="https://cdn.bootcdn.net" />
 	<?php if ($this->options->twemoji=='true'){ ?>
 	<link rel="preload" href="<?php echo asseturl('fonts/twemoji/TwemojiMozilla.ttf'); ?>" as="font" type='font/ttf' crossorigin />
 	<?php } ?>
 	<link rel="stylesheet" href="<?php echo asseturl('css/mdui.min.css'); ?>" />
 	<?php if ($this->options->highlightmode=='highlightjs'){ ?>
-	<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/highlightjs/cdn-release@9.13.0/build/styles/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "default"?>.min.css" />
+	<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.7.0/styles/<?php if ($this->options->highlightstyle) echo $this->options->highlightstyle; else echo "default"?>.min.css" />
 	<?php } else { ?>
 	<link rel="stylesheet" href="<?php echo asseturl('css/prism/'.($this->options->highlightstyle?$this->options->highlightstyle:"prism").'.min.css'); ?>" />
 	<?php } ?>
@@ -55,11 +55,11 @@
 			"HTML-CSS":{availableFonts:["TeX"]}
 		});
 	</script>
-	<script src="https://fastly.jsdelivr.net/npm/mathjax@2.7.9/unpacked/MathJax.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.9/MathJax.js"></script>
 	<?php } else { ?>
-	<link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" />
-	<script defer src="https://fastly.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
-	<script defer src="https://fastly.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.4/katex.min.css" />
+	<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.4/katex.min.js"></script>
+	<script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded",function(){
 			renderMathInElement(document.getElementById("pjax-container"),{
@@ -76,7 +76,7 @@
 	<?php } else { ?>
 	<script src="<?php echo asseturl('js/prism.min.js'); ?>"></script>
 	<?php } ?>
-	<script src="<?php echo asseturl('js/md5.min.js'); ?>"></script>
+	<script src="<?php echo asseturl('js/crypto-js.min.js'); ?>"></script>
 	<script src="<?php echo asseturl('js/jquery.fancybox.min.js'); ?>"></script>
 	<script src="<?php echo asseturl('js/jquery.headindex.min.js'); ?>"></script>
 	<script src="<?php echo asseturl('js/MDUI2333.js'); ?>"></script>
@@ -103,7 +103,7 @@
 			</div>
 			<?php } ?>
 			<?php if ($this->options->travelling=='true'){ ?>
-				<a href="https://travellings.link/" target="_blank" class="mdui-btn mdui-btn-icon mdui-hidden-xs-down" mdui-tooltip="{content:'开往-友链接力'}"><i class="mdui-icon material-icons">&#xe533;</i></a>
+				<a href="https://www.travellings.cn/go.html" target="_blank" class="mdui-btn mdui-btn-icon mdui-hidden-xs-down" mdui-tooltip="{content:'开往-友链接力'}"><i class="mdui-icon material-icons">&#xe533;</i></a>
 			<?php } ?>
 			<?php if ($this->user->hasLogin()){ ?>
 				<a href="<?php $this->options->adminUrl(); ?>" target="_blank" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content:'控制台'}"><i class="mdui-icon material-icons">&#xe8b8;</i></a>

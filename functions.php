@@ -64,7 +64,8 @@ function themeConfig($form){
 	$form->addInput($config);
 	$config=new Typecho_Widget_Helper_Form_Element_Select('gravatarurl',array(
 		'https://gravatar.loli.net/avatar/' => 'loli源',
-		'https://cravatar.cn/avatar/' => 'Cravatar源',
+		'https://cn.cravatar.com/avatar/' => 'Cravatar源',
+		'https://weavatar.com/avatar/' => 'WeAvatar源',
 		'https://cdn.v2ex.com/gravatar/' => 'V2EX源',
 		'https://www.gravatar.com/avatar/' => 'Gravatar www源',
 		'https://secure.gravatar.com/avatar/' => 'Gravatar secure源',
@@ -150,7 +151,7 @@ function themeConfig($form){
 	$config=new Typecho_Widget_Helper_Form_Element_Textarea('pjaxreload',NULL,NULL,_t('附加PJAX重载'),_t('这里可以写入自定义的PJAX重载代码'));
 	$form->addInput($config);
 }
-function errorexit($status) {header($status);die();}
+function errorexit($status) {\Typecho\Response::getInstance()->setStatus($status);die();}
 function printjson($json) {header('Content-type:application/json;charset=utf-8');die($json);}
 function printarray($data) {printjson(json_encode($data));}
 function geturl($url){
@@ -161,41 +162,81 @@ function geturl($url){
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 	$output=curl_exec($ch);curl_close($ch);return $output;
 }
+function getCommentsByDateRange($cid,$start,$end){
+	$db=Typecho_Db::get();
+	return $db->fetchAll($db->select()
+		->from('table.comments')
+		->where('cid = ?',$cid)
+		->where('created >= ?',$start)
+		->where('created < ?',$end)
+		->order('created',Typecho_Db::SORT_DESC));
+}
+function getDiaryCommentsContent($cid,$year,$month){
+	if ($year<1 || $month<1 || $month>12) return "";
+	$nextYear=$year;$nextMonth=$month+1;
+	if ($nextMonth>12) {$nextYear++;$nextMonth=1;}
+	$startTime=strtotime(sprintf("%d-%d-1",$year,$month));
+	$endTime=strtotime(sprintf("%d-%d-1",$nextYear,$nextMonth));
+	$comments=$startTime && $endTime?getCommentsByDateRange($cid,$startTime,$endTime):[];
+	$html='';
+	foreach ($comments as $comment){
+		$html.='
+		<div class="mdui-col">
+			<div id="'.($comment['type']??'').'-'.($comment['coid']??'').'" class="mdui-card mdui-m-t-2">
+				<div class="mdui-card-header">
+					<img class="mdui-card-header-avatar" src="'.GravatarURL($comment['mail']??'',100).'" />
+					<div class="mdui-card-header-title">'.($comment['author']??'').'</div>
+					<div class="mdui-card-header-subtitle">'.date(Helper::options()->commentDateFormat,$comment['created']??0).'</div>
+				</div>
+				<div class="mdui-card-content dairy-content">'.RewriteCommentContent(Markdown::convert($comment['text']??'')).'</div>
+			</div>
+		</div>';
+	}
+	return $html;
+}
 function themeInit($archive){
 	Helper::options()->commentsMaxNestingLevels=19260817;
 	Helper::options()->commentsMarkdown=true;
 	Helper::options()->commentsAntiSpam=false;
 	Helper::options()->commentsCheckReferer=false;
-	if ($archive->hidden && ($_SERVER['REQUEST_METHOD']=='POST' || $_SERVER['HTTP_X_PJAX']=='true')) header('HTTP/1.1 200 OK');
-	$gets=$_GET;$posts=$_POST;$salt=Helper::options()->apisalt;$type=$gets['type'];
+	if ($archive->hidden && ($_SERVER['REQUEST_METHOD']=='POST' || $_SERVER['HTTP_X_PJAX']=='true')) \Typecho\Response::getInstance()->setStatus(200);
+	$gets=$_GET;$posts=$_POST;$salt=Helper::options()->apisalt;$type=$gets['type']??'';
 	if ($type=='settingbackup'){
 		$opt=$gets['opt'];$db=Typecho_Db::get();
 		if ($_SERVER['REQUEST_METHOD']=='POST' && $opt=='backup'){
-			if ($gets['salt']!=$salt) errorexit('HTTP/1.1 403 Forbidden');
-			$data=$posts['data'];if (empty($data)) errorexit('HTTP/1.1 403 Forbidden');
+			if ($gets['salt']!=$salt) errorexit(403);
+			$data=$posts['data'];if (empty($data)) errorexit(403);
 			if (!empty($db->fetchRow($db->select()->from('table.options')->where('name=?','theme:SettingBackup'))))
 				$db->query($db->update('table.options')->rows(array('value'=>$data))->where('name=?','theme:SettingBackup'));
 				else $db->query($db->insert('table.options')->rows(array('name'=>'theme:SettingBackup','user'=>'0','value'=>$data)));
 			printarray(array('msg'=>'Success'));
 		}
 		if ($_SERVER['REQUEST_METHOD']=='GET' && $opt=='restore'){
-			if ($gets['salt']!=$salt) errorexit('HTTP/1.1 403 Forbidden');
+			if ($gets['salt']!=$salt) errorexit(403);
 			$data=$db->fetchRow($db->select()->from('table.options')->where('name=?','theme:SettingBackup'));
 			if (empty($data)) printarray(array('msg'=>'Error'));
 			else printarray(array('msg'=>'Success','data'=>$data['value']));
 		}
-		errorexit('HTTP/1.1 403 Forbidden');
+		errorexit(403);
 	}
 	if ($_SERVER['REQUEST_METHOD']=='GET' && $type=='bangumicache'){
-		$url=$gets['url'];$ssid=$gets['ssid'];if (empty($url) || empty($ssid)) errorexit('HTTP/1.1 403 Forbidden');
-		if ($gets['auth']!=md5($url.$salt.$ssid)) errorexit('HTTP/1.1 403 Forbidden');
+		$url=$gets['url'];$ssid=$gets['ssid'];if (empty($url) || empty($ssid)) errorexit(403);
+		if ($gets['auth']!=md5($url.$salt.$ssid)) errorexit(403);
 		mkdir(Helper::options()->themeFile(ThemeName(),"cache/bangumi/cover"),0777,true);
 		if (!file_exists(Helper::options()->themeFile(ThemeName(),"cache/bangumi/cover/".$ssid.'.jpg'))){
-			$img=geturl($url);if (empty($img)) errorexit('HTTP/1.1 403 Forbidden');
+			$img=geturl($url);if (empty($img)) errorexit(403);
 			$file=fopen(Helper::options()->themeFile(ThemeName(),"cache/bangumi/cover/".$ssid.'.jpg'),"w");
 			fwrite($file,$img);fclose($file);
 		}
 		header('Location:'.Helper::options()->themeUrl.'/cache/bangumi/cover/'.$ssid.'.jpg');
+	}
+	if ($archive->template=='page-diary.php'){
+		if ($_SERVER['REQUEST_METHOD']=='GET' && $type=='diary'){
+			$year=(int)($gets['y']??0);$month=(int)($gets['m']??0);
+			if (($gets['auth']??NULL)!=md5($year.$salt.$month)) errorexit(403);
+			header('Content-type:text/html;charset=utf-8');
+			die(getDiaryCommentsContent($archive->cid,$year,$month));
+		}
 	}
 	if ($archive->is('post') && $_SERVER['REQUEST_METHOD']=='POST' && $posts['type']=='getTokenUrl')
 		die(Typecho_Widget::widget('Widget_Security')->getTokenUrl($archive->permalink));
@@ -254,11 +295,11 @@ function ThemeAccent(){
 	}
 }
 function Countdays($start,$end) {return (strtotime($end)-strtotime($start))/86400;}
-function MailHash($mail) {$mailHash=NULL;if (!empty($mail)) $mailHash=md5(strtolower($mail));return $mailHash;}
+function MailHash($mail) {$mailHash=NULL;if (!empty($mail)) $mailHash=hash('sha256',strtolower($mail));return $mailHash;}
 function GravatarURL($mail,$size) {return Helper::options()->gravatarurl.MailHash($mail).'?s='.$size.'&d=mp';}
 /* 魔改自Material(https://github.com/idawnlight/typecho-theme-material) */
 function ShowThumbnail($widget){
-	$fields=unserialize($widget->fields);if ($fields['picUrl']) {echo $fields['picUrl'];return;}
+	$fields=unserialize($widget->fields);if ($fields['picUrl']??NULL) {echo $fields['picUrl'];return;}
 	$dir=scandir(Helper::options()->themeFile(ThemeName(),"img/random"));$n=count($dir);$m=0;
 	for ($i=0;$i<$n;$i++) if ($dir[$i]!='.' && $dir[$i]!='..') $ID[$m++]=$i;
 	echo asseturl('img/random/'.$dir[$ID[mt_rand(0,$m-1)]],true);
@@ -285,26 +326,26 @@ function ConvertSmilies($widget){
 	for ($i=0;$i<$length;$i++){
 		$key=$TABName[$i];$tot=count($QAQTAB[$key]['content']);
 		if ($QAQTAB[$key]['type']=='picture'){
-			$width=$QAQTAB[$key]['width'];$height=$QAQTAB[$key]['height'];
+			$width=$QAQTAB[$key]['width']??NULL;$height=$QAQTAB[$key]['height']??NULL;
 			for ($j=0;$j<$tot;$j++){
 				$string=':'.$key.$QAQTAB[$key]['content'][$j]['id'].':';
 				$smiliesTrans[$string][0]=$key.'/'.$QAQTAB[$key]['content'][$j]['path'];
-				if ($width!='') $smiliesTrans[$string][1]=$width;
-				if ($QAQTAB[$key]['content'][$j]['width']!='') $smiliesTrans[$string][1]=$QAQTAB[$key]['content'][$j]['width'];
-				if ($height!='') $smiliesTrans[$string][2]=$height;
-				if ($QAQTAB[$key]['content'][$j]['height']!='') $smiliesTrans[$string][2]=$QAQTAB[$key]['content'][$j]['height'];
-				$smiliesTrans[$string][3]=$QAQTAB[$key]['content'][$j]['tip'];
+				if ($width) $smiliesTrans[$string][1]=$width;
+				if ($QAQTAB[$key]['content'][$j]['width']??NULL) $smiliesTrans[$string][1]=$QAQTAB[$key]['content'][$j]['width'];
+				if ($height) $smiliesTrans[$string][2]=$height;
+				if ($QAQTAB[$key]['content'][$j]['height']??NULL) $smiliesTrans[$string][2]=$QAQTAB[$key]['content'][$j]['height'];
+				$smiliesTrans[$string][3]=$QAQTAB[$key]['content'][$j]['tip']??NULL;
 			}
 		}
 	}
 	foreach($smiliesTrans as $smiley => $img){
 		$smiliesTag[]=$smiley;
-		$smiliesReplace[]='<img src="'.asseturl('img/QAQ/'.$img[0],true).'" alt="'.$img[3].'" width="'.$img[1].'" height="'.$img[2].'" />';
+		$smiliesReplace[]='<img src="'.asseturl('img/QAQ/'.($img[0]??''),true).'" alt="'.($img[3]??'').'" width="'.($img[1]??'').'" height="'.($img[2]??'').'" />';
 	}
 	$output='';$textArr=preg_split("/(<.*>)/U",$widget,-1,PREG_SPLIT_DELIM_CAPTURE);$stop=count($textArr);
 	for ($i=0;$i<$stop;$i++){
 		$content=$textArr[$i];
-		if ((strlen($content)>0)&&('<'!=$content{0}))
+		if ((strlen($content)>0)&&('<'!=$content[0]))
 			$content=str_replace($smiliesTag,$smiliesReplace,$content);
 		$output.=$content;
 	}
@@ -436,6 +477,12 @@ function RewriteComment($comment){
 	$content=$comment->content;
 	$content=AddTarget($content,Helper::options()->linktarget);
 	if ($comment->parent) $content=GetCommentAt($comment->parent).$content;
+	$content=AddFancyboxSingle($content);
+	$content=ConvertSmilies($content);
+	return $content;
+}
+function RewriteCommentContent($content){
+	$content=AddTarget($content,Helper::options()->linktarget);
 	$content=AddFancyboxSingle($content);
 	$content=ConvertSmilies($content);
 	return $content;

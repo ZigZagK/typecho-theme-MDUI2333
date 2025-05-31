@@ -19,7 +19,7 @@ function threadedComments($comment,$options){ ?>
 			<?php if ($comment->status=='waiting') { ?><small><strong class="mdui-text-color-theme-accent"><?php echo $options->commentStatus; ?></strong></small><br><?php } ?>
 			<?php echo RewriteComment($comment); ?>
 			<div class="mdui-chip">
-				<?php if ($comment->authorId==$comment->ownerId){ ?>
+				<?php if ($comment->authorId){ ?>
 				<span class="mdui-chip-icon mdui-color-theme-accent" ><i class="mdui-icon material-icons">&#xe853;</i></span><span class="mdui-chip-title">博主</span>
 				<?php } else { ?>
 				<span class="mdui-chip-icon" ><i class="mdui-icon material-icons">&#xe417;</i></span><span class="mdui-chip-title">访客</span>

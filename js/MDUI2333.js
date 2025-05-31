@@ -75,12 +75,14 @@ function mathjaxreload(element){ //数学公式重载
 	if (options.latexmode=='MathJax'){
 		MathJax.Hub.Typeset(document.getElementById(element));
 	} else {
-		renderMathInElement(document.getElementById(element),{
-			delimiters: [
-				{left:"$$",right:"$$",display:true},
-				{left:"$",right:"$",display:false}
-			]
-		});
+		if (typeof(renderMathInElement)==="function"){
+			renderMathInElement(document.getElementById(element),{
+				delimiters: [
+					{left:"$$",right:"$$",display:true},
+					{left:"$",right:"$",display:false}
+				]
+			});
+		}
 	}
 }
 function highlightreload(element){ //代码高亮重载
@@ -162,8 +164,8 @@ function smoothscroll(element){ //平滑移动监听重载
 }
 function visitorfunction(opt,gravatarurl){ //评论者为访客时的函数
 	if (opt==false){
-		$('#emailavatar').attr('src',gravatarurl+md5($("input#mail").val())+'?s=100&d=mystery');
-		$('input#mail').blur(function(){$('#emailavatar').attr('src',gravatarurl+md5($("input#mail").val())+'?s=100&d=mystery');});
+		$('#emailavatar').attr('src',gravatarurl+CryptoJS.SHA256($("input#mail").val())+'?s=100&d=mystery');
+		$('input#mail').blur(function(){$('#emailavatar').attr('src',gravatarurl+CryptoJS.SHA256($("input#mail").val())+'?s=100&d=mystery');});
 		$('input[name="receiveMail"]').change(function(){
 			var status=$('input[name="receiveMail"]').is(':checked');
 			if (!status) {$('#receiveMailicon').html('&#xe7f6;');$('#receiveMailicon').addClass('mdui-text-color-grey');$('#receiveMailicon').removeClass('mdui-text-color-theme-accent');}

@@ -23,17 +23,34 @@ function threadedComments($comment,$options){
 	</div>';
 	$GLOBALS['total']++;
 }
+function getAllDiaryMonth($page){
+	$db=Typecho_Db::get();
+	$comments=$db->fetchAll($db->select()
+		->from('table.comments')
+		->where('cid = ?',$page->cid)
+		->order('created',Typecho_Db::SORT_DESC)
+	);
+	$monthTimeList=[];
+	$last=NULL;
+	foreach ($comments as $comment){
+		$time=$comment['created']??0;
+		$monthStr=date('Y-n',$time);
+		if ($monthStr!=$last) {$monthTimeList[]=$time;$last=$monthStr;}
+	}
+	return $monthTimeList;
+}
+function getDiaryUrl($post,$year,$month){
+	return $post->permalink.'?'.http_build_query(array('type'=>'diary','y'=>$year,'m'=>$month,'auth'=>md5($year.Helper::options()->apisalt.$month)));
+}
 ?>
 <div class="mdui-container mdui-m-b-2">
 	<?php $this->comments()->to($comments); ?>
 	<?php $comments->listComments(array('before'=>'','after'=>'')); ?>
 	<div class="mdui-tab mdui-color-theme" mdui-tab>
+	<?php $monthTimeList=getAllDiaryMonth($this); ?>
 	<?php
-	$last='19260817';
-	for ($i=0;$i<$total;$i++){
-		if ($diary[$i][0]->format('Y-n')!=$last) echo '<a href="#'.$diary[$i][0]->format('Y-n').'" class="mdui-ripple">'.$diary[$i][0]->format('Y.n').'</a>';
-		$last=$diary[$i][0]->format('Y-n');
-	}
+	foreach($monthTimeList as $time)
+		echo '<a href="#'.date('Y-n',$time).'" id="tab-'.date('Y-n',$time).'"class="mdui-ripple">'.date('Y.n',$time).'</a>';
 	?>
 	</div>
 	<?php if ($this->user->hasLogin()){ ?>
@@ -64,44 +81,29 @@ function threadedComments($comment,$options){
 	</div>
 	<?php } ?>
 	<?php
-	$last='19260817';
-	for ($i=0;$i<$total;$i++){
-		if ($diary[$i][0]->format('Y-n')!=$last){
-			if ($last!='19260817') echo '
+	foreach($monthTimeList as $time)
+		echo '
+		<div class="mdui-typo" id="'.date('Y-n',$time).'">
+			<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-row-xl-4" id="diaryContent-'.date('Y-n',$time).'">
 			</div>
-		</div>
-			';
-			echo '
-		<div class="mdui-typo" id="'.$diary[$i][0]->format('Y-n').'">
-			<div class="mdui-row-xs-1 mdui-row-sm-2 mdui-row-md-3 mdui-row-lg-4 mdui-row-xl-4">
-			';
-		}
-		echo $diary[$i][1];
-		$last=$diary[$i][0]->format('Y-n');
-	}
-	if ($last!='19260817') echo '
-		</div>
-	</div>';
+		</div>';
 	?>
 </div>
 <script>
-	var QAQTab=new mdui.Tab('#QAQTab');
-	$('#QAQ').on('open.mdui.dialog',function(){QAQTab.handleUpdate();});
-	Smilies={
-		dom:function(id) {return document.getElementById(id);},
-		grin:function(tag){
-			tag=' '+tag+' ';myField=this.dom('commenttextarea');
-			document.selection?(myField.focus(),sel=document.selection.createRange(),sel.text=tag,myField.focus()):this.insertTag(tag);
-		},
-		insertTag:function(tag){
-			myField=Smilies.dom('commenttextarea');
-			myField.selectionStart || myField.selectionStart=='0'?(
-				startPos=myField.selectionStart,endPos=myField.selectionEnd,cursorPos=startPos,
-				myField.value=myField.value.substring(0,startPos)+tag+myField.value.substring(endPos,myField.value.length),
-				cursorPos+=tag.length,myField.focus(),myField.selectionStart=cursorPos,myField.selectionEnd=cursorPos
-			):(myField.value+=tag,myField.focus());
-		}
+	QAQTABreload();smiliesreload();
+	var diaryCacheDict={};
+	function loadDiaryContent(url,contentIdStr){
+		if (diaryCacheDict[contentIdStr]==true) return;
+		$.ajax({url:url,type:"GET",success:function(data){diaryCacheDict[contentIdStr]=true;$("[id='"+contentIdStr+"']").html(data);}});
 	}
+	loadDiaryContent("<?php echo getDiaryUrl($this,2025,5); ?>","diaryContent-2025-5");
+	<?php
+	foreach($monthTimeList as $time){
+		$year=(int)date('Y',$time);$month=(int)date('n',$time);
+		$tabId='tab-'.$year.'-'.$month;$diaryId='diaryContent-'.$year.'-'.$month;
+		echo '$("[id=\''.$tabId.'\']").on("click",function(){loadDiaryContent("'.getDiaryUrl($this,$year,$month).'","'.$diaryId.'");});';
+	}
+	?>
 </script>
 <?php $this->need('sidebar.php'); ?>
 <?php $this->need('footer.php'); ?>

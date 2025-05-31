@@ -76,7 +76,7 @@
 													error:function() {mdui.alert('发生了未知错误，请刷新页面');}
 												});
 											},
-											error:function() {mdui.alert('发生了未知错误，请刷新页面');}
+											error:function() {mdui.alert('对不起,您输入的密码错误');}
 										});
 									},
 									error:function() {mdui.alert('发生了未知错误，请刷新页面');}
