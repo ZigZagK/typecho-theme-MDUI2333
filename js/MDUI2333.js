@@ -65,10 +65,12 @@ function showposttoc(opt){ //生成文章目录
 }
 function codelinenumber(element){ //代码行号
 	$(element).find('pre code').each(function(){
-		var lines=$(this).text().split('\n').length;
-		var numbering=$('<ul/>').addClass('pre-numbering');
-		for(var i=1;i<=lines;i++) numbering.append($('<li/>').text(i));
-		$(this).addClass('has-numbering').parent().prepend(numbering);
+		if (!$(this).hasClass('has-numbering')){
+			var lines=$(this).text().split('\n').length;
+			var numbering=$('<ul/>').addClass('pre-numbering');
+			for(var i=1;i<=lines;i++) numbering.append($('<li/>').text(i));
+			$(this).addClass('has-numbering').parent().prepend(numbering);
+		}
 	});
 }
 function mathjaxreload(element){ //数学公式重载

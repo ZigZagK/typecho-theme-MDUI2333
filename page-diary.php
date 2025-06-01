@@ -94,9 +94,24 @@ function getDiaryUrl($post,$year,$month){
 	var diaryCacheDict={};
 	function loadDiaryContent(url,contentIdStr){
 		if (diaryCacheDict[contentIdStr]==true) return;
-		$.ajax({url:url,type:"GET",success:function(data){diaryCacheDict[contentIdStr]=true;$("[id='"+contentIdStr+"']").html(data);}});
+		$.ajax({
+			url:url,
+			type:"GET",
+			success:function(data){
+				diaryCacheDict[contentIdStr]=true;
+				$("[id='"+contentIdStr+"']").html(data);
+				mathjaxreload(contentIdStr);codelinenumber('#'+contentIdStr);
+				highlightreload('#'+contentIdStr);mdui.mutation();
+			}
+		});
 	}
-	loadDiaryContent("<?php echo getDiaryUrl($this,2025,5); ?>","diaryContent-2025-5");
+	<?php
+	if ($monthTimeList[0]??NULL){
+		$year=(int)date('Y',$monthTimeList[0]);$month=(int)date('n',$monthTimeList[0]);
+		$diaryId='diaryContent-'.$year.'-'.$month;
+		echo 'loadDiaryContent("'.getDiaryUrl($this,$year,$month).'","'.$diaryId.'");';
+	}
+	?>
 	<?php
 	foreach($monthTimeList as $time){
 		$year=(int)date('Y',$time);$month=(int)date('n',$time);
