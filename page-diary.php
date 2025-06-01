@@ -5,24 +5,7 @@
  * @package custom
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-Helper::options()->commentsPageBreak=false; //评论不分页，获取所有评论
 $this->need('header.php');
-global $total;global $diary;$total=0;
-function threadedComments($comment,$options){
-	$GLOBALS['diary'][$GLOBALS['total']][0]=$comment->date;
-	$GLOBALS['diary'][$GLOBALS['total']][1]='
-	<div class="mdui-col">
-		<div id="'.$comment->theId.'" class="mdui-card mdui-m-t-2">
-			<div class="mdui-card-header">
-				<img class="mdui-card-header-avatar" src="'.GravatarURL($comment->mail,100).'" />
-				<div class="mdui-card-header-title">'.$comment->author.'</div>
-				<div class="mdui-card-header-subtitle">'.$comment->date->format(Helper::options()->commentDateFormat).'</div>
-			</div>
-			<div class="mdui-card-content dairy-content">'.RewriteComment($comment).'</div>
-		</div>
-	</div>';
-	$GLOBALS['total']++;
-}
 function getAllDiaryMonth($page){
 	$db=Typecho_Db::get();
 	$comments=$db->fetchAll($db->select()
@@ -39,13 +22,11 @@ function getAllDiaryMonth($page){
 	}
 	return $monthTimeList;
 }
-function getDiaryUrl($post,$year,$month){
-	return $post->permalink.'?'.http_build_query(array('type'=>'diary','y'=>$year,'m'=>$month,'auth'=>md5($year.Helper::options()->apisalt.$month)));
+function getDiaryUrl($page,$year,$month){
+	return $page->permalink.'?'.http_build_query(array('type'=>'diary','y'=>$year,'m'=>$month,'auth'=>md5($year.Helper::options()->apisalt.$month)));
 }
 ?>
 <div class="mdui-container mdui-m-b-2">
-	<?php $this->comments()->to($comments); ?>
-	<?php $comments->listComments(array('before'=>'','after'=>'')); ?>
 	<div class="mdui-tab mdui-color-theme" mdui-tab>
 	<?php $monthTimeList=getAllDiaryMonth($this); ?>
 	<?php
